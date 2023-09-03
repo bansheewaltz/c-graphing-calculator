@@ -23,7 +23,7 @@ The russian version of the task can be found in the repository.
 
 ## Preamble
 
-![SmartCalc](misc/eng/images/smartcalc.jpg)
+![SmartCalc](task/misc/eng/images/smartcalc.jpg)
 
 Planet Earth, USA, California, Cupertino, 10260 Bandley Drive, August 5, 1983.
 
