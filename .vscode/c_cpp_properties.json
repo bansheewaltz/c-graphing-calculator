@@ -1,0 +1,44 @@
+{
+  "env": {
+    "projectIncludePath": [
+      "${workspaceFolder}/src/include",
+      "${workspaceFolder}/src/lib/headers",
+      "${workspaceFolder}/src/test/headers"
+    ],
+    "macDefaultIncludes": [
+      "/opt/homebrew/Cellar/check/0.15.2/include",
+      "/usr/local/include"
+    ],
+    "linuxDefaultIncludes": [
+      "/usr/include"
+    ]
+  },
+  "configurations": [
+    {
+      "name": "Universal",
+      "includePath": [
+        "${projectIncludePath}",
+        "${macDefaultIncludes}",
+        "${linuxDefaultIncludes}"
+      ]
+    },
+    {
+      "name": "Mac",
+      "includePath": [
+        "${projectIncludePath}",
+        "${macDefaultIncludes}"
+      ]
+    },
+    {
+      "name": "Ubuntu",
+      "includePath": [
+        "${projectIncludePath}",
+        "${linuxDefaultIncludes}"
+      ],
+      "defines": [
+        "_DEFAULT_SOURCE"
+      ]
+    }
+  ],
+  "version": 4
+}

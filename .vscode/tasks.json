@@ -1,0 +1,43 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build and run active file",
+			"type": "shell",
+			"command": "gcc ${file} -o build/${fileBasenameNoExtension} && build/${fileBasenameNoExtension} 2>&1",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"echo": false,
+				"showReuseMessage": false,
+				"clear": true,
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"type": "cppbuild",
+			"label": "build debug version of file",
+			"command": "/usr/local/bin/gcc",
+			"args": [
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/../build/${fileBasenameNoExtension}"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				// "isDefault": true
+			},
+			"detail": "compiler: /usr/local/bin/gcc"
+		}
+	]
+}

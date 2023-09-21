@@ -1,0 +1,54 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "(lldb) Launch test file",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${fileDirname}/../bin/${fileBasenameNoExtension}",
+      "args": [],
+      "cwd": "${fileDirname}",
+    },
+    {
+      "name": "(lldb) Launch current file",
+      "type": "lldb",
+      "request": "launch",
+      "preLaunchTask": "build debug version of file",
+      "program": "${fileDirname}/../build/${fileBasenameNoExtension}",
+      "args": [],
+      "cwd": "${fileDirname}"
+    },
+    {
+      "name": "(lldb) Launch",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "(gdb) Launch",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
