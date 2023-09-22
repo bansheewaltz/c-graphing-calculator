@@ -45,16 +45,11 @@ int strcount(const char* str, char ch) {
   return count;
 }
 
-void remove_spaces(const char* src, char** res_p) {
+char* remove_spaces(const char* src) {
   assert(src != NULL);
-  assert(res_p != NULL);
-
   int spaces_count = strcount(src, ' ');
   int res_len = strlen(src) - spaces_count + 1;
-  *res_p = calloc(res_len, sizeof(char));
-  assert(*res_p != NULL);
-  char* res = *res_p;
-
+  char* res = calloc(res_len, sizeof(char));
   *res = *src;
   while (*src != '\0') {
     if (*src != ' ') {
@@ -64,6 +59,7 @@ void remove_spaces(const char* src, char** res_p) {
     src++;
   }
   *res = '\0';
+  return res;
 }
 
 bool iscomma(char ch) { return ch == ','; }
@@ -71,64 +67,82 @@ bool isparen(char ch) { return ch == '(' || ch == ')'; }
 bool isradixp(char ch) { return ch == '.'; }
 bool isdigitf(char ch) { return isdigit(ch) || isradixp(ch); }
 
-Token* read_lexeme(const char* src, int* pos) {
+char* read_lexeme(const char* src, int* pos) {
   assert(src != NULL);
   assert(pos != NULL);
 
   int start_idx = *pos;
   const char* ch = &src[*pos];
 
-  int token_len = 1;
-  if (isdigit(src[*pos])) {
+  int lexeme_len = 1;
+  if (isdigit(src[start_idx])) {
     int radixp_count = 0;
-    while (isdigitf(*ch + token_len)) {
-      if (isradixp(*ch + token_len)) radixp_count++;
+    while (isdigitf(*ch + lexeme_len)) {
+      if (isradixp(*ch + lexeme_len)) radixp_count++;
       if (radixp_count == 2) break;
-      token_len++;
+      lexeme_len++;
     }
   }
-  if (isalpha(src[*pos])) {
-    while (isalpha(*ch + token_len)) {
-      token_len++;
+  if (isalpha(src[start_idx])) {
+    while (isalpha(*ch + lexeme_len)) {
+      lexeme_len++;
     }
   }
 
-  char* lexem = calloc(token_len + 1, sizeof(char));
-  assert(lexem != NULL);
-  strncpy(&src[*pos], lexem, token_len);
+  char* lexeme = calloc(lexeme_len + 1, sizeof(char));
+  assert(lexeme != NULL);
+  strncpy(&src[*pos], lexeme, lexeme_len);
+  *pos += lexeme_len;
+  return lexeme;
 }
 
-ErrorCode tokenize(char* const src, TokenNode** list_head) {
+TokenType match_token_type(str lexeme) {
+  ;
+  ;
+}
+
+Token create_token(str lexeme, TokenType type) {
+  Token token;
+  token.lexeme = lexeme;
+  token.type = type;
+  return token;
+}
+
+Token read_token(const char* src, int* pos) {
+  char* lexeme = read_lexeme(src, pos);
+  TokenType type = match_token_type(lexeme);
+  Token token = create_token(lexeme, type);
+  return token;
+}
+
+TokenNode* create_token_node(Token token) {
+  TokenNode* node = malloc(sizeof(TokenNode));
+  node->token = token;
+  node->next = NULL;
+  return node;
+}
+
+TokenNode* tokenize(char* const src) {
   assert(src != NULL);
-  assert(list_head != NULL);
-
-  char* res;
-  remove_spaces(src, &res);
-  if (strlen(res) == 0) {
-    return E_EMPTY_SOURCE_STRING;
+  char* src_wo_spaces = remove_spaces(src);
+  if (strlen(src_wo_spaces) == 0) {
+    return NULL;
   }
-
-  *list_head = (TokenNode*)malloc(sizeof(TokenNode));
-  assert(list_head != NULL);
-
-  TokenNode* token_node = *list_head;
-  for (int i = 0; i < strlen(src); i++) {
-    int error = read_lexeme(src, &i, &token_node->token);
-    if (error) return error;
-
-    token_node->next = malloc(sizeof(TokenNode));
-    assert(token_node->next != NULL);
+  int pos = 0;
+  Token token = read_token(src, &pos);
+  TokenNode* token_node = create_token_node(token);
+  while (token_node != NULL) {
+    token = read_token(src, &pos);
+    token_node->next = create_token_node(token);
     token_node = token_node->next;
   }
-
-  return E_SUCCESS;
+  return token_node;
 }
 
 int main(void) {
   char expr[] = "1+2-(3*8)";
 
-  TokenNode* token_list = NULL;
-  tokenize(expr, &token_list);
+  TokenNode* token_list = tokenize(expr);
   TokenNode* token_node = token_list;
   while (token_node) {
     printf("%s\n", token_node->token.lexeme);
