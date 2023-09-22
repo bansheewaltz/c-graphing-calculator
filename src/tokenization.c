@@ -179,6 +179,7 @@ char* read_lexeme(const char* src, size_t* pos) {
 bool l_isvariab(char* lexeme) { return isalpha(lexeme[0]); }
 bool l_isparenl(char* lexeme) { return lexeme[0] == '('; }
 bool l_isparenr(char* lexeme) { return lexeme[0] == ')'; }
+
 bool l_isfloat_wo_integral_part(char* lexeme) {
   return isradixp(lexeme[0]) && strlen(lexeme) > 1;
 }
