@@ -279,37 +279,20 @@ ErrorCode validate_tokens(const TokenNode* const list) {
   if (list == NULL) {
     return E_EMPTY_SOURCE_STRING;
   }
-
   int parentheses_balance = 0;
   bool term_presence = false;
-
   const TokenNode* node = list;
   while (node) {
     Token token = node->token;
-    if (token.type == BAD_TOKEN) {
-      return E_BAD_TOKEN;
-    }
-    if (token.type == LITERAL || token.type == VARIABLE) {
-      term_presence = true;
-    }
-    if (token.type == PARENTHESIS_LEFT) {
-      parentheses_balance++;
-    }
-    if (token.type == PARENTHESIS_RIGHT) {
-      parentheses_balance--;
-    }
-    if (parentheses_balance < 0) {
-      return E_PARENTHESES_INVALID_SEQUENCE;
-    }
+    if (token.type == BAD_TOKEN) return E_BAD_TOKEN;
+    if (token.type == LITERAL || token.type == VARIABLE) term_presence = true;
+    if (token.type == PARENTHESIS_LEFT) parentheses_balance++;
+    if (token.type == PARENTHESIS_RIGHT) parentheses_balance--;
+    if (parentheses_balance < 0) return E_PARENTHESES_INVALID_SEQUENCE;
     node = node->next;
   }
-
-  if (parentheses_balance != 0) {
-    return E_PARENTHESES_NOT_BALANCED;
-  }
-  if (term_presence == false) {
-    return E_EMPTY_EXPRESSION;
-  }
+  if (parentheses_balance != 0) return E_PARENTHESES_NOT_BALANCED;
+  if (term_presence == false) return E_EMPTY_EXPRESSION;
   return E_SUCCESS;
 }
 
@@ -319,6 +302,17 @@ void terminate(ErrorCode error) {
   exit(error);
 }
 
+// void cleanup_tokens(const TokenNode* const list) {
+//   const TokenNode* node = list;
+//   TokenType last_type;
+//   bool last_minus;
+//   while (node) {
+//     Token token = node->token;
+
+//     node = node->next;
+//   }
+// }
+
 int main(void) {
   char expr[] = "1.21 + 2*cos(2x), 3x";
 
@@ -327,6 +321,6 @@ int main(void) {
   if (error) {
     terminate(error);
   }
-  // cleanup(token_list);
+  // cleanup_tokens(token_list);
   print_tokens(expr, token_list);
 }
