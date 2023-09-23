@@ -5,19 +5,38 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef enum error_code {
-  E_SUCCESS,
-  E_NULL_POINTER_INPUT,
-  E_MEMORY_ALLOCATION_FAILURE,
-  E_EMPTY_SOURCE_STRING,
-  E_INCORRECT_TOKEN,
-} ErrorCode;
-
 #define BAD_KEY -1
 typedef struct key_value_pair {
   char* value;
   int key;
 } KeyValuePair;
+typedef enum error_code {
+  E_SUCCESS,
+  E_EMPTY_SOURCE_STRING,
+  E_BAD_TOKEN,
+  E_PARENTHESES_INVALID_SEQUENCE,
+  E_PARENTHESES_NOT_BALANCED,
+  E_EMPTY_EXPRESSION,
+  E_SEPARATOR_OUT_OF_CONTEXT,
+} ErrorCode;
+const KeyValuePair ErrorLUT[] = {
+    {"There is no input.", E_EMPTY_SOURCE_STRING},
+    {"There is a symbol in the expression string that the calculator does not "
+     "work with.",
+     E_BAD_TOKEN},
+    {"There is a point in the expression string, where the closing parenthesis "
+     "does not match any of the opening ones.",
+     E_PARENTHESES_INVALID_SEQUENCE},
+    {"The count of opening parentheses does not match with the count of "
+     "closing ones.",
+     E_PARENTHESES_NOT_BALANCED},
+    {"There are no any literals or variables, so there is nothing to "
+     "calculate.",
+     E_EMPTY_EXPRESSION},
+    {"There is an argument separator located not inside a function.",
+     E_SEPARATOR_OUT_OF_CONTEXT},
+};
+const int ErrorLUT_size = sizeof(ErrorLUT) / sizeof(ErrorLUT[0]);
 
 int keyfromstring(char* value, const KeyValuePair lut[], int lut_size) {
   for (int i = 0; i < lut_size; i++) {
@@ -256,9 +275,58 @@ void print_tokens(const char* const src, const TokenNode* const list) {
   }
 }
 
+ErrorCode validate_tokens(const TokenNode* const list) {
+  if (list == NULL) {
+    return E_EMPTY_SOURCE_STRING;
+  }
+
+  int parentheses_balance = 0;
+  bool term_presence = false;
+
+  const TokenNode* node = list;
+  while (node) {
+    Token token = node->token;
+    if (token.type == BAD_TOKEN) {
+      return E_BAD_TOKEN;
+    }
+    if (token.type == LITERAL || token.type == VARIABLE) {
+      term_presence = true;
+    }
+    if (token.type == PARENTHESIS_LEFT) {
+      parentheses_balance++;
+    }
+    if (token.type == PARENTHESIS_RIGHT) {
+      parentheses_balance--;
+    }
+    if (parentheses_balance < 0) {
+      return E_PARENTHESES_INVALID_SEQUENCE;
+    }
+    node = node->next;
+  }
+
+  if (parentheses_balance != 0) {
+    return E_PARENTHESES_NOT_BALANCED;
+  }
+  if (term_presence == false) {
+    return E_EMPTY_EXPRESSION;
+  }
+  return E_SUCCESS;
+}
+
+void terminate(ErrorCode error) {
+  char* desc = stringfromkey(error, ErrorLUT, ErrorLUT_size);
+  fprintf(stderr, "%s\n", desc);
+  exit(error);
+}
+
 int main(void) {
-  char expr[] = "1.21. + 2*cos(2x)";
+  char expr[] = "1.21 + 2*cos(2x), 3x";
 
   TokenNode* token_list = tokenize(expr);
+  ErrorCode error = validate_tokens(token_list);
+  if (error) {
+    terminate(error);
+  }
+  // cleanup(token_list);
   print_tokens(expr, token_list);
 }
