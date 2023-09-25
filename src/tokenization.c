@@ -58,70 +58,70 @@ char* stringfromkey(int key, const KeyValuePair lut[], int lut_size) {
   return NULL;
 }
 typedef enum token_type {
-  YET_UNDEFINED,
-  LITERAL,
-  VARIABLE,
-  OPERATOR,
-  UNARY_OPERATOR,
-  FUNCTION,
-  FUNCTION_ARGUMENT,
-  FUNCTION_ARGUMENT_SEPARATOR,
-  PARENTHESIS_LEFT,
-  PARENTHESIS_RIGHT,
-  BAD_TOKEN
+  TT_YET_UNDEFINED,
+  TT_LITERAL,
+  TT_VARIABLE,
+  TT_OPERATOR,
+  TT_UNARY_OPERATOR,
+  TT_FUNCTION,
+  TT_FUNCTION_ARGUMENT,
+  TT_FUNCTION_ARGUMENT_SEPARATOR,
+  TT_PARENTHESIS_LEFT,
+  TT_PARENTHESIS_RIGHT,
+  TT_BAD_TOKEN
 } TokenType;
 const KeyValuePair TokenLUT[] = {
-    {"literal", LITERAL},
-    {"variable", VARIABLE},
-    {"operator", OPERATOR},
-    {"unary operator", UNARY_OPERATOR},
-    {"function", FUNCTION},
-    {"function argument", FUNCTION_ARGUMENT},
-    {"function argument separator", FUNCTION_ARGUMENT_SEPARATOR},
-    {"parenthesis left", PARENTHESIS_LEFT},
-    {"parenthesis right", PARENTHESIS_RIGHT},
-    {"bad token", BAD_TOKEN},
+    {"literal", TT_LITERAL},
+    {"variable", TT_VARIABLE},
+    {"operator", TT_OPERATOR},
+    {"unary operator", TT_UNARY_OPERATOR},
+    {"function", TT_FUNCTION},
+    {"function argument", TT_FUNCTION_ARGUMENT},
+    {"function argument separator", TT_FUNCTION_ARGUMENT_SEPARATOR},
+    {"parenthesis left", TT_PARENTHESIS_LEFT},
+    {"parenthesis right", TT_PARENTHESIS_RIGHT},
+    {"bad token", TT_BAD_TOKEN},
 };
 const int TokenLUT_size = sizeof(TokenLUT) / sizeof(TokenLUT[0]);
 
 typedef enum operator{
-  ADDITION,
-  SUBTRACTION,
-  MULTIPLICATION,
-  DIVISION,
-  POWER,
-  MODULUS,
+  OP_ADDITION,
+  OP_SUBTRACTION,
+  OP_MULTIPLICATION,
+  OP_DIVISION,
+  OP_POWER,
+  OP_MODULUS,
 } Operator;
 const KeyValuePair OperatorLUT[] = {
-    {"+", ADDITION}, {"-", SUBTRACTION}, {"*", MULTIPLICATION},
-    {"/", DIVISION}, {"^", POWER},       {"mod", MODULUS},
+    {"+", OP_ADDITION}, {"-", OP_SUBTRACTION}, {"*", OP_MULTIPLICATION},
+    {"/", OP_DIVISION}, {"^", OP_POWER},       {"mod", OP_MODULUS},
 };
 const int OperatorLUT_size = sizeof(OperatorLUT) / sizeof(OperatorLUT[0]);
 typedef enum function {
-  ARC_COSINE,
-  ARC_COTANGENT,
-  ARC_SINE,
-  ARC_TANENGT,
-  COSINE,
-  COTANGENT,
-  LOGARITHM_COMMON,
-  LOGARITHM_NATURAL,
-  SINE,
-  SQUARE_ROOT,
-  TANGENT,
+  FN_ARC_COSINE,
+  FN_ARC_COTANGENT,
+  FN_ARC_SINE,
+  FN_ARC_TANENGT,
+  FN_COSINE,
+  FN_COTANGENT,
+  FN_LOGARITHM_COMMON,
+  FN_LOGARITHM_NATURAL,
+  FN_SINE,
+  FN_SQUARE_ROOT,
+  FN_TANGENT,
 } Function;
 const KeyValuePair FunctionLUT[] = {
-    {"sin", SINE},
-    {"cos", COSINE},
-    {"tan", TANGENT},
-    {"cot", COTANGENT},
-    {"asin", ARC_SINE},
-    {"acos", ARC_COSINE},
-    {"atan", ARC_TANENGT},
-    {"acot", ARC_COTANGENT},
-    {"sqrt", SQUARE_ROOT},
-    {"ln", LOGARITHM_NATURAL},
-    {"log", LOGARITHM_COMMON},
+    {"sin", FN_SINE},
+    {"cos", FN_COSINE},
+    {"tan", FN_TANGENT},
+    {"cot", FN_COTANGENT},
+    {"asin", FN_ARC_SINE},
+    {"acos", FN_ARC_COSINE},
+    {"atan", FN_ARC_TANENGT},
+    {"acot", FN_ARC_COTANGENT},
+    {"sqrt", FN_SQUARE_ROOT},
+    {"ln", FN_LOGARITHM_NATURAL},
+    {"log", FN_LOGARITHM_COMMON},
 };
 const int FunctionLUT_size = sizeof(FunctionLUT) / sizeof(FunctionLUT[0]);
 
@@ -218,14 +218,14 @@ bool l_isoperat(char* lexeme) {
 }
 
 TokenType match_token_type(char* lexeme) {
-  if (l_isparenl(lexeme)) return PARENTHESIS_LEFT;
-  if (l_isparenr(lexeme)) return PARENTHESIS_RIGHT;
-  if (l_isnumber(lexeme)) return LITERAL;
-  if (l_issepart(lexeme)) return FUNCTION_ARGUMENT_SEPARATOR;
-  if (l_isfunctn(lexeme)) return FUNCTION;
-  if (l_isoperat(lexeme)) return OPERATOR;
-  if (l_isvariab(lexeme)) return VARIABLE;
-  return BAD_TOKEN;
+  if (l_isparenl(lexeme)) return TT_PARENTHESIS_LEFT;
+  if (l_isparenr(lexeme)) return TT_PARENTHESIS_RIGHT;
+  if (l_isnumber(lexeme)) return TT_LITERAL;
+  if (l_issepart(lexeme)) return TT_FUNCTION_ARGUMENT_SEPARATOR;
+  if (l_isfunctn(lexeme)) return TT_FUNCTION;
+  if (l_isoperat(lexeme)) return TT_OPERATOR;
+  if (l_isvariab(lexeme)) return TT_VARIABLE;
+  return TT_BAD_TOKEN;
 }
 
 Token create_token(const char* lexeme, TokenType type) {
@@ -284,10 +284,11 @@ ErrorCode validate_tokens(const TokenNode* const list) {
   const TokenNode* node = list;
   while (node) {
     Token token = node->token;
-    if (token.type == BAD_TOKEN) return E_BAD_TOKEN;
-    if (token.type == LITERAL || token.type == VARIABLE) term_presence = true;
-    if (token.type == PARENTHESIS_LEFT) parentheses_balance++;
-    if (token.type == PARENTHESIS_RIGHT) parentheses_balance--;
+    if (token.type == TT_BAD_TOKEN) return E_BAD_TOKEN;
+    if (token.type == TT_LITERAL || token.type == TT_VARIABLE)
+      term_presence = true;
+    if (token.type == TT_PARENTHESIS_LEFT) parentheses_balance++;
+    if (token.type == TT_PARENTHESIS_RIGHT) parentheses_balance--;
     if (parentheses_balance < 0) return E_PARENTHESES_INVALID_SEQUENCE;
     node = node->next;
   }
@@ -402,9 +403,10 @@ Token tkn_queue_dequeue(TokenQueue* const queue) {
  * @brief greater int = greater precedence
  *
  */
+typedef int Precedence;
 const int PrecedenceLUT[] = {
-    [ADDITION] = 1, [SUBTRACTION] = 1, [MULTIPLICATION] = 2,
-    [DIVISION] = 2, [MODULUS] = 2,     [POWER] = 3,
+    [OP_ADDITION] = 1, [OP_SUBTRACTION] = 1, [OP_MULTIPLICATION] = 2,
+    [OP_DIVISION] = 2, [OP_MODULUS] = 2,     [OP_POWER] = 3,
 };
 
 typedef enum {
@@ -412,9 +414,9 @@ typedef enum {
   ASSOC_RIGHT,
 } Associativity;
 const int AssociativityLUT[] = {
-    [ADDITION] = ASSOC_LEFT,       [SUBTRACTION] = ASSOC_LEFT,
-    [MULTIPLICATION] = ASSOC_LEFT, [DIVISION] = ASSOC_LEFT,
-    [MODULUS] = ASSOC_LEFT,        [POWER] = ASSOC_LEFT,
+    [OP_ADDITION] = ASSOC_LEFT,       [OP_SUBTRACTION] = ASSOC_LEFT,
+    [OP_MULTIPLICATION] = ASSOC_LEFT, [OP_DIVISION] = ASSOC_LEFT,
+    [OP_MODULUS] = ASSOC_LEFT,        [OP_POWER] = ASSOC_LEFT,
 
 };
 
@@ -427,27 +429,27 @@ void infix_to_postfix(const TokenNode* const list_head) {
   while (node) {
     Token token = node->token;
     switch (token.type) {
-      case LITERAL:
-      case VARIABLE:
-      case FUNCTION_ARGUMENT:
+      case TT_LITERAL:
+      case TT_VARIABLE:
+      case TT_FUNCTION_ARGUMENT:
         tkn_queue_enqueue(&out_queue, token);
         break;
-      case FUNCTION:
-      case PARENTHESIS_LEFT:
+      case TT_FUNCTION:
+      case TT_PARENTHESIS_LEFT:
         tkn_stack_push(&op_stack, token);
         break;
-      case FUNCTION_ARGUMENT_SEPARATOR:
-        while (tkn_stack_peek(&op_stack).type != PARENTHESIS_LEFT) {
+      case TT_FUNCTION_ARGUMENT_SEPARATOR:
+        while (tkn_stack_peek(&op_stack).type != TT_PARENTHESIS_LEFT) {
           Token operator= tkn_stack_pop(&op_stack);
           tkn_queue_enqueue(&out_queue, operator);
         }
-        assert(tkn_stack_peek(&op_stack).type == PARENTHESIS_LEFT);
+        assert(tkn_stack_peek(&op_stack).type == TT_PARENTHESIS_LEFT);
         break;
-      case OPERATOR:
-        while (tkn_stack_peek(&op_stack).type == OPERATOR) {
+      case TT_OPERATOR:
+        while (tkn_stack_peek(&op_stack).type == TT_OPERATOR) {
           Token operator1 = token;
-          int prec1 = PrecedenceLUT[operator1.type];
-          int prec2 = PrecedenceLUT[tkn_stack_peek(&op_stack).type];
+          Precedence prec1 = PrecedenceLUT[operator1.type];
+          Precedence prec2 = PrecedenceLUT[tkn_stack_peek(&op_stack).type];
           Associativity assoc1 = AssociativityLUT[operator1.type];
           if (!(prec2 > prec1 || prec1 == prec2 && assoc1 == ASSOC_LEFT)) {
             break;
@@ -457,14 +459,14 @@ void infix_to_postfix(const TokenNode* const list_head) {
         }
         tkn_stack_push(&op_stack, token);
         break;
-      case PARENTHESIS_RIGHT:
-        while (tkn_stack_peek(&op_stack).type != PARENTHESIS_LEFT) {
+      case TT_PARENTHESIS_RIGHT:
+        while (tkn_stack_peek(&op_stack).type != TT_PARENTHESIS_LEFT) {
           Token operator= tkn_stack_pop(&op_stack);
           tkn_stack_push(&op_stack, operator);
         }
-        assert(tkn_stack_peek(&op_stack).type == PARENTHESIS_LEFT);
+        assert(tkn_stack_peek(&op_stack).type == TT_PARENTHESIS_LEFT);
         (void)tkn_stack_pop(&op_stack);
-        if (tkn_stack_peek(&op_stack).type == FUNCTION) {
+        if (tkn_stack_peek(&op_stack).type == TT_FUNCTION) {
           Token function = tkn_stack_pop(&op_stack);
           tkn_queue_enqueue(&out_queue, function);
         }
@@ -475,7 +477,7 @@ void infix_to_postfix(const TokenNode* const list_head) {
     node = node->next;
   }
   while (!tkn_stack_isempty(&op_stack)) {
-    assert(tkn_stack_peek(&op_stack).type != PARENTHESIS_LEFT);
+    assert(tkn_stack_peek(&op_stack).type != TT_PARENTHESIS_LEFT);
     Token operator= tkn_stack_pop(&op_stack);
     tkn_queue_enqueue(&out_queue, operator);
   }
