@@ -313,14 +313,182 @@ void terminate(ErrorCode error) {
 //   }
 // }
 
+int tkn_list_get_length(const TokenNode* const list_head) {
+  const TokenNode* node = list_head;
+  int count = 0;
+  while (node) {
+    count++;
+    node = node->next;
+  }
+  return count;
+}
+
+/* REVERSE POLISH NOTATION */
+
+typedef struct token_stack {
+  int capacity;
+  Token* array;
+  int top;
+} TokenStack;
+#define EMPTY -1
+TokenStack tkn_stack_create(int capacity) {
+  TokenStack stack;
+  stack.array = malloc(sizeof(Token) * capacity);
+  assert(stack.array != NULL);
+  stack.top = EMPTY;
+  return stack;
+}
+bool tkn_stack_isfull(const TokenStack* const stack) {
+  assert(stack != NULL);
+  return stack->top == stack->capacity - 1;
+}
+bool tkn_stack_isempty(const TokenStack* const stack) {
+  assert(stack != NULL);
+  return stack->top == EMPTY;
+}
+void tkn_stack_push(TokenStack* const stack, Token token) {
+  assert(stack != NULL);
+  assert(!tkn_stack_isfull(stack));
+  stack->top++;
+  stack->array[stack->top] = token;
+}
+Token tkn_stack_pop(TokenStack* const stack) {
+  assert(stack != NULL);
+  assert(!tkn_stack_isempty(stack));
+  return stack->array[stack->top--];
+}
+Token tkn_stack_peek(TokenStack* const stack) {
+  assert(stack != NULL);
+  assert(!tkn_stack_isempty(stack));
+  return stack->array[stack->top];
+}
+
+typedef struct token_queue {
+  int capacity;
+  Token* array;
+  int front;
+  int rear;
+} TokenQueue;
+
+TokenQueue tkn_queue_create(int capacity) {
+  TokenQueue queue;
+  queue.array = malloc(sizeof(Token) * capacity);
+  assert(queue.array != NULL);
+  queue.front = 0;
+  queue.rear = EMPTY;
+  return queue;
+}
+bool tkn_queue_isfull(const TokenQueue* const queue) {
+  assert(queue != NULL);
+  return queue->rear == queue->capacity - 1;
+}
+bool tkn_queue_isempty(const TokenQueue* const queue) {
+  assert(queue != NULL);
+  return queue->rear == EMPTY;
+}
+void tkn_queue_enqueue(TokenQueue* const queue, Token token) {
+  assert(queue != NULL);
+  assert(!tkn_queue_isfull(queue));
+  queue->front++;
+  queue->array[queue->front] = token;
+}
+Token tkn_queue_dequeue(TokenQueue* const queue) {
+  assert(queue != NULL);
+  assert(!tkn_queue_isempty(queue));
+  return queue->array[queue->front++];
+}
+
+/**
+ * @brief greater int = greater precedence
+ *
+ */
+const int PrecedenceLUT[] = {
+    [ADDITION] = 1, [SUBTRACTION] = 1, [MULTIPLICATION] = 2,
+    [DIVISION] = 2, [MODULUS] = 2,     [POWER] = 3,
+};
+
+typedef enum {
+  ASSOC_LEFT,
+  ASSOC_RIGHT,
+} Associativity;
+const int AssociativityLUT[] = {
+    [ADDITION] = ASSOC_LEFT,       [SUBTRACTION] = ASSOC_LEFT,
+    [MULTIPLICATION] = ASSOC_LEFT, [DIVISION] = ASSOC_LEFT,
+    [MODULUS] = ASSOC_LEFT,        [POWER] = ASSOC_LEFT,
+
+};
+
+void infix_to_postfix(const TokenNode* const list_head) {
+  int token_count = tkn_list_get_length(list_head);
+  TokenStack op_stack = tkn_stack_create(token_count);
+  TokenQueue out_queue = tkn_queue_create(token_count);
+
+  const TokenNode* node = list_head;
+  while (node) {
+    Token token = node->token;
+    switch (token.type) {
+      case LITERAL:
+      case VARIABLE:
+      case FUNCTION_ARGUMENT:
+        tkn_queue_enqueue(&out_queue, token);
+        break;
+      case FUNCTION:
+      case PARENTHESIS_LEFT:
+        tkn_stack_push(&op_stack, token);
+        break;
+      case FUNCTION_ARGUMENT_SEPARATOR:
+        while (tkn_stack_peek(&op_stack).type != PARENTHESIS_LEFT) {
+          Token operator= tkn_stack_pop(&op_stack);
+          tkn_queue_enqueue(&out_queue, operator);
+        }
+        assert(tkn_stack_peek(&op_stack).type == PARENTHESIS_LEFT);
+        break;
+      case OPERATOR:
+        while (tkn_stack_peek(&op_stack).type == OPERATOR) {
+          Token operator1 = token;
+          int prec1 = PrecedenceLUT[operator1.type];
+          int prec2 = PrecedenceLUT[tkn_stack_peek(&op_stack).type];
+          Associativity assoc1 = AssociativityLUT[operator1.type];
+          if (!(prec2 > prec1 || prec1 == prec2 && assoc1 == ASSOC_LEFT)) {
+            break;
+          }
+          Token operator2 = tkn_stack_pop(&op_stack);
+          tkn_queue_enqueue(&out_queue, operator2);
+        }
+        tkn_stack_push(&op_stack, token);
+        break;
+      case PARENTHESIS_RIGHT:
+        while (tkn_stack_peek(&op_stack).type != PARENTHESIS_LEFT) {
+          Token operator= tkn_stack_pop(&op_stack);
+          tkn_stack_push(&op_stack, operator);
+        }
+        assert(tkn_stack_peek(&op_stack).type == PARENTHESIS_LEFT);
+        (void)tkn_stack_pop(&op_stack);
+        if (tkn_stack_peek(&op_stack).type == FUNCTION) {
+          Token function = tkn_stack_pop(&op_stack);
+          tkn_queue_enqueue(&out_queue, function);
+        }
+        break;
+      default:
+        assert(!token.type);
+    }
+    node = node->next;
+  }
+  while (!tkn_stack_isempty(&op_stack)) {
+    assert(tkn_stack_peek(&op_stack).type != PARENTHESIS_LEFT);
+    Token operator= tkn_stack_pop(&op_stack);
+    tkn_queue_enqueue(&out_queue, operator);
+  }
+}
+
 int main(void) {
-  char expr[] = "1.21 + 2*cos(2x), 3x";
+  char expr[] = "1.21 + 2*cos2x, 3x";
 
   TokenNode* token_list = tokenize(expr);
   ErrorCode error = validate_tokens(token_list);
   if (error) {
     terminate(error);
   }
-  // cleanup_tokens(token_list);
+  // format_token_sequence(token_list);
   print_tokens(expr, token_list);
 }
