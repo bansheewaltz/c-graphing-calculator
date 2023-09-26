@@ -69,19 +69,18 @@ typedef enum token_type {
   TT_PARENTHESIS_RIGHT,
   TT_BAD_TOKEN
 } TokenType;
-const KeyValuePair TokenLUT[] = {
-    {"literal", TT_LITERAL},
-    {"variable", TT_VARIABLE},
-    {"operator", TT_OPERATOR},
-    {"unary operator", TT_UNARY_OPERATOR},
-    {"function", TT_FUNCTION},
-    {"function argument", TT_FUNCTION_ARGUMENT},
-    {"function argument separator", TT_FUNCTION_ARGUMENT_SEPARATOR},
-    {"parenthesis left", TT_PARENTHESIS_LEFT},
-    {"parenthesis right", TT_PARENTHESIS_RIGHT},
-    {"bad token", TT_BAD_TOKEN},
+const char* const TokenTypeLUT[] = {
+    [TT_LITERAL] = "literal",
+    [TT_VARIABLE] = "variable",
+    [TT_OPERATOR] = "operator",
+    [TT_UNARY_OPERATOR] = "unary operator",
+    [TT_FUNCTION] = "function",
+    [TT_FUNCTION_ARGUMENT] = "function argument",
+    [TT_FUNCTION_ARGUMENT_SEPARATOR] = "function argument separator",
+    [TT_PARENTHESIS_LEFT] = "parenthesis left",
+    [TT_PARENTHESIS_RIGHT] = "parenthesis right",
+    [TT_BAD_TOKEN] = "bad token",
 };
-const int TokenLUT_size = sizeof(TokenLUT) / sizeof(TokenLUT[0]);
 
 typedef enum operator{
   OP_ADDITION,
@@ -268,7 +267,7 @@ void print_tokens(const char* const src, const TokenNode* const list) {
   printf("Source string: \"%s\"\n", src);
   while (node) {
     Token token = node->token;
-    char* type = stringfromkey(token.type, TokenLUT, TokenLUT_size);
+    const char* type = TokenTypeLUT[token.type];
     printf("Type: \"%s\", Value: \"%s\"\n", type, token.lexeme);
     node = node->next;
   }
