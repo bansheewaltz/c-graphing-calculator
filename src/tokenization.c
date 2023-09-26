@@ -195,36 +195,36 @@ char* read_lexeme(const char* src, size_t* pos) {
   return lexeme;
 }
 
-bool l_isvariab(char* lexeme) { return isalpha(lexeme[0]); }
-bool l_isparenl(char* lexeme) { return lexeme[0] == '('; }
-bool l_isparenr(char* lexeme) { return lexeme[0] == ')'; }
+bool lxm_isvariab(char* lexeme) { return isalpha(lexeme[0]); }
+bool lxm_isparenl(char* lexeme) { return lexeme[0] == '('; }
+bool lxm_isparenr(char* lexeme) { return lexeme[0] == ')'; }
 
-bool l_isfloat_wo_integral_part(char* lexeme) {
+bool lxm_isfloat_wo_integralxm_part(char* lexeme) {
   return isradixp(lexeme[0]) && strlen(lexeme) > 1;
 }
-bool l_isnumber(char* lexeme) {
-  return isdigit(lexeme[0]) || l_isfloat_wo_integral_part(lexeme);
+bool lxm_isnumber(char* lexeme) {
+  return isdigit(lexeme[0]) || lxm_isfloat_wo_integralxm_part(lexeme);
 }
-bool l_issepart(char* lexeme) {
+bool lxm_issepart(char* lexeme) {
   return lexeme[0] == ',' && strlen(lexeme) == 1;
 }
-bool l_isfunctn(char* lexeme) {
+bool lxm_isfunctn(char* lexeme) {
   int key = keyfromstring(lexeme, FunctionLUT, FunctionLUT_size);
   return key != BAD_KEY;
 }
-bool l_isoperat(char* lexeme) {
+bool lxm_isoperat(char* lexeme) {
   int key = keyfromstring(lexeme, OperatorLUT, OpLUT_size);
   return key != BAD_KEY;
 }
 
 TokenType match_token_type(char* lexeme) {
-  if (l_isparenl(lexeme)) return TT_PARENTHESIS_LEFT;
-  if (l_isparenr(lexeme)) return TT_PARENTHESIS_RIGHT;
-  if (l_isnumber(lexeme)) return TT_LITERAL;
-  if (l_issepart(lexeme)) return TT_FUNCTION_ARGUMENT_SEPARATOR;
-  if (l_isfunctn(lexeme)) return TT_FUNCTION;
-  if (l_isoperat(lexeme)) return TT_OPERATOR;
-  if (l_isvariab(lexeme)) return TT_VARIABLE;
+  if (lxm_isparenl(lexeme)) return TT_PARENTHESIS_LEFT;
+  if (lxm_isparenr(lexeme)) return TT_PARENTHESIS_RIGHT;
+  if (lxm_isnumber(lexeme)) return TT_LITERAL;
+  if (lxm_issepart(lexeme)) return TT_FUNCTION_ARGUMENT_SEPARATOR;
+  if (lxm_isfunctn(lexeme)) return TT_FUNCTION;
+  if (lxm_isoperat(lexeme)) return TT_OPERATOR;
+  if (lxm_isvariab(lexeme)) return TT_VARIABLE;
   return TT_BAD_TOKEN;
 }
 
