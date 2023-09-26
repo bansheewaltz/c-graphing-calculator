@@ -19,24 +19,23 @@ typedef enum error_code {
   E_EMPTY_EXPRESSION,
   E_SEPARATOR_OUT_OF_CONTEXT,
 } ErrorCode;
-const KeyValuePair ErrorLUT[] = {
-    {"There is no input.", E_EMPTY_SOURCE_STRING},
-    {"There is a symbol in the expression string that the calculator does not "
-     "work with.",
-     E_BAD_TOKEN},
-    {"There is a point in the expression string, where the closing parenthesis "
-     "does not match any of the opening ones.",
-     E_PARENTHESES_INVALID_SEQUENCE},
-    {"The count of opening parentheses does not match with the count of "
-     "closing ones.",
-     E_PARENTHESES_NOT_BALANCED},
-    {"There are no any literals or variables, so there is nothing to "
-     "calculate.",
-     E_EMPTY_EXPRESSION},
-    {"There is an argument separator located not inside a function.",
-     E_SEPARATOR_OUT_OF_CONTEXT},
+const char* const ErrorLUT[] = {
+    [E_EMPTY_SOURCE_STRING] = "There is no input.",
+    [E_BAD_TOKEN] =
+        "There is a symbol in the expression string that the calculator does "
+        "not work with.",
+    [E_PARENTHESES_INVALID_SEQUENCE] =
+        "There is a point in the expression string, where the closing "
+        "parenthesis does not match any of the opening ones.",
+    [E_PARENTHESES_NOT_BALANCED] =
+        "The count of opening parentheses does not match with the count of "
+        "closing ones.",
+    [E_EMPTY_EXPRESSION] =
+        "There are no any literals or variables, so there is nothing to "
+        "calculate.",
+    [E_SEPARATOR_OUT_OF_CONTEXT] =
+        "There is an argument separator located not inside a function.",
 };
-const int ErrorLUT_size = sizeof(ErrorLUT) / sizeof(ErrorLUT[0]);
 
 int keyfromstring(const char* value, const KeyValuePair lut[], int lut_size) {
   for (int i = 0; i < lut_size; i++) {
@@ -298,7 +297,7 @@ ErrorCode validate_tokens(const TokenNode* const list) {
 }
 
 void terminate(ErrorCode error) {
-  char* desc = stringfromkey(error, ErrorLUT, ErrorLUT_size);
+  const char* desc = ErrorLUT[error];
   fprintf(stderr, "%s\n", desc);
   exit(error);
 }
@@ -468,7 +467,7 @@ void infix_to_postfix(const TokenNode* const list_head) {
           int prec1 = PrecedenceLUT[op1];
           int prec2 = PrecedenceLUT[op2];
           int assoc1 = AssociativityLUT[op1];
-          if (prec2 > prec1 || prec1 == prec2 && assoc1 == ASSOC_LEFT) {
+          if (prec2 > prec1 || (prec1 == prec2 && assoc1 == ASSOC_LEFT)) {
             Token operator2 = tkn_stack_pop(op_stack);
             tkn_queue_enqueue(out_queue, operator2);
           } else {
