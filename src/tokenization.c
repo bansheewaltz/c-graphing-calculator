@@ -89,7 +89,7 @@ typedef enum operator{
   OP_DIVISION,
   OP_POWER,
   OP_MODULUS,
-} Operator;
+} OperatorKey;
 const KeyValuePair OperatorLUT[] = {
     {"+", OP_ADDITION}, {"-", OP_SUBTRACTION}, {"*", OP_MULTIPLICATION},
     {"/", OP_DIVISION}, {"^", OP_POWER},       {"mod", OP_MODULUS},
@@ -107,7 +107,7 @@ typedef enum function {
   FN_SINE,
   FN_SQUARE_ROOT,
   FN_TANGENT,
-} Function;
+} FunctionKey;
 const KeyValuePair FunctionLUT[] = {
     {"sin", FN_SINE},
     {"cos", FN_COSINE},
@@ -461,8 +461,8 @@ void infix_to_postfix(const TokenNode* const list_head) {
         while (tkn_stack_peek(op_stack).type == TT_OPERATOR) {
           Token t1 = token;
           Token t2 = tkn_stack_peek(op_stack);
-          Operator op1 = keyfromstring(t1.lexeme, OperatorLUT, OpLUT_size);
-          Operator op2 = keyfromstring(t2.lexeme, OperatorLUT, OpLUT_size);
+          OperatorKey op1 = keyfromstring(t1.lexeme, OperatorLUT, OpLUT_size);
+          OperatorKey op2 = keyfromstring(t2.lexeme, OperatorLUT, OpLUT_size);
           int prec1 = PrecedenceLUT[op1];
           int prec2 = PrecedenceLUT[op2];
           int assoc1 = AssociativityLUT[op1];
