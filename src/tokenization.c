@@ -38,7 +38,7 @@ const KeyValuePair ErrorLUT[] = {
 };
 const int ErrorLUT_size = sizeof(ErrorLUT) / sizeof(ErrorLUT[0]);
 
-int keyfromstring(char* value, const KeyValuePair lut[], int lut_size) {
+int keyfromstring(const char* value, const KeyValuePair lut[], int lut_size) {
   for (int i = 0; i < lut_size; i++) {
     KeyValuePair entry = lut[i];
     if (strcmp(entry.value, value) == 0) {
@@ -96,7 +96,7 @@ const KeyValuePair OperatorLUT[] = {
     {"+", OP_ADDITION}, {"-", OP_SUBTRACTION}, {"*", OP_MULTIPLICATION},
     {"/", OP_DIVISION}, {"^", OP_POWER},       {"mod", OP_MODULUS},
 };
-const int OperatorLUT_size = sizeof(OperatorLUT) / sizeof(OperatorLUT[0]);
+const int OpLUT_size = sizeof(OperatorLUT) / sizeof(OperatorLUT[0]);
 typedef enum function {
   FN_ARC_COSINE,
   FN_ARC_COTANGENT,
@@ -213,7 +213,7 @@ bool l_isfunctn(char* lexeme) {
   return key != BAD_KEY;
 }
 bool l_isoperat(char* lexeme) {
-  int key = keyfromstring(lexeme, OperatorLUT, OperatorLUT_size);
+  int key = keyfromstring(lexeme, OperatorLUT, OpLUT_size);
   return key != BAD_KEY;
 }
 
@@ -332,12 +332,20 @@ typedef struct token_stack {
   int top;
 } TokenStack;
 #define EMPTY -1
-TokenStack tkn_stack_create(int capacity) {
-  TokenStack stack;
-  stack.array = malloc(sizeof(Token) * capacity);
-  assert(stack.array != NULL);
-  stack.top = EMPTY;
+TokenStack* tkn_stack_create(int capacity) {
+  TokenStack* stack = malloc(sizeof(TokenStack) * capacity);
+  assert(stack != NULL);
+  stack->array = malloc(sizeof(Token) * capacity);
+  assert(stack->array != NULL);
+  stack->top = EMPTY;
   return stack;
+}
+void tkn_stack_remove(TokenStack* stack) {
+  if (stack == NULL) return;
+  if (stack->array) {
+    free(stack->array);
+  }
+  free(stack);
 }
 bool tkn_stack_isfull(const TokenStack* const stack) {
   assert(stack != NULL);
@@ -371,12 +379,13 @@ typedef struct token_queue {
   int rear;
 } TokenQueue;
 
-TokenQueue tkn_queue_create(int capacity) {
-  TokenQueue queue;
-  queue.array = malloc(sizeof(Token) * capacity);
-  assert(queue.array != NULL);
-  queue.front = 0;
-  queue.rear = EMPTY;
+TokenQueue* tkn_queue_create(int capacity) {
+  TokenQueue* queue = malloc(sizeof(TokenQueue) * capacity);
+  assert(queue != NULL);
+  queue->array = malloc(sizeof(Token) * capacity);
+  assert(queue->array != NULL);
+  queue->front = 0;
+  queue->rear = EMPTY;
   return queue;
 }
 bool tkn_queue_isfull(const TokenQueue* const queue) {
@@ -420,10 +429,15 @@ const int AssociativityLUT[] = {
 
 };
 
+/**
+ * @brief Dijkstra's shunting yard algorithm
+ *
+ * @param list_head
+ */
 void infix_to_postfix(const TokenNode* const list_head) {
   int token_count = tkn_list_get_length(list_head);
-  TokenStack op_stack = tkn_stack_create(token_count);
-  TokenQueue out_queue = tkn_queue_create(token_count);
+  TokenStack* op_stack = tkn_stack_create(token_count);
+  TokenQueue* out_queue = tkn_queue_create(token_count);
 
   const TokenNode* node = list_head;
   while (node) {
@@ -432,43 +446,47 @@ void infix_to_postfix(const TokenNode* const list_head) {
       case TT_LITERAL:
       case TT_VARIABLE:
       case TT_FUNCTION_ARGUMENT:
-        tkn_queue_enqueue(&out_queue, token);
+        tkn_queue_enqueue(out_queue, token);
         break;
       case TT_FUNCTION:
       case TT_PARENTHESIS_LEFT:
-        tkn_stack_push(&op_stack, token);
+        tkn_stack_push(op_stack, token);
         break;
       case TT_FUNCTION_ARGUMENT_SEPARATOR:
-        while (tkn_stack_peek(&op_stack).type != TT_PARENTHESIS_LEFT) {
-          Token operator= tkn_stack_pop(&op_stack);
-          tkn_queue_enqueue(&out_queue, operator);
+        while (tkn_stack_peek(op_stack).type != TT_PARENTHESIS_LEFT) {
+          Token operator= tkn_stack_pop(op_stack);
+          tkn_queue_enqueue(out_queue, operator);
         }
-        assert(tkn_stack_peek(&op_stack).type == TT_PARENTHESIS_LEFT);
+        assert(tkn_stack_peek(op_stack).type == TT_PARENTHESIS_LEFT);
         break;
       case TT_OPERATOR:
-        while (tkn_stack_peek(&op_stack).type == TT_OPERATOR) {
-          Token operator1 = token;
-          Precedence prec1 = PrecedenceLUT[operator1.type];
-          Precedence prec2 = PrecedenceLUT[tkn_stack_peek(&op_stack).type];
-          Associativity assoc1 = AssociativityLUT[operator1.type];
-          if (!(prec2 > prec1 || prec1 == prec2 && assoc1 == ASSOC_LEFT)) {
+        while (tkn_stack_peek(op_stack).type == TT_OPERATOR) {
+          Token t1 = token;
+          Token t2 = tkn_stack_peek(op_stack);
+          Operator op1 = keyfromstring(t1.lexeme, OperatorLUT, OpLUT_size);
+          Operator op2 = keyfromstring(t2.lexeme, OperatorLUT, OpLUT_size);
+          int prec1 = PrecedenceLUT[op1];
+          int prec2 = PrecedenceLUT[op2];
+          int assoc1 = AssociativityLUT[op1];
+          if (prec2 > prec1 || prec1 == prec2 && assoc1 == ASSOC_LEFT) {
+            Token operator2 = tkn_stack_pop(op_stack);
+            tkn_queue_enqueue(out_queue, operator2);
+          } else {
             break;
           }
-          Token operator2 = tkn_stack_pop(&op_stack);
-          tkn_queue_enqueue(&out_queue, operator2);
         }
-        tkn_stack_push(&op_stack, token);
+        tkn_stack_push(op_stack, token);
         break;
       case TT_PARENTHESIS_RIGHT:
-        while (tkn_stack_peek(&op_stack).type != TT_PARENTHESIS_LEFT) {
-          Token operator= tkn_stack_pop(&op_stack);
-          tkn_stack_push(&op_stack, operator);
+        while (tkn_stack_peek(op_stack).type != TT_PARENTHESIS_LEFT) {
+          Token operator= tkn_stack_pop(op_stack);
+          tkn_stack_push(op_stack, operator);
         }
-        assert(tkn_stack_peek(&op_stack).type == TT_PARENTHESIS_LEFT);
-        (void)tkn_stack_pop(&op_stack);
-        if (tkn_stack_peek(&op_stack).type == TT_FUNCTION) {
-          Token function = tkn_stack_pop(&op_stack);
-          tkn_queue_enqueue(&out_queue, function);
+        assert(tkn_stack_peek(op_stack).type == TT_PARENTHESIS_LEFT);
+        (void)tkn_stack_pop(op_stack);
+        if (tkn_stack_peek(op_stack).type == TT_FUNCTION) {
+          Token function = tkn_stack_pop(op_stack);
+          tkn_queue_enqueue(out_queue, function);
         }
         break;
       default:
@@ -476,10 +494,10 @@ void infix_to_postfix(const TokenNode* const list_head) {
     }
     node = node->next;
   }
-  while (!tkn_stack_isempty(&op_stack)) {
-    assert(tkn_stack_peek(&op_stack).type != TT_PARENTHESIS_LEFT);
-    Token operator= tkn_stack_pop(&op_stack);
-    tkn_queue_enqueue(&out_queue, operator);
+  while (!tkn_stack_isempty(op_stack)) {
+    assert(tkn_stack_peek(op_stack).type != TT_PARENTHESIS_LEFT);
+    Token operator= tkn_stack_pop(op_stack);
+    tkn_queue_enqueue(out_queue, operator);
   }
 }
 
