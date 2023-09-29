@@ -1,0 +1,14 @@
+FROM ubuntu:23.10
+
+ENV PROMPT_COLOR="\033[38;5;117m" COLOR_RESET="\033[0m"
+RUN apt-get update; \
+    apt-get install -y check \
+                       clang-format \
+                       gcc \
+                       gcovr \
+                       make \
+                       pkg-config \
+                       valgrind \
+    rm -rf /var/lib/apt/lists/*; \
+    echo 'export PS1="${PROMPT_COLOR}\u@ubuntu_container${COLOR_RESET}:/\W# "' \
+          >> ~/.bashrc
