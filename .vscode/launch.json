@@ -19,6 +19,15 @@
       "cwd": "${fileDirname}"
     },
     {
+      "name": "(lldb) Launch project",
+      "type": "lldb",
+      "request": "launch",
+      "preLaunchTask": "build project",
+      "program": "${fileWorkspaceFolder}/build/bin/smartcalc",
+      "args": [],
+      "cwd": "${fileDirname}"
+    },
+    {
       "name": "(lldb) Launch",
       "type": "cppdbg",
       "request": "launch",

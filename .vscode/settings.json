@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.check": "plaintext",
+    "Makefile*": "makefile",
+    "*.h": "c",
+  }
+}
