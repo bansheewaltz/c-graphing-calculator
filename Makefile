@@ -1,4 +1,4 @@
-### Project name
+### Project name and output location
 PROGRAM = smartcalc
 PROGRAM_EXE = $(BIN_DIR)/$(PROGRAM)
 ### Directories
@@ -6,39 +6,53 @@ SRC_DIR = src
 BLD_DIR = build
 BIN_DIR = $(BLD_DIR)/bin
 OBJ_DIR = $(BLD_DIR)/obj
+DEP_DIR = $(BLD_DIR)/dep
 ### Files
-SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
-HDR_FILES = $(SRC_DIR)/*.h
-OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+DEPS = $(SRCS:$(SRC_DIR)/%.c=$(DEP_DIR)/%.d)
 ### Tools
 CC   = gcc
 LINT = clang-format
-### Flags
-CPPFLAGS =
+### Flag groups
+DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
 STDFLAGS = -std=c11
 DBGFLAGS = -g
 OPTFLAGS =
-LINTFLAG = --style=google
 WFLAGS   = -Wall -Werror -Wextra -Wpedantic
-WFLAG1   = 
+LINTFLAG = --style=google
+### Stage flags
+CPPFLAGS = $(DEPFLAGS)
+CFLAGS   = $(STDFLAGS) $(DBGFLAGS) $(OPTFlAGS) $(WFLAGS)
+LDFLAGS  =
+LDLIBS   =
 
-CFLAGS  = $(CPPFLAGS) $(STDFLAGS) $(DBGFLAGS) $(OPTFlAGS) $(WFLAGS)
-LDFLAGS =
-LDLIBS  =
 
+all: $(PROGRAM)
+PHONY: all
 
-all: smartcalc
-
-smartcalc: ${PROGRAM_EXE}
-${PROGRAM_EXE}: ${OBJ_FILES} | ${BIN_DIR}
-	${CC} -o $@ ${CFLAGS} ${OBJ_FILES} ${LDFLAGS} ${LDLIBS}
-${OBJ_DIR}/%.o: ${SRC_DIR}/%.c $(HDR_FILES) | ${OBJ_DIR}
-	${CC} ${CFLAGS} -c -o $@ $<
-# Directories creation
-${BIN_DIR}:
+$(PROGRAM): $(PROGRAM_EXE)
+# Link the object files into one binary
+$(PROGRAM_EXE): $(OBJS) | $(BIN_DIR)
+	@echo \### Linking $@...
+	$(CC) -o $@ $(OBJS) $(LDFLAGS) $(LDLIBS)
+# Compile the object files, generating dependency files in the process
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEP_DIR)/%.d | $(OBJ_DIR) $(DEP_DIR)
+	@echo \### Compiling $<...
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $<
+# Include the dependency files that exist
+include $(wildcard $(DEPS))
+# Create the directories if they don't already exist
+$(BIN_DIR) $(OBJ_DIR) $(DEP_DIR):
+	@echo \### Creating $@...
 	mkdir -p $@
-${OBJ_DIR}:
-	mkdir -p $@
+
+clean:
+	$(RM) -r $(BLD_DIR)
+PHONY: clean
+
+re: clean all
+PHONY: re
 
 run: $(PROGRAM_EXE)
 	$(PROGRAM_EXE)
@@ -48,12 +62,8 @@ container:
 	bash test/run_container.sh
 PHONY: container
 
-clean:
-	$(RM) -r build
-PHONY: clean
-
-linter_fix:   LINTFLAGS := -i $(LINTFLAGS)
 linter_check: LINTFLAGS := -n $(LINTFLAGS)
+linter_fix:   LINTFLAGS := -i $(LINTFLAGS)
 linter_check linter_fix:
 	$(LINT) $(LINTFLAGS) $(shell find . -type f -name '*.h' -o -name '*.c')
 .PHONY: linter_check linter_fix
