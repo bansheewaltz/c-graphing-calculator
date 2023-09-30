@@ -2,6 +2,7 @@
 
 #include "error_handling.h"
 #include "grammar.h"
+#include "postfix_evaluation.h"
 #include "strutils.h"
 #include "tkn_linkedl.h"
 #include "tkn_queuearr.h"
@@ -25,5 +26,16 @@ char* smartcalc_expr_infix_to_postfix(const char* expr) {
   }
   TokenQueue* queue = infix_to_postfix(token_list);
   char* res = tkn_queue_tostr(queue);
+  return res;
+}
+
+double smartcalc_expr_infix_evaluate(const char* expr) {
+  TokenNode* token_list = tokenize(expr);
+  ErrorCode error = validate_tokens(token_list);
+  if (error) {
+    terminate(error);
+  }
+  TokenQueue* queue = infix_to_postfix(token_list);
+  double res = tkn_queue_postfix_evaluate(queue);
   return res;
 }

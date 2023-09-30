@@ -37,7 +37,7 @@ bool tkn_queue_isfull(const TokenQueue* const queue) {
 
 bool tkn_queue_isempty(const TokenQueue* const queue) {
   assert(queue != NULL);
-  return queue->rear == EMPTY;
+  return queue->rear == EMPTY || queue->rear < queue->front;
 }
 
 void tkn_queue_enqueue(TokenQueue* const queue, Token token) {

@@ -15,5 +15,6 @@ typedef struct token {
 
 int tkn_get_precedence(Token token);
 int tkn_get_assoc(Token token);
+int tkn_get_argcount(Token token);
 
 #endif  // TOKEN_H_

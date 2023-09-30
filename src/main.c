@@ -9,4 +9,7 @@ int main(void) {
   smartcalc_expr_analyze(expr);
   char* expr_postfix = smartcalc_expr_infix_to_postfix(expr);
   printf("%s\n", expr_postfix);
+  double res = smartcalc_expr_infix_evaluate(expr);
+
+  printf("%lf\n", res);
 }

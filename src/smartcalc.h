@@ -5,7 +5,7 @@
 
 char* smartcalc_expr_infix_to_postfix(const char* expr);
 void smartcalc_expr_analyze(const char* expr);
-ErrorCode smartcalc_expr_infix_evaluate(const char* expr);
-ErrorCode smartcalc_expr_postfix_evaluate(const char* expr);
+double smartcalc_expr_infix_evaluate(const char* expr);
+double smartcalc_expr_postfix_evaluate(const char* expr);
 
 #endif  // SMARTCALC_H_

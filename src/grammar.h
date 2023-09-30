@@ -2,7 +2,6 @@
 #define GRAMMAR_H_
 
 #include <string.h>
-
 #define BAD_KEY (-1)
 
 typedef enum TokenType {
@@ -32,11 +31,15 @@ typedef enum FunctionKey {
   FN_SQUARE_ROOT,
   FN_TANGENT,
 } FunctionKey;
+
+typedef double (*FnUnaryPtr)(double);
 typedef struct FunctionInfo {
   const char *const lexeme;
+  FnUnaryPtr fn_unary_ptr;
   int arg_count;
 } FunctionInfo;
 
+typedef double (*FnUnaryPtr)(double);
 typedef enum {
   OP_ADDITION,
   OP_SUBTRACTION,
@@ -49,8 +52,11 @@ typedef enum {
   ASSOC_LEFT,
   ASSOC_RIGHT,
 } Associativity;
+
+typedef double (*FnBinaryPtr)(double, double);
 typedef struct OperatorInfo {
   const char *const lexeme;
+  FnBinaryPtr fn_binary_ptr;
   int precedence;
   Associativity assoc;
 } OperatorInfo;
@@ -60,10 +66,16 @@ extern const OperatorInfo OperatorLUT[];
 extern const FunctionInfo FunctionLUT[];
 
 int fn_get_keyfromstr(const char *const str);
-const char *fn_get_strfromkey(FunctionKey key);
-int fn_get_argcount(FunctionKey key);
 int op_get_keyfromstr(const char *const str);
 const char *op_get_strfromkey(OperatorKey key);
+const char *fn_get_strfromkey(FunctionKey key);
+FnUnaryPtr fn_unary_getptr(FunctionKey key);
+FnBinaryPtr op_binary_getptr(OperatorKey key);
+double fn_unary_apply(FnUnaryPtr fn, double a);
+double fn_binary_apply(FnBinaryPtr fn, double a, double b);
+
+int fn_get_argcount(FunctionKey key);
+
 int op_get_precedence(OperatorKey key);
 Associativity op_get_assoc(OperatorKey key);
 

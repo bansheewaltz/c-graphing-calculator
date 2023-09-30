@@ -81,8 +81,19 @@ TokenType match_token_type(const char* const lexeme) {
 
 Token create_token(const char* const lexeme, TokenType type) {
   Token token = {.type = type, .str = lexeme};
-  if (type == TT_FUNCTION) token.lexeme.fnkey = fn_get_keyfromstr(lexeme);
-  if (type == TT_OPERATOR) token.lexeme.fnkey = op_get_keyfromstr(lexeme);
+  switch (token.type) {
+    case TT_LITERAL:
+      token.lexeme.number = atof(lexeme);
+      break;
+    case TT_FUNCTION:;
+      token.lexeme.fnkey = fn_get_keyfromstr(lexeme);
+      break;
+    case TT_OPERATOR:
+      token.lexeme.opkey = op_get_keyfromstr(lexeme);
+      break;
+    default:
+      break;
+  }
   return token;
 }
 
