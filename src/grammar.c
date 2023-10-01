@@ -2,6 +2,7 @@
 
 #include <assert.h>
 #include <math.h>
+#include <stdbool.h>
 
 #include "token.h"
 
@@ -109,21 +110,37 @@ const char* op_get_strfromkey(OperatorKey key) {
 }
 
 int op_get_precedence(OperatorKey key) { return OperatorLUT[key].precedence; }
+
+Associativity op_get_assoc(OperatorKey key) { return OperatorLUT[key].assoc; }
+
 int tkn_get_precedence(Token token) {
   assert(token.type == TT_OPERATOR);
   return op_get_precedence(token.lexeme.opkey);
 }
-
-Associativity op_get_assoc(OperatorKey key) { return OperatorLUT[key].assoc; }
 int tkn_get_assoc(Token token) {
   assert(token.type == TT_OPERATOR);
   return op_get_assoc(token.lexeme.opkey);
 }
-
 int tkn_get_argcount(Token token) {
   assert(token.type == TT_OPERATOR || token.type == TT_FUNCTION);
   if (token.type == TT_OPERATOR) return 2;
   if (token.type == TT_FUNCTION)
     return FunctionLUT[token.lexeme.fnkey].arg_count;
   return 0;
+}
+FnUnaryPtr tkn_get_fn_unary(Token token) {
+  switch (token.type) {
+    case TT_FUNCTION:
+      return fn_unary_getptr(token.lexeme.fnkey);
+    default:
+      assert(token.type && false);
+  }
+}
+FnBinaryPtr tkn_get_fn_binary(Token token) {
+  switch (token.type) {
+    case TT_OPERATOR:
+      return op_binary_getptr(token.lexeme.opkey);
+    default:
+      assert(token.type && false);
+  }
 }

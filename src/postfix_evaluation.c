@@ -48,24 +48,24 @@ double tkn_queue_postfix_evaluate(TokenQueue *queue) {
       case TT_LITERAL:
         num_stack_push(num_stack, token.lexeme.number);
         break;
-      case TT_OPERATOR: {
-        double rigth_num = num_stack_pop(num_stack);
-        double left_num = num_stack_pop(num_stack);
-        FnBinaryPtr operation = op_binary_getptr(token.lexeme.opkey);
-        double res = fn_binary_apply(operation, left_num, rigth_num);
-        num_stack_push(num_stack, res);
-        break;
-      }
       case TT_FUNCTION:
+      case TT_OPERATOR: {
+        double res = 0.0;
         if (tkn_get_argcount(token) == 1) {
           double num = num_stack_pop(num_stack);
-          FnUnaryPtr operation = fn_unary_getptr(token.lexeme.fnkey);
-          double res = fn_unary_apply(operation, num);
-          num_stack_push(num_stack, res);
+          FnUnaryPtr fn = tkn_get_fn_unary(token);
+          res = fn_unary_apply(fn, num);
         }
-        break;
+        if (tkn_get_argcount(token) == 2) {
+          double rigth_num = num_stack_pop(num_stack);
+          double left_num = num_stack_pop(num_stack);
+          FnBinaryPtr fn = tkn_get_fn_binary(token);
+          res = fn_binary_apply(fn, left_num, rigth_num);
+        }
+        num_stack_push(num_stack, res);
+      } break;
       default:
-        assert(!token.type);
+        assert(token.type && false);
     }
   }
   return num_stack_pop(num_stack);
