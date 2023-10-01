@@ -40,8 +40,10 @@ $(PROGRAM_EXE): $(OBJS) | $(BIN_DIR)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEP_DIR)/%.d | $(OBJ_DIR) $(DEP_DIR)
 	@echo \### Compiling $<...
 	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $<
+# Handle missing .d files
+$(DEPS):
 # Include the dependency files that exist
-include $(wildcard $(DEPS))
+include $(DEPS)
 # Create the directories if they don't already exist
 $(BIN_DIR) $(OBJ_DIR) $(DEP_DIR):
 	@echo \### Creating $@...
