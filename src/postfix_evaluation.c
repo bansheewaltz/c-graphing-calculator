@@ -7,17 +7,22 @@
 typedef struct {
   int capacity;
   int top;
-  double *arr;
+  double *array;
 } NumberStack;
 
 static NumberStack *num_stack_create(size_t capacity) {
   NumberStack *stack = malloc(sizeof(NumberStack));
   assert(stack != NULL);
-  stack->arr = malloc(capacity * sizeof(double));
-  assert(stack->arr != NULL);
+  stack->array = malloc(capacity * sizeof(double));
+  assert(stack->array != NULL);
   stack->capacity = capacity;
   stack->top = -1;
   return stack;
+}
+static void num_stack_remove(NumberStack *stack) {
+  if (stack == NULL) return;
+  if (stack->array) free(stack->array);
+  free(stack);
 }
 static bool num_stack_isfull(const NumberStack *stack) {
   assert(stack != NULL);
@@ -30,13 +35,12 @@ static bool num_stack_isempty(const NumberStack *stack) {
 static void num_stack_push(NumberStack *stack, double value) {
   assert(stack != NULL);
   assert(!num_stack_isfull(stack));
-  stack->top++;
-  stack->arr[stack->top] = value;
+  stack->array[++stack->top] = value;
 }
 static double num_stack_pop(NumberStack *stack) {
   assert(stack != NULL);
   assert(!num_stack_isempty(stack));
-  return stack->arr[stack->top--];
+  return stack->array[stack->top--];
 }
 
 double tkn_queue_postfix_evaluate(TokenQueue *queue) {
@@ -68,5 +72,7 @@ double tkn_queue_postfix_evaluate(TokenQueue *queue) {
         assert(token.type && false);
     }
   }
-  return num_stack_pop(num_stack);
+  double res = num_stack_pop(num_stack);
+  num_stack_remove(num_stack);
+  return res;
 }
