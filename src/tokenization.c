@@ -11,6 +11,11 @@
 #include "tkn_linkedl.h"
 #include "token.h"
 
+bool iscomma(char ch) { return ch == ','; }
+bool isparen(char ch) { return ch == '(' || ch == ')'; }
+bool isradixp(char ch) { return ch == '.'; }
+bool isdigitf(char ch) { return isdigit(ch) || isradixp(ch); }
+
 char* read_lexeme(const char* src, size_t* pos) {
   assert(src != NULL);
   assert(pos != NULL);

@@ -5,11 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-bool iscomma(char ch) { return ch == ','; }
-bool isparen(char ch) { return ch == '(' || ch == ')'; }
-bool isradixp(char ch) { return ch == '.'; }
-bool isdigitf(char ch) { return isdigit(ch) || isradixp(ch); }
-
 bool strisempty(const char* const str) { return strlen(str) == 0; }
 
 int strcount(const char* const str, char ch) {
