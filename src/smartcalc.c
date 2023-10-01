@@ -2,6 +2,7 @@
 
 #include "error_handling.h"
 #include "grammar.h"
+#include "infix_to_postfix.h"
 #include "postfix_evaluation.h"
 #include "strutils.h"
 #include "tkn_linkedl.h"
