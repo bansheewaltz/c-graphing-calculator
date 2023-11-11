@@ -1,5 +1,5 @@
-#ifndef MainWindow_H
-#define MainWindow_H
+#ifndef MainWindow_HPP_
+#define MainWindow_HPP_
 
 #include <QAbstractButton>
 #include <QMainWindow>
@@ -40,4 +40,4 @@ class MainWindow : public QMainWindow {
   QVector<double> x_graph, y_graph;
   QPropertyAnimation *animation = nullptr;
 };
-#endif  // MainWindow_H
+#endif  // MainWindow_HPP_
