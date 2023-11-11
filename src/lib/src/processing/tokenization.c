@@ -140,29 +140,29 @@ TokenNode* tokenize(const char* src) {
   return list_head;
 }
 
-ErrorCode validate_tokens(const TokenNode* const list_head) {
+SmartCalcError validate_tokens(const TokenNode* const list_head) {
   if (list_head == NULL) {
-    return E_EMPTY_SOURCE_STRING;
+    return SMARTCALC_EMPTY_SOURCE_STRING;
   }
   int parentheses_balance = 0;
   bool term_presence = false;
   const TokenNode* node = list_head;
   while (node) {
     Token token = node->token;
-    if (token.type == TT_BAD_TOKEN) return E_BAD_TOKEN;
+    if (token.type == TT_BAD_TOKEN) return SMARTCALC_BAD_TOKEN;
     if (token.type == TT_LITERAL || token.type == TT_VARIABLE)
       term_presence = true;
     if (token.type == TT_PARENTHESIS_LEFT) parentheses_balance++;
     if (token.type == TT_PARENTHESIS_RIGHT) parentheses_balance--;
-    if (parentheses_balance < 0) return E_PARENTHESES_INVALID_SEQUENCE;
+    if (parentheses_balance < 0) return SMARTCALC_PARENTHESES_INVALID_SEQUENCE;
     node = node->next;
   }
-  if (parentheses_balance != 0) return E_PARENTHESES_NOT_BALANCED;
-  if (term_presence == false) return E_EMPTY_EXPRESSION;
-  return E_SUCCESS;
+  if (parentheses_balance != 0) return SMARTCALC_PARENTHESES_NOT_BALANCED;
+  if (term_presence == false) return SMARTCALC_EMPTY_EXPRESSION;
+  return SMARTCALC_SUCCESS;
 }
 
-ErrorCode format_token_sequence(const TokenNode* const list_head) {
+SmartCalcError format_token_sequence(const TokenNode* const list_head) {
   ;
   ;
 }
