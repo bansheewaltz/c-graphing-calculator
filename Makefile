@@ -3,7 +3,7 @@ PROGRAM = smartcalc
 PROGRAM_EXE = $(BIN_DIR)/$(PROGRAM)
 ### Directories
 SRC_DIR = src
-BLD_DIR = build
+BLD_DIR = build/lib
 BIN_DIR = $(BLD_DIR)/bin
 OBJ_DIR = $(BLD_DIR)/obj
 DEP_DIR = $(BLD_DIR)/dep

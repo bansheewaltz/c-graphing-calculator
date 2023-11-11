@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "error_handling.h"
 #include "grammar.h"
+#include "smartcalc.h"
 #include "strutils.h"
 #include "tkn_linkedl.h"
 #include "token.h"
@@ -16,6 +16,21 @@ bool isparen(char ch) { return ch == '(' || ch == ')'; }
 bool isradixp(char ch) { return ch == '.'; }
 bool isdigitf(char ch) { return isdigit(ch) || isradixp(ch); }
 
+/**
+ * The function `read_lexeme` reads a lexeme from a given source string starting
+ * at a specified position.
+ *
+ * @param src The `src` parameter is a pointer to a constant character array,
+ * which represents the source code or input string from which we want to
+ * extract a lexeme.
+ * @param pos The `pos` parameter is a pointer to a `size_t` variable that
+ * represents the current position in the source string `src`. It is used to
+ * keep track of the current position while reading the lexemes from the source
+ * string.
+ *
+ * @return a pointer to a character array (char*) representing the lexeme read
+ * from the source string.
+ */
 char* read_lexeme(const char* src, size_t* pos) {
   assert(src != NULL);
   assert(pos != NULL);
@@ -145,4 +160,9 @@ ErrorCode validate_tokens(const TokenNode* const list_head) {
   if (parentheses_balance != 0) return E_PARENTHESES_NOT_BALANCED;
   if (term_presence == false) return E_EMPTY_EXPRESSION;
   return E_SUCCESS;
+}
+
+ErrorCode format_token_sequence(const TokenNode* const list_head) {
+  ;
+  ;
 }

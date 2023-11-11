@@ -10,7 +10,6 @@ const char* const TokenTypeLUT[] = {
     [TT_LITERAL] = "literal",
     [TT_VARIABLE] = "variable",
     [TT_OPERATOR] = "operator",
-    [TT_UNARY_OPERATOR] = "unary operator",
     [TT_FUNCTION] = "function",
     [TT_FUNCTION_ARGUMENT] = "function argument",
     [TT_FUNCTION_ARGUMENT_SEPARATOR] = "function argument separator",

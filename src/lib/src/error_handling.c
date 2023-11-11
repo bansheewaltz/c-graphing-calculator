@@ -1,9 +1,9 @@
-#include "error_handling.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 
-const char* const ErrorLUT[] = {
+#include "smartcalc.h"
+
+static const char* const ErrorLUT[] = {
     [E_EMPTY_SOURCE_STRING] = "There is no input.",
     [E_BAD_TOKEN] =
         "There is a symbol in the expression string that the calculator does "
@@ -21,8 +21,12 @@ const char* const ErrorLUT[] = {
         "There is an argument separator located not inside a function.",
 };
 
-void terminate(ErrorCode error) {
+void smartcalc_error_terminate(ErrorCode error) {
   const char* desc = ErrorLUT[error];
   fprintf(stderr, "%s\n", desc);
   exit(error);
+}
+
+const char* smartcalc_error_get_description(ErrorCode error) {
+  return ErrorLUT[error];
 }
