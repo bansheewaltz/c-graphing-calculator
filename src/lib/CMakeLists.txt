@@ -24,7 +24,7 @@ add_library(${LIB_NAME} STATIC
   src/data_structures/tkn_queuearr.c src/data_structures/tkn_queuearr.h
   src/data_structures/tkn_linkedl.c src/data_structures/tkn_linkedl.h
 
-  src/utils/strutils.c src/utils/strutils.h
+  src/utils/stringutils.c src/utils/stringutils.h
 
   src/processing/expression_handler.c
   src/processing/tokenization.c src/processing/tokenization.h

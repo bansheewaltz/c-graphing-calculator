@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "strutils.h"
+#include "stringutils.h"
 #include "token.h"
 
 #define EMPTY (-1)
@@ -58,7 +58,7 @@ char* tkn_queue_tostr(const TokenQueue* const queue) {
   char* res = NULL;
   for (int i = 0; i <= queue->rear; i++) {
     const char* lexeme = queue->array[i].str;
-    stradd(&res, lexeme);
+    string_add(&res, lexeme);
   }
   return res;
 }

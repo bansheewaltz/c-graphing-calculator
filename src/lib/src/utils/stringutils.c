@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-bool strisempty(const char* const str) { return strlen(str) == 0; }
+bool string_isempty(const char* const str) { return strlen(str) == 0; }
 
-int strcount(const char* const str, char ch) {
+int string_count(const char* const str, char ch) {
   assert(str != NULL);
   int count = 0;
   for (size_t i = 0; i < strlen(str); i++) {
@@ -16,17 +16,17 @@ int strcount(const char* const str, char ch) {
   return count;
 }
 
-char* strzcreate(size_t len) {
+char* string_createz(size_t len) {
   char* res = calloc(len + 1, sizeof(char));
   assert(res != NULL);
   return res;
 }
 
-char* strremove(const char* src, char ch) {
+char* string_remove(const char* src, char ch) {
   assert(src != NULL);
-  int ch_count = strcount(src, ch);
+  int ch_count = string_count(src, ch);
   size_t res_len = strlen(src) - ch_count;
-  char* res = strzcreate(res_len);
+  char* res = string_createz(res_len);
   char* iter = res;
   while (*src != '\0') {
     if (*src != ch) {
@@ -39,15 +39,15 @@ char* strremove(const char* src, char ch) {
   return res;
 }
 
-void stradd(char** dest, const char* addition) {
+void string_add(char** dest, const char* addition) {
   if (addition == NULL || dest == NULL) return;
   if (*dest == NULL) {
-    *dest = strzcreate(strlen(addition));
+    *dest = string_createz(strlen(addition));
     sprintf(*dest, "%s", addition);
     return;
   }
   size_t total_len = strlen(*dest) + strlen(addition) + 1;  // +1 for whitespace
-  char* res = strzcreate(total_len);
+  char* res = string_createz(total_len);
   sprintf(res, "%s %s", *dest, addition);
   free(*dest);
   *dest = res;

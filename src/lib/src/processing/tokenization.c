@@ -7,7 +7,7 @@
 
 #include "grammar.h"
 #include "smartcalc.h"
-#include "strutils.h"
+#include "stringutils.h"
 #include "tkn_linkedl.h"
 #include "token.h"
 
@@ -53,7 +53,7 @@ char* read_lexeme(const char* src, size_t* pos) {
   }
 
   size_t lexeme_len = end_idx - start_idx;
-  char* lexeme = strzcreate(lexeme_len);
+  char* lexeme = string_createz(lexeme_len);
   strncpy(lexeme, &src[*pos], lexeme_len);
   *pos += lexeme_len;
   return lexeme;
@@ -124,8 +124,8 @@ Token read_token(const char* const src, size_t* pos) {
 
 TokenNode* tokenize(const char* src) {
   assert(src != NULL);
-  src = strremove(src, ' ');
-  if (strisempty(src)) {
+  src = string_remove(src, ' ');
+  if (string_isempty(src)) {
     return NULL;
   }
   size_t pos = 0;
