@@ -6,13 +6,7 @@
 #include <QPropertyAnimation>
 #include <QVector>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 #include "smartcalc.h"
-#ifdef __cplusplus
-}
-#endif
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
