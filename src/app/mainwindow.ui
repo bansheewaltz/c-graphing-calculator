@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>455</width>
-    <height>390</height>
+    <width>450</width>
+    <height>320</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>455</width>
-    <height>390</height>
+    <width>450</width>
+    <height>320</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -29,1330 +29,1412 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="AC">
-    <property name="geometry">
-     <rect>
-      <x>195</x>
-      <y>65</y>
-      <width>130</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>AC</string>
-    </property>
-    <property name="shortcut">
-     <string>Backspace</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="left">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>65</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>(</string>
-    </property>
-    <property name="shortcut">
-     <string>(</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="right">
-    <property name="geometry">
-     <rect>
-      <x>65</x>
-      <y>65</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>)</string>
-    </property>
-    <property name="shortcut">
-     <string>)</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="mod">
-    <property name="geometry">
-     <rect>
-      <x>325</x>
-      <y>65</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>%</string>
-    </property>
-    <property name="shortcut">
-     <string>%</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="sin">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>130</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>sin</string>
-    </property>
-    <property name="shortcut">
-     <string>S</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup_function</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="cos">
-    <property name="geometry">
-     <rect>
-      <x>65</x>
-      <y>130</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>cos</string>
-    </property>
-    <property name="shortcut">
-     <string>C</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup_function</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="push_7">
-    <property name="geometry">
-     <rect>
-      <x>195</x>
-      <y>130</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(156, 157, 161);
-}</string>
-    </property>
-    <property name="text">
-     <string>7</string>
-    </property>
-    <property name="shortcut">
-     <string>7</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="push_8">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>130</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(156, 157, 161);
-}</string>
-    </property>
-    <property name="text">
-     <string>8</string>
-    </property>
-    <property name="shortcut">
-     <string>8</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="pow">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>65</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>^</string>
-    </property>
-    <property name="shortcut">
-     <string>^</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="push_9">
-    <property name="geometry">
-     <rect>
-      <x>325</x>
-      <y>130</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(156, 157, 161);
-}</string>
-    </property>
-    <property name="text">
-     <string>9</string>
-    </property>
-    <property name="shortcut">
-     <string>9</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="asin">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>195</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>asin</string>
-    </property>
-    <property name="shortcut">
-     <string>Shift+S</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup_function</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="div">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>65</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(238, 162, 59);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(193, 129, 46);
-}</string>
-    </property>
-    <property name="text">
-     <string>÷</string>
-    </property>
-    <property name="shortcut">
-     <string>/</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="acos">
-    <property name="geometry">
-     <rect>
-      <x>65</x>
-      <y>195</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>acos</string>
-    </property>
-    <property name="shortcut">
-     <string>Shift+C</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup_function</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="push_4">
-    <property name="geometry">
-     <rect>
-      <x>195</x>
-      <y>195</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(156, 157, 161);
-}</string>
-    </property>
-    <property name="text">
-     <string>4</string>
-    </property>
-    <property name="shortcut">
-     <string>4</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="push_2">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>260</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(156, 157, 161);
-}</string>
-    </property>
-    <property name="text">
-     <string>2</string>
-    </property>
-    <property name="shortcut">
-     <string>2</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="push_6">
-    <property name="geometry">
-     <rect>
-      <x>325</x>
-      <y>195</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(156, 157, 161);
-}</string>
-    </property>
-    <property name="text">
-     <string>6</string>
-    </property>
-    <property name="shortcut">
-     <string>6</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="tan">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>130</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>tan</string>
-    </property>
-    <property name="shortcut">
-     <string>T</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup_function</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="mult">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>130</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(238, 162, 59);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(193, 129, 46);
-}</string>
-    </property>
-    <property name="text">
-     <string>×</string>
-    </property>
-    <property name="shortcut">
-     <string>*</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="push_5">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>195</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(156, 157, 161);
-}</string>
-    </property>
-    <property name="text">
-     <string>5</string>
-    </property>
-    <property name="shortcut">
-     <string>5</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="sqrt">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>260</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>sqrt</string>
-    </property>
-    <property name="shortcut">
-     <string>Q</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup_function</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="push_1">
-    <property name="geometry">
-     <rect>
-      <x>195</x>
-      <y>260</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(156, 157, 161);
-}</string>
-    </property>
-    <property name="text">
-     <string>1</string>
-    </property>
-    <property name="shortcut">
-     <string>1</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="push_3">
-    <property name="geometry">
-     <rect>
-      <x>325</x>
-      <y>260</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(156, 157, 161);
-}</string>
-    </property>
-    <property name="text">
-     <string>3</string>
-    </property>
-    <property name="shortcut">
-     <string>3</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="minus">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>195</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(238, 162, 59);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(193, 129, 46);
-}</string>
-    </property>
-    <property name="text">
-     <string>-</string>
-    </property>
-    <property name="shortcut">
-     <string>-</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="log">
-    <property name="geometry">
-     <rect>
-      <x>65</x>
-      <y>260</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>log</string>
-    </property>
-    <property name="shortcut">
-     <string>L</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup_function</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="ln">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>260</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>ln</string>
-    </property>
-    <property name="shortcut">
-     <string>Shift+L</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup_function</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="atan">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>195</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>atan</string>
-    </property>
-    <property name="shortcut">
-     <string>Shift+T</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup_function</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="push_x">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>325</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(93, 95, 95);
-}</string>
-    </property>
-    <property name="text">
-     <string>x</string>
-    </property>
-    <property name="shortcut">
-     <string>X</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="push_0">
-    <property name="geometry">
-     <rect>
-      <x>195</x>
-      <y>325</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(156, 157, 161);
-}</string>
-    </property>
-    <property name="text">
-     <string>0</string>
-    </property>
-    <property name="shortcut">
-     <string>0</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="plus">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>260</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(238, 162, 59);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(193, 129, 46);
-}</string>
-    </property>
-    <property name="text">
-     <string>+</string>
-    </property>
-    <property name="shortcut">
-     <string>+</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="eq">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>325</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(238, 162, 59);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(193, 129, 46);
-}</string>
-    </property>
-    <property name="text">
-     <string>=</string>
-    </property>
-    <property name="shortcut">
-     <string>Return</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="point">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>325</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(156, 157, 161);
-}</string>
-    </property>
-    <property name="text">
-     <string>.</string>
-    </property>
-    <property name="shortcut">
-     <string>.</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="Graph">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>325</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-  background-color: rgb(238, 162, 59);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-
-QPushButton:pressed {
-    background-color: rgb(193, 129, 46);
-}</string>
-    </property>
-    <property name="text">
-     <string>Plot</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="EnterX">
-    <property name="geometry">
-     <rect>
-      <x>325</x>
-      <y>325</y>
-      <width>65</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit {
-  background-color: rgb(93, 95, 95);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-</string>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string>X</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="Xmax">
-    <property name="geometry">
-     <rect>
-      <x>65</x>
-      <y>325</y>
-      <width>65</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit {
-  background-color: rgb(238, 162, 59);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-</string>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string>Xmax</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="Ymin">
-    <property name="geometry">
-     <rect>
-      <x>65</x>
-      <y>374</y>
-      <width>65</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit {
-  background-color: rgb(238, 162, 59);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-</string>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string>Ymin</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="Xmin">
-    <property name="geometry">
-     <rect>
-      <x>65</x>
-      <y>341</y>
-      <width>65</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit {
-  background-color: rgb(238, 162, 59);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-</string>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string>Xmin</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="Ymax">
-    <property name="geometry">
-     <rect>
-      <x>65</x>
-      <y>358</y>
-      <width>65</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit {
-  background-color: rgb(238, 162, 59);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-</string>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string>Ymax</string>
-    </property>
-   </widget>
-   <widget class="QCustomPlot" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>455</x>
-      <y>0</y>
-      <width>390</width>
-      <height>390</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="label">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>455</width>
-      <height>65</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit {
+   <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <layout class="QVBoxLayout" name="calcPadLayout" stretch="3,10">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="outputLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>50</pointsize>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
   background-color: rgb(37, 41, 47);
   color: white; 
   border: 1px solid rgb(36, 40, 45);
 }</string>
-    </property>
-    <property name="text">
-     <string>0</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="buttonsLayout" stretch="3,4">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QGridLayout" name="functionsLayout" rowstretch="1,1,1,1,1" columnstretch="1,1,1,0,0,0">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="sqrt">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>sqrt</string>
+            </property>
+            <property name="shortcut">
+             <string>Q</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup_function</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="atan">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>atan</string>
+            </property>
+            <property name="shortcut">
+             <string>Shift+T</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup_function</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="right">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>)</string>
+            </property>
+            <property name="shortcut">
+             <string>)</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="acos">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>acos</string>
+            </property>
+            <property name="shortcut">
+             <string>Shift+C</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup_function</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="log">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>log</string>
+            </property>
+            <property name="shortcut">
+             <string>L</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup_function</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="cos">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>cos</string>
+            </property>
+            <property name="shortcut">
+             <string>C</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup_function</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="pow">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>^</string>
+            </property>
+            <property name="shortcut">
+             <string>^</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QPushButton" name="plot">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(238, 162, 59);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(193, 129, 46);
+}</string>
+            </property>
+            <property name="text">
+             <string>Plot</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="left">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>(</string>
+            </property>
+            <property name="shortcut">
+             <string>(</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="sin">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>sin</string>
+            </property>
+            <property name="shortcut">
+             <string>S</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup_function</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="tan">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>tan</string>
+            </property>
+            <property name="shortcut">
+             <string>T</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup_function</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLineEdit" name="promptX">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>22</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+</string>
+            </property>
+            <property name="inputMask">
+             <string/>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="placeholderText">
+             <string>X</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <layout class="QVBoxLayout" name="domainInputLayout">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="sizeConstraint">
+             <enum>QLayout::SetNoConstraint</enum>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="xMin">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>8</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+  background-color: rgb(238, 162, 59);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+</string>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="placeholderText">
+               <string>xMin</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="yMax">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>8</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+  background-color: rgb(238, 162, 59);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+</string>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="placeholderText">
+               <string>Ymax</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="xMax">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>8</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+  background-color: rgb(238, 162, 59);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+</string>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="placeholderText">
+               <string>Xmax</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="yMin">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>8</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+  background-color: rgb(238, 162, 59);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+</string>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="placeholderText">
+               <string>Ymin</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="ln">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>ln</string>
+            </property>
+            <property name="shortcut">
+             <string>Shift+L</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup_function</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="asin">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+            </property>
+            <property name="text">
+             <string>asin</string>
+            </property>
+            <property name="shortcut">
+             <string>Shift+S</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup_function</string>
+            </attribute>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="mainLayout" stretch="1,4">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="topRightLayout" stretch="2,1,1">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QPushButton" name="AC">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>18</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+              </property>
+              <property name="text">
+               <string>AC</string>
+              </property>
+              <property name="shortcut">
+               <string>Backspace</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="mod">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>18</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(93, 95, 95);
+}</string>
+              </property>
+              <property name="text">
+               <string>%</string>
+              </property>
+              <property name="shortcut">
+               <string>%</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="div">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(238, 162, 59);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(193, 129, 46);
+}</string>
+              </property>
+              <property name="text">
+               <string>÷</string>
+              </property>
+              <property name="shortcut">
+               <string>/</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="numbersLayout">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <item row="2" column="2">
+             <widget class="QPushButton" name="push_6">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>6</string>
+              </property>
+              <property name="shortcut">
+               <string>6</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QPushButton" name="point">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>.</string>
+              </property>
+              <property name="shortcut">
+               <string>.</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QPushButton" name="push_x">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>x</string>
+              </property>
+              <property name="shortcut">
+               <string>X</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QPushButton" name="push_0">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>0</string>
+              </property>
+              <property name="shortcut">
+               <string>0</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QPushButton" name="eq">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(238, 162, 59);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(193, 129, 46);
+}</string>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+              <property name="shortcut">
+               <string>Return</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QPushButton" name="push_3">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>3</string>
+              </property>
+              <property name="shortcut">
+               <string>3</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="push_8">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>8</string>
+              </property>
+              <property name="shortcut">
+               <string>8</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="push_9">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>9</string>
+              </property>
+              <property name="shortcut">
+               <string>9</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QPushButton" name="mult">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(238, 162, 59);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(193, 129, 46);
+}</string>
+              </property>
+              <property name="text">
+               <string>×</string>
+              </property>
+              <property name="shortcut">
+               <string>*</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QPushButton" name="push_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>2</string>
+              </property>
+              <property name="shortcut">
+               <string>2</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="push_4">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>4</string>
+              </property>
+              <property name="shortcut">
+               <string>4</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QPushButton" name="plus">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(238, 162, 59);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(193, 129, 46);
+}</string>
+              </property>
+              <property name="text">
+               <string>+</string>
+              </property>
+              <property name="shortcut">
+               <string>+</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QPushButton" name="minus">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(238, 162, 59);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(193, 129, 46);
+}</string>
+              </property>
+              <property name="text">
+               <string>–</string>
+              </property>
+              <property name="shortcut">
+               <string>-</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="push_7">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>7</string>
+              </property>
+              <property name="shortcut">
+               <string>7</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QPushButton" name="push_1">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>1</string>
+              </property>
+              <property name="shortcut">
+               <string>1</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QPushButton" name="push_5">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>22</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+  background-color: rgb(93, 95, 95);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+
+QPushButton:pressed {
+    background-color: rgb(156, 157, 161);
+}</string>
+              </property>
+              <property name="text">
+               <string>5</string>
+              </property>
+              <property name="shortcut">
+               <string>5</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QCustomPlot" name="graphWidget" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>400</width>
+        <height>400</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <customwidgets>

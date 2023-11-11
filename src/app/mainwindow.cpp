@@ -1,12 +1,13 @@
 #include "mainwindow.hpp"
 
 #include "./ui_mainwindow.h"
+#include "smartcalc.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
 
-  ui->label->setFocus();
+  ui->outputLabel->setFocus();
   this->setProperty("windowOpacity", 0.98);
 
   connect(ui->buttonGroup, &QButtonGroup::buttonClicked, this,
@@ -17,22 +18,24 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->eq, &QPushButton::clicked, this,
           &MainWindow::pushButtonCalculate);
 
-  connect(ui->EnterX, &QLineEdit::textChanged, this, &MainWindow::SetEnterX);
+  connect(ui->promptX, &QLineEdit::textChanged, this, &MainWindow::SetpromptX);
+  ui->graphWidget->setVisible(false);
 }
 
 MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::StartLabel(QAbstractButton *button) {
-  if (ui->label->text() == "0" && button->text() != ".") ui->label->setText("");
-  if (ui->label->text() == "Error: Invalid input expression." ||
-      ui->label->text() == "Error: Error in calculation.")
-    ui->label->setText("");
+  if (ui->outputLabel->text() == "0" && button->text() != ".")
+    ui->outputLabel->setText("");
+  if (ui->outputLabel->text() == "Error: Invalid input expression." ||
+      ui->outputLabel->text() == "Error: Error in calculation.")
+    ui->outputLabel->setText("");
 }
 
-void MainWindow::SetEnterX(const QString &arg1) { x = arg1.toDouble(); }
+void MainWindow::SetpromptX(const QString &arg1) { x = arg1.toDouble(); }
 
 void MainWindow::pushButtonCalculate() {
-  std::string inputStringStr = ui->label->text().toStdString();
+  std::string inputStringStr = ui->outputLabel->text().toStdString();
   const char *inputStr = inputStringStr.c_str();
 
   char postfixStr[255] = {0};
@@ -49,32 +52,32 @@ void MainWindow::pushButtonCalculate() {
   //    }
   //  }
 
-  ui->EnterX->setText("");
+  ui->promptX->setText("");
 }
 
 void MainWindow::setText(QAbstractButton *button) {
   StartLabel(button);
   if (button->text() != "÷")
-    ui->label->setText(ui->label->text() + button->text());
+    ui->outputLabel->setText(ui->outputLabel->text() + button->text());
   else
-    ui->label->setText(ui->label->text() + '/');
+    ui->outputLabel->setText(ui->outputLabel->text() + '/');
 }
 
 void MainWindow::setText_function(QAbstractButton *button) {
   StartLabel(button);
-  ui->label->setText(ui->label->text() + button->text() + "(");
+  ui->outputLabel->setText(ui->outputLabel->text() + button->text() + "(");
 }
 
 void MainWindow::setText_AC() {
-  ui->label->setText("0");
+  ui->outputLabel->setText("0");
 
-  ui->EnterX->setText("");
-  ui->Xmax->setText("");
-  ui->Xmin->setText("");
-  ui->Ymax->setText("");
-  ui->Ymin->setText("");
+  ui->promptX->setText("");
+  ui->xMax->setText("");
+  ui->xMin->setText("");
+  ui->yMax->setText("");
+  ui->yMin->setText("");
 
-  ui->label->setFocus();
+  ui->outputLabel->setFocus();
 }
 
 void MainWindow::animateWindowSize() {
@@ -89,7 +92,7 @@ void MainWindow::animateWindowSize() {
   }
 
   if (animation->state() != QAbstractAnimation::Running &&
-      ui->label->text() == "0") {
+      ui->outputLabel->text() == "0") {
     if (width() == minimumWidth()) {
       animation->setStartValue(QSize(minimumWidth(), height()));
       animation->setEndValue(QSize(maximumWidth(), height()));
@@ -102,34 +105,26 @@ void MainWindow::animateWindowSize() {
   }
 }
 
-void MainWindow::on_Graph_clicked() {
+void MainWindow::on_Plot_clicked() {
   animateWindowSize();
 
   if (width() == maximumWidth()) {
-    xmax = ui->Xmax->text().toDouble();
-    xmin = ui->Xmin->text().toDouble();
-    ymax = ui->Ymax->text().toDouble();
-    ymin = ui->Ymin->text().toDouble();
+    xmax = ui->xMax->text().toDouble();
+    xMin = ui->xMin->text().toDouble();
+    ymax = ui->yMax->text().toDouble();
+    ymin = ui->yMin->text().toDouble();
 
-    if (ui->Xmax->text().isEmpty()) {
-      xmax = 100;
-    }
-    if (ui->Xmin->text().isEmpty()) {
-      xmin = -100;
-    }
-    if (ui->Ymax->text().isEmpty()) {
-      ymax = 100;
-    }
-    if (ui->Ymin->text().isEmpty()) {
-      ymin = -100;
-    }
+    if (ui->xMax->text().isEmpty()) xmax = +100;
+    if (ui->xMin->text().isEmpty()) xMin = -100;
+    if (ui->yMax->text().isEmpty()) ymax = +100;
+    if (ui->yMin->text().isEmpty()) ymin = -100;
 
-    ui->widget->xAxis->setRange(xmin, xmax);
-    ui->widget->yAxis->setRange(ymin, ymax);
-    ui->widget->setInteraction(QCP::iRangeDrag);
-    ui->widget->setInteraction(QCP::iRangeZoom);
+    ui->graphWidget->xAxis->setRange(xMin, xmax);
+    ui->graphWidget->yAxis->setRange(ymin, ymax);
+    ui->graphWidget->setInteraction(QCP::iRangeDrag);
+    ui->graphWidget->setInteraction(QCP::iRangeZoom);
 
-    std::string inputStringStr = ui->label->text().toStdString();
+    std::string inputStringStr = ui->outputLabel->text().toStdString();
     const char *inputStr = inputStringStr.c_str();
 
     char postfixStr[255] = {0};
@@ -137,10 +132,10 @@ void MainWindow::on_Graph_clicked() {
     //    if (parser(inputStr, postfixStr)) {
     //      ui->label->setText("Error: Invalid input expression.");
     //    } else {
-    //      if ((xmin <= xmax) && (ymin <= ymax)) {
+    //      if ((xMin <= xmax) && (ymin <= ymax)) {
     //        double output = 0;
 
-    //        for (double X = xmin; X <= xmax; X += 0.1) {
+    //        for (double X = xMin; X <= xmax; X += 0.1) {
     //          x_graph.push_back(X);
     //          calculation(postfixStr, &output, X);
     //          if (ymin <= output && output <= ymax) {
@@ -150,9 +145,9 @@ void MainWindow::on_Graph_clicked() {
     //          }
     //        }
 
-    //        ui->widget->addGraph();
-    //        ui->widget->graph(0)->setData(x_graph, y_graph);
-    //        ui->widget->replot();
+    //        ui->graphWidget->addGraph();
+    //        ui->graphWidget->graph(0)->setData(x_graph, y_graph);
+    //        ui->graphWidget->replot();
     //        x_graph.clear();
     //        y_graph.clear();
 

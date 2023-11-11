@@ -6,8 +6,6 @@
 #include <QPropertyAnimation>
 #include <QVector>
 
-#include "smartcalc.h"
-
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -21,18 +19,18 @@ class MainWindow : public QMainWindow {
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
   void from_QStr_to_string(char *str, QString qstr);
-  double x, xmax, xmin, ymax, ymin;
+  double x, xmax, xMin, ymax, ymin;
 
  private slots:
   void StartLabel(QAbstractButton *button);
 
   void setText(QAbstractButton *button);
   void setText_function(QAbstractButton *button);
-  void SetEnterX(const QString &arg1);
+  void SetpromptX(const QString &arg1);
   void setText_AC();
   void pushButtonCalculate();
 
-  void on_Graph_clicked();
+  void on_Plot_clicked();
   void animateWindowSize();
 
  private:
