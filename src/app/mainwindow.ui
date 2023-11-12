@@ -548,42 +548,7 @@ QPushButton:pressed {
                <set>Qt::AlignCenter</set>
               </property>
               <property name="placeholderText">
-               <string>xMin</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="yMax">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>8</pointsize>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QLineEdit {
-  background-color: rgb(58, 62, 66);
-  color: white; 
-  border: 1px solid rgb(36, 40, 45);
-}
-</string>
-              </property>
-              <property name="inputMask">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-              <property name="placeholderText">
-               <string>Ymax</string>
+               <string>Xmin</string>
               </property>
              </widget>
             </item>
@@ -654,6 +619,41 @@ QPushButton:pressed {
               </property>
               <property name="placeholderText">
                <string>Ymin</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="yMax">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>8</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+  background-color: rgb(58, 62, 66);
+  color: white; 
+  border: 1px solid rgb(36, 40, 45);
+}
+</string>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="placeholderText">
+               <string>Ymax</string>
               </property>
              </widget>
             </item>
