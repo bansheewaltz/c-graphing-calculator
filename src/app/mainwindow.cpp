@@ -72,10 +72,10 @@ void MainWindow::setText_AC() {
   ui->outputLabel->setText("0");
 
   ui->promptX->setText("");
-  ui->xMax->setText("");
   ui->xMin->setText("");
-  ui->yMax->setText("");
+  ui->xMax->setText("");
   ui->yMin->setText("");
+  ui->yMax->setText("");
 
   ui->outputLabel->setFocus();
 }
@@ -109,17 +109,17 @@ void MainWindow::on_plot_clicked() {
   animateWindowSize();
 
   if (width() == maximumWidth()) {
+    xmin = ui->xMin->text().toDouble();
     xmax = ui->xMax->text().toDouble();
-    xMin = ui->xMin->text().toDouble();
-    ymax = ui->yMax->text().toDouble();
     ymin = ui->yMin->text().toDouble();
+    ymax = ui->yMax->text().toDouble();
 
+    if (ui->xMin->text().isEmpty()) xmin = -100;
     if (ui->xMax->text().isEmpty()) xmax = +100;
-    if (ui->xMin->text().isEmpty()) xMin = -100;
-    if (ui->yMax->text().isEmpty()) ymax = +100;
     if (ui->yMin->text().isEmpty()) ymin = -100;
+    if (ui->yMax->text().isEmpty()) ymax = +100;
 
-    ui->graphWidget->xAxis->setRange(xMin, xmax);
+    ui->graphWidget->xAxis->setRange(xmin, xmax);
     ui->graphWidget->yAxis->setRange(ymin, ymax);
     ui->graphWidget->setInteraction(QCP::iRangeDrag);
     ui->graphWidget->setInteraction(QCP::iRangeZoom);

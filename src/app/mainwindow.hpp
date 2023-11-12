@@ -15,11 +15,12 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow {
   Q_OBJECT
 
+ private:
+  double x, xmax, xmin, ymax, ymin;
+
  public:
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
-  void from_QStr_to_string(char *str, QString qstr);
-  double x, xmax, xMin, ymax, ymin;
 
  private slots:
   void StartLabel(QAbstractButton *button);
@@ -38,4 +39,5 @@ class MainWindow : public QMainWindow {
   QVector<double> x_graph, y_graph;
   QPropertyAnimation *animation = nullptr;
 };
+
 #endif  // MainWindow_HPP_
