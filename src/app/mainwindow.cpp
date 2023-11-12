@@ -10,31 +10,30 @@ MainWindow::MainWindow(QWidget *parent)
   this->setProperty("windowOpacity", 0.98);
 
   connect(ui->buttonGroup, &QButtonGroup::buttonClicked, this,
-          &MainWindow::setText);
+          &MainWindow::setDisplayAddSymbol);
   connect(ui->buttonGroup_function, &QButtonGroup::buttonClicked, this,
-          &MainWindow::setText_function);
-  connect(ui->AC, &QPushButton::clicked, this, &MainWindow::setText_AC);
-  connect(ui->eq, &QPushButton::clicked, this,
-          &MainWindow::pushButtonCalculate);
+          &MainWindow::setDisplayAddFunction);
+  connect(ui->ac, &QPushButton::clicked, this, &MainWindow::setDisplayReset);
 
-  connect(ui->promptX, &QLineEdit::textChanged, this, &MainWindow::SetpromptX);
+  connect(ui->eq, &QPushButton::clicked, this, &MainWindow::calculate);
+  connect(ui->xVal, &QLineEdit::textChanged, this, &MainWindow::setxVal);
+
   ui->graphWidget->setVisible(false);
 }
 
 MainWindow::~MainWindow() { delete ui; }
 
-void MainWindow::StartLabel(QAbstractButton *button) {
-  if (ui->outputLabel->text() == "0" && button->text() != ".")
-    ui->outputLabel->setText("");
-  if (ui->outputLabel->text() == "Error: Invalid input expression." ||
-      ui->outputLabel->text() == "Error: Error in calculation.")
-    ui->outputLabel->setText("");
+void MainWindow::setDisplayPrepare(QAbstractButton *button) {
+  if (ui->outputDisplay->text() == "0" && button->text() != "." ||
+      ui->outputDisplay->text() == "Error: Invalid input expression." ||
+      ui->outputDisplay->text() == "Error: Error in calculation.")
+    ui->outputDisplay->setText("");
 }
 
-void MainWindow::SetpromptX(const QString &arg1) { x = arg1.toDouble(); }
+void MainWindow::setxVal(const QString &val) { x = val.toDouble(); }
 
-void MainWindow::pushButtonCalculate() {
-  std::string inputStringStr = ui->outputLabel->text().toStdString();
+void MainWindow::calculate() {
+  std::string inputStringStr = ui->outputDisplay->text().toStdString();
   const char *inputStr = inputStringStr.c_str();
 
   char postfixStr[255] = {0};
@@ -51,32 +50,29 @@ void MainWindow::pushButtonCalculate() {
   //    }
   //  }
 
-  ui->promptX->setText("");
+  ui->xVal->setText("");
 }
 
-void MainWindow::setText(QAbstractButton *button) {
-  StartLabel(button);
+void MainWindow::setDisplayAddSymbol(QAbstractButton *button) {
+  setDisplayPrepare(button);
   if (button->text() != "÷")
-    ui->outputLabel->setText(ui->outputLabel->text() + button->text());
+    ui->outputDisplay->setText(ui->outputDisplay->text() + button->text());
   else
-    ui->outputLabel->setText(ui->outputLabel->text() + '/');
+    ui->outputDisplay->setText(ui->outputDisplay->text() + '/');
 }
 
-void MainWindow::setText_function(QAbstractButton *button) {
-  StartLabel(button);
-  ui->outputLabel->setText(ui->outputLabel->text() + button->text() + "(");
+void MainWindow::setDisplayAddFunction(QAbstractButton *button) {
+  setDisplayPrepare(button);
+  ui->outputDisplay->setText(ui->outputDisplay->text() + button->text() + "(");
 }
 
-void MainWindow::setText_AC() {
-  ui->outputLabel->setText("0");
-
-  ui->promptX->setText("");
+void MainWindow::setDisplayReset() {
+  ui->outputDisplay->setText("0");
+  ui->xVal->setText("");
   ui->xMin->setText("");
   ui->xMax->setText("");
   ui->yMin->setText("");
   ui->yMax->setText("");
-
-  ui->outputLabel->setFocus();
 }
 
 void MainWindow::animateWindowSize() {
@@ -91,7 +87,7 @@ void MainWindow::animateWindowSize() {
   }
 
   if (animation->state() != QAbstractAnimation::Running &&
-      ui->outputLabel->text() == "0") {
+      ui->outputDisplay->text() == "0") {
     if (width() == minimumWidth()) {
       animation->setStartValue(QSize(minimumWidth(), height()));
       animation->setEndValue(QSize(maximumWidth(), height()));
@@ -123,7 +119,7 @@ void MainWindow::on_plot_clicked() {
     ui->graphWidget->setInteraction(QCP::iRangeDrag);
     ui->graphWidget->setInteraction(QCP::iRangeZoom);
 
-    std::string inputStringStr = ui->outputLabel->text().toStdString();
+    std::string inputStringStr = ui->outputDisplay->text().toStdString();
     const char *inputStr = inputStringStr.c_str();
 
     char postfixStr[255] = {0};

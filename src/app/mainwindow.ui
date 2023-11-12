@@ -54,7 +54,7 @@
        <enum>QLayout::SetNoConstraint</enum>
       </property>
       <item>
-       <widget class="QLineEdit" name="outputLabel">
+       <widget class="QLineEdit" name="outputDisplay">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -475,7 +475,7 @@ QPushButton:pressed {
            </widget>
           </item>
           <item row="4" column="2">
-           <widget class="QLineEdit" name="promptX">
+           <widget class="QLineEdit" name="xVal">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -742,7 +742,7 @@ QPushButton:pressed {
              <number>0</number>
             </property>
             <item>
-             <widget class="QPushButton" name="AC">
+             <widget class="QPushButton" name="ac">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                 <horstretch>0</horstretch>

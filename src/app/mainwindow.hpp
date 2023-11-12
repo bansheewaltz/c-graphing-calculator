@@ -23,13 +23,13 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
 
  private slots:
-  void StartLabel(QAbstractButton *button);
+  void setDisplayPrepare(QAbstractButton *button);
+  void setDisplayReset();
+  void setDisplayAddSymbol(QAbstractButton *button);
+  void setDisplayAddFunction(QAbstractButton *button);
 
-  void setText(QAbstractButton *button);
-  void setText_function(QAbstractButton *button);
-  void SetpromptX(const QString &arg1);
-  void setText_AC();
-  void pushButtonCalculate();
+  void setxVal(const QString &val);
+  void calculate();
 
   void on_plot_clicked();
   void animateWindowSize();
