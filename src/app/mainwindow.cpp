@@ -85,8 +85,8 @@ void MainWindow::animateWindowSize() {
     if (height() == minimumHeight()) {
       window_animation->setStartValue(QSize(width(), minimumHeight()));
       window_animation->setEndValue(QSize(width(), maximumHeight()));
-    } else if (height() == maximumHeight()) {
-      window_animation->setStartValue(QSize(width(), maximumHeight()));
+    } else {
+      window_animation->setStartValue(QSize(width(), height()));
       window_animation->setEndValue(QSize(width(), minimumHeight()));
     }
     window_animation->start();
