@@ -105,7 +105,7 @@ void MainWindow::animateWindowSize() {
   }
 }
 
-void MainWindow::on_Plot_clicked() {
+void MainWindow::on_plot_clicked() {
   animateWindowSize();
 
   if (width() == maximumWidth()) {

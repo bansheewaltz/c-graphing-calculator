@@ -30,7 +30,7 @@ class MainWindow : public QMainWindow {
   void setText_AC();
   void pushButtonCalculate();
 
-  void on_Plot_clicked();
+  void on_plot_clicked();
   void animateWindowSize();
 
  private:

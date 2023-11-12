@@ -91,7 +91,7 @@
          <number>0</number>
         </property>
         <item>
-         <layout class="QGridLayout" name="functionsLayout" rowstretch="1,1,1,1,1" columnstretch="1,1,1,0,0,0">
+         <layout class="QGridLayout" name="functionsLayout" rowstretch="1,1,1,1,1" columnstretch="1,1,1">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -505,7 +505,7 @@ QPushButton:pressed {
              <set>Qt::AlignCenter</set>
             </property>
             <property name="placeholderText">
-             <string>X</string>
+             <string>x</string>
             </property>
            </widget>
           </item>
@@ -532,7 +532,7 @@ QPushButton:pressed {
               </property>
               <property name="styleSheet">
                <string notr="true">QLineEdit {
-  background-color: rgb(238, 162, 59);
+  background-color: rgb(58, 62, 66);
   color: white; 
   border: 1px solid rgb(36, 40, 45);
 }
@@ -567,7 +567,7 @@ QPushButton:pressed {
               </property>
               <property name="styleSheet">
                <string notr="true">QLineEdit {
-  background-color: rgb(238, 162, 59);
+  background-color: rgb(58, 62, 66);
   color: white; 
   border: 1px solid rgb(36, 40, 45);
 }
@@ -602,7 +602,7 @@ QPushButton:pressed {
               </property>
               <property name="styleSheet">
                <string notr="true">QLineEdit {
-  background-color: rgb(238, 162, 59);
+  background-color: rgb(58, 62, 66);
   color: white; 
   border: 1px solid rgb(36, 40, 45);
 }
@@ -637,7 +637,7 @@ QPushButton:pressed {
               </property>
               <property name="styleSheet">
                <string notr="true">QLineEdit {
-  background-color: rgb(238, 162, 59);
+  background-color: rgb(58, 62, 66);
   color: white; 
   border: 1px solid rgb(36, 40, 45);
 }
