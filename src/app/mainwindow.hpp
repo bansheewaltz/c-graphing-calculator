@@ -37,7 +37,7 @@ class MainWindow : public QMainWindow {
  private:
   Ui::MainWindow *ui;
   QVector<double> x_graph, y_graph;
-  QPropertyAnimation *animation = nullptr;
+  QPropertyAnimation *window_animation = nullptr;
 };
 
 #endif  // MainWindow_HPP_

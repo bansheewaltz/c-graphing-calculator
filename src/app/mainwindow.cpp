@@ -17,8 +17,6 @@ MainWindow::MainWindow(QWidget *parent)
 
   connect(ui->eq, &QPushButton::clicked, this, &MainWindow::calculate);
   connect(ui->xVal, &QLineEdit::textChanged, this, &MainWindow::setxVal);
-
-  ui->graphWidget->setVisible(false);
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -76,27 +74,22 @@ void MainWindow::setDisplayReset() {
 }
 
 void MainWindow::animateWindowSize() {
-  if (!animation) {
-    animation = new QPropertyAnimation(this, "size");
-    animation->setDuration(350);
+  window_animation = new QPropertyAnimation(this, "size");
+  window_animation->setDuration(350);
+  connect(window_animation, &QPropertyAnimation::finished, this, [this]() {
+    delete window_animation;
+    window_animation = nullptr;
+  });
 
-    connect(animation, &QPropertyAnimation::finished, this, [this]() {
-      delete animation;
-      animation = nullptr;
-    });
-  }
-
-  if (animation->state() != QAbstractAnimation::Running &&
-      ui->outputDisplay->text() == "0") {
-    if (width() == minimumWidth()) {
-      animation->setStartValue(QSize(minimumWidth(), height()));
-      animation->setEndValue(QSize(maximumWidth(), height()));
-    } else if (width() == maximumWidth()) {
-      animation->setStartValue(QSize(maximumWidth(), height()));
-      animation->setEndValue(QSize(minimumWidth(), height()));
+  if (window_animation->state() != QAbstractAnimation::Running) {
+    if (height() == minimumHeight()) {
+      window_animation->setStartValue(QSize(width(), minimumHeight()));
+      window_animation->setEndValue(QSize(width(), maximumHeight()));
+    } else if (height() == maximumHeight()) {
+      window_animation->setStartValue(QSize(width(), maximumHeight()));
+      window_animation->setEndValue(QSize(width(), minimumHeight()));
     }
-
-    animation->start();
+    window_animation->start();
   }
 }
 
