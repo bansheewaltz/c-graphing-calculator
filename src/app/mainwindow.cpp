@@ -7,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
 
-  ui->outputLabel->setFocus();
   this->setProperty("windowOpacity", 0.98);
 
   connect(ui->buttonGroup, &QButtonGroup::buttonClicked, this,
