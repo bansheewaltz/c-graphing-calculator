@@ -754,6 +754,12 @@ QPushButton:pressed {
                 <pointsize>18</pointsize>
                </font>
               </property>
+              <property name="toolTip">
+               <string>hotkey: backspace</string>
+              </property>
+              <property name="toolTipDuration">
+               <number>-1</number>
+              </property>
               <property name="styleSheet">
                <string notr="true">QPushButton {
   background-color: rgb(58, 62, 66);
