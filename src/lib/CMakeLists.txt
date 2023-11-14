@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
 
-# set library name if it is not already specified from top-level
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 
+# set library name if it is not already specified from top-level
 if(NOT IS_SUBPROJECT)
-  set(LIB_NAME libsmartcalc)
+  set(LIB_NAME smartcalc)
 endif()
 
 project(${LIB_NAME} LANGUAGES C)
@@ -32,6 +32,11 @@ add_library(${LIB_NAME} STATIC
   src/processing/infix_to_postfix.c src/processing/infix_to_postfix.h
 )
 
+# remove the prefix as it is already set
+if(IS_SUBPROJECT)
+  set_target_properties(${LIB_NAME} PROPERTIES PREFIX "")
+endif()
+
 target_include_directories(${LIB_NAME} PUBLIC include)
 target_include_directories(${LIB_NAME} PRIVATE
   src
@@ -40,6 +45,9 @@ target_include_directories(${LIB_NAME} PRIVATE
   src/utils
 )
 
-# Tests
+include(CTest)
 
+# if(BUILD_TESTING)
 add_subdirectory(test)
+
+# endif()
