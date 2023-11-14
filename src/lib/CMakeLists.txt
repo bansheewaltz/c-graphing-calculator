@@ -41,3 +41,5 @@ target_include_directories(${LIB_NAME} PRIVATE
 )
 
 # Tests
+
+add_subdirectory(test)

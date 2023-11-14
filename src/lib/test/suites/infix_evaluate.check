@@ -1,0 +1,19 @@
+#include "smartcalc.h"
+
+#suite infix_evaluate
+#test sample
+const char* expr = "2 / (3 + 2) * 5";
+
+const double res = smartcalc_expr_infix_evaluate(expr);
+
+const double exp = 2.0;
+ck_assert_double_eq_tol(res, exp, 7);
+
+#suite infix_eval
+#test sample2
+const char* expr = "2 / (3 + 2) * 5";
+
+const double res = smartcalc_expr_infix_evaluate(expr);
+
+const double exp = 2.0;
+ck_assert_double_eq_tol(res, exp, 7);
