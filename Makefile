@@ -4,21 +4,22 @@ BUILD_DIR := build
 all: build
 .PHONY: all
 
-build:
-	cmake -B $(BUILD_DIR) -Wno-dev -DCMAKE_BUILD_TYPE=Release
-	cmake --build $(BUILD_DIR)
-.PHONY: build
+release:
+	cmake -B $(BUILD_DIR)/release -Wno-dev -DCMAKE_BUILD_TYPE=Release
+	cmake --build $(BUILD_DIR)/release
+.PHONY: release
 
-buildd:
-	cmake -B $(BUILD_DIR) -Wno-dev -DCMAKE_BUILD_TYPE=Debug
-	cmake --build $(BUILD_DIR)
-.PHONY: buildd
+debug:
+	cmake -B $(BUILD_DIR)/debug -Wno-dev -DCMAKE_BUILD_TYPE=Debug
+	cmake --build $(BUILD_DIR)/debug
+.PHONY: debug
 
-re: clean buildd
+re: clean debug
 .PHONY: re
 
 # verbose build
-buildv: config
+buildv:
+	cmake -B build
 	VERBOSE=1 cmake --build $(BUILD_DIR)
 .PHONY: buildv
 
@@ -48,7 +49,7 @@ dist:
 .PHONY: dist
 
 test:
-	@cd build && ctest
+	@cd build/release && ctest
 .PHONY: test
 
 gcov_report:
