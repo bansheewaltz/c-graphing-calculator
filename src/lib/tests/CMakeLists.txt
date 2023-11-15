@@ -1,9 +1,14 @@
 find_package(Check REQUIRED)
 find_program(CHECKMK checkmk)
 
-file(GLOB suites_check CONFIGURE_DEPENDS ${CMAKE_CURRENT_LIST_DIR}/suites/*.check)
+file(GLOB SUITES_CHECK
+    CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_LIST_DIR}/*.check
+)
 
-foreach(suite_check ${suites_check})
+set(EXES)
+
+foreach(suite_check ${SUITES_CHECK})
     string(REPLACE ".check" ".c" suite_c ${suite_check})
     add_custom_command(
         OUTPUT ${suite_c}
@@ -12,6 +17,12 @@ foreach(suite_check ${suites_check})
         VERBATIM)
     get_filename_component(exe ${suite_check} NAME_WLE)
     add_executable(${exe} ${suite_c})
-    target_link_libraries(${exe} libsmartcalc check)
+    list(APPEND EXES ${exe})
+    target_link_libraries(${exe} ${LIB_NAME} check)
     add_test(${exe} ${exe})
 endforeach()
+
+add_custom_target(run_tests ALL
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --rerun-failed
+    DEPENDS ${EXES}
+)
