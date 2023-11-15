@@ -48,6 +48,6 @@ target_include_directories(${LIB_NAME} PRIVATE
 include(CTest)
 
 # if(BUILD_TESTING)
-add_subdirectory(test)
+add_subdirectory(tests)
 
 # endif()
