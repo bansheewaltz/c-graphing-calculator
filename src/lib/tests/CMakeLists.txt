@@ -48,6 +48,7 @@ if(LIBSMARTCALC_COVERAGE AND GCOVR_EXECUTABLE)
     add_custom_target(coverage_html
         COMMAND ${GCOVR_EXECUTABLE}
         --html-details --html-self-contained
+        --decisions
         --root=${PROJECT_SOURCE_DIR}/
         --filter=${PROJECT_SOURCE_DIR}/include
         --filter=${PROJECT_SOURCE_DIR}/src
