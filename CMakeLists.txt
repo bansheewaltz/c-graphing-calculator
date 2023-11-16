@@ -16,9 +16,9 @@ set(LIB_NAME libsmartcalc)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+option(LIBSMARTCALC_DOCS "Create documenation" ON)
 option(LIBSMARTCALC_TESTING "Turn on unit-testing" ON)
 option(LIBSMARTCALC_COVERAGE "Turn on code coverage" ON)
-option(LIBSMARTCALC_DOCS "Create documenation" ON)
 
 if(LIBSMARTCALC_TESTING)
   include(CTest)
