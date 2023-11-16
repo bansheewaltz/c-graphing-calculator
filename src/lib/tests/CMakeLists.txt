@@ -37,29 +37,20 @@ if(LIBSMARTCALC_COVERAGE AND GCOVR_EXECUTABLE)
     target_link_options(libsmartcalc PRIVATE --coverage)
     target_link_libraries(libsmartcalc gcov)
 
-    add_custom_target(coverage_cli
+    add_custom_target(coverage ALL
         COMMAND ${GCOVR_EXECUTABLE}
-            --root=${PROJECT_SOURCE_DIR}/
-            --filter=${PROJECT_SOURCE_DIR}/include
-            --filter=${PROJECT_SOURCE_DIR}/src
-            --object-directory=${PROJECT_BINARY_DIR}
-        DEPENDS run_tests
-    )
-    add_custom_target(coverage_html
-        COMMAND ${GCOVR_EXECUTABLE}
-            --html-details --html-self-contained
+            --txt
+            --html-details=${LIBSMARTCALC_COVERAGE_DIR}/report.html
+            --html-self-contained
             --decisions
             --root=${PROJECT_SOURCE_DIR}/
             --filter=${PROJECT_SOURCE_DIR}/include
             --filter=${PROJECT_SOURCE_DIR}/src
             --object-directory=${PROJECT_BINARY_DIR}
-            -o ${LIBSMARTCALC_COVERAGE_DIR}/report.html
-        DEPENDS run_tests
+        DEPENDS run_tests create_coverage_dir
     )
-    add_custom_target(create_coverage_dir ALL
+    add_custom_target(create_coverage_dir
         COMMAND ${CMAKE_COMMAND} -E make_directory ${LIBSMARTCALC_COVERAGE_DIR})
-    add_custom_target(coverage ALL
-        DEPENDS create_coverage_dir coverage_cli coverage_html)
 elseif(LIBSMARTCALC_COVERAGE AND NOT GCOVR_EXECUTABLE)
     set(LIBSMARTCALC_COVERAGE OFF)
     message(WARNING "gcovr program required for code coverage analysis was not found.")
