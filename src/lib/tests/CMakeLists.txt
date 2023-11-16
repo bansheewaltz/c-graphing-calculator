@@ -39,7 +39,6 @@ if(LIBSMARTCALC_COVERAGE AND GCOVR_EXECUTABLE)
 
     add_custom_target(coverage_cli
         COMMAND ${GCOVR_EXECUTABLE}
-        --gcov-executable gcov-13
         --root=${PROJECT_SOURCE_DIR}/
         --filter=${PROJECT_SOURCE_DIR}/include
         --filter=${PROJECT_SOURCE_DIR}/src
@@ -48,7 +47,6 @@ if(LIBSMARTCALC_COVERAGE AND GCOVR_EXECUTABLE)
     )
     add_custom_target(coverage_html
         COMMAND ${GCOVR_EXECUTABLE}
-        --gcov-executable gcov-13
         --html-details --html-self-contained
         --root=${PROJECT_SOURCE_DIR}/
         --filter=${PROJECT_SOURCE_DIR}/include
