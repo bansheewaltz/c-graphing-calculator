@@ -24,7 +24,9 @@ foreach(suite_check ${SUITES_CHECK})
 endforeach()
 
 add_custom_target(run_tests ALL
-    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --rerun-failed
+    COMMAND ${CMAKE_CTEST_COMMAND}
+        --output-on-failure
+        --rerun-failed
     DEPENDS ${SUITES_EXE}
 )
 
