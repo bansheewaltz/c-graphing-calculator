@@ -47,7 +47,7 @@ dist:
 .PHONY: dist
 
 test:
-	cmake --build $(BUILD_DIR)/debug --target test
+	cmake --build $(BUILD_DIR)/debug --target run_tests
 .PHONY: test
 
 gcov_report:
