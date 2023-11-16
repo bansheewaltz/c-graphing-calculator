@@ -1,7 +1,7 @@
 BUILD_DIR := build
 
 
-all: release
+all: debug
 .PHONY: all
 
 release:
