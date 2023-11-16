@@ -9,18 +9,19 @@ file(GLOB SUITES_CHECK
 set(SUITES_EXE)
 
 foreach(suite_check ${SUITES_CHECK})
-    string(REPLACE ".check" ".c" suite_c ${suite_check})
+    get_filename_component(suite_name ${suite_check} NAME_WLE)
+    string(PREPEND suite_name "test_")
+    string(CONCAT suite_c "${CMAKE_CURRENT_LIST_DIR}/" "${suite_name}.c")
     add_custom_command(
         OUTPUT ${suite_c}
         COMMAND ${CHECKMK} ${suite_check} > ${suite_c}
         DEPENDS ${suite_check}
         VERBATIM
     )
-    get_filename_component(exe ${suite_check} NAME_WLE)
-    add_executable(${exe} ${suite_c})
-    list(APPEND SUITES_EXE ${exe})
-    target_link_libraries(${exe} ${LIB_NAME} check)
-    add_test(${exe} ${exe})
+    add_executable(${suite_name} ${suite_c})
+    list(APPEND SUITES_EXE ${suite_name})
+    target_link_libraries(${suite_name} ${LIB_NAME} check)
+    add_test(${suite_name} ${suite_name})
 endforeach()
 
 add_custom_target(run_tests ALL
