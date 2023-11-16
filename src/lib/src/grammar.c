@@ -18,10 +18,16 @@ const char* const TokenTypeLUT[] = {
     [TT_BAD_TOKEN] = "bad token",
 };
 
-double calc_sin(double x) { return sin(x); }
-double calc_cos(double x) { return cos(x); }
-double calc_tan(double x) { return tan(x); }
-double calc_cot(double x) { return 1.0 / tan(x); }
+static inline double to_degrees(double radians) {
+  return radians * 180.0 / M_PI;
+}
+static inline double to_radians(double degrees) {
+  return degrees * (M_PI / 180);
+}
+double calc_sin(double x) { return sin(to_radians(x)); }
+double calc_cos(double x) { return cos(to_radians(x)); }
+double calc_tan(double x) { return tan(to_radians(x)); }
+double calc_cot(double x) { return 1.0 / tan(to_radians(x)); }
 double calc_asin(double x) { return asin(x); }
 double calc_acos(double x) { return acos(x); }
 double calc_atan(double x) { return atan(x); }
