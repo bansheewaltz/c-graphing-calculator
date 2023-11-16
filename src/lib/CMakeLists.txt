@@ -45,9 +45,15 @@ target_include_directories(${LIB_NAME} PRIVATE
   src/utils
 )
 
-include(CTest)
+option(LIBSMARTCALC_TESTING "Turn on unit-testing" ON)
+option(LIBSMARTCALC_COVERAGE "Turn on code coverage" ON)
+option(LIBSMARTCALC_DOCS "Create documenation" ON)
 
-# if(BUILD_TESTING)
-add_subdirectory(tests)
+if(LIBSMARTCALC_TESTING)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
 
-# endif()
+if(LIBSMARTCALC_DOCS)
+  add_subdirectory(docs)
+endif()
