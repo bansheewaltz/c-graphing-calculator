@@ -16,7 +16,7 @@ debug:
 
 # verbose build
 buildv:
-	cmake -B build
+	cmake -B $(BUILD_DIR)
 	VERBOSE=1 cmake --build $(BUILD_DIR)
 .PHONY: buildv
 
@@ -36,7 +36,7 @@ uninstall:
 .PHONY: uninstall
 
 clean:
-	$(RM) -r build
+	$(RM) -r $(BUILD_DIR)
 .PHONY: clean
 
 dvi:
