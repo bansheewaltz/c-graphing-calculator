@@ -1,12 +1,7 @@
 BUILD_DIR := build
 
 
-all:
-	cmake -B $(BUILD_DIR)/release -Wno-dev -DCMAKE_BUILD_TYPE=Release \
-                                         -DLIBSMARTCALC_TESTING \
-                                         -DLIBSMARTCALC_COVERAGE \
-                                         -DLIBSMARTCALC_DOCS
-	cmake --build $(BUILD_DIR)/release
+all: release
 .PHONY: all
 
 release:
