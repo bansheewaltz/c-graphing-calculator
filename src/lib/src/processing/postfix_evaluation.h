@@ -3,6 +3,6 @@
 
 #include "tkn_queuearr.h"
 
-double tkn_queue_postfix_evaluate(TokenQueue *queue);
+double tkn_queue_postfix_evaluate(TokenQueue *queue, double x);
 
 #endif  // POSTFIX_EVALUATION_H_
