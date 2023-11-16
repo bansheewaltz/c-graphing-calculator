@@ -16,7 +16,8 @@ class MainWindow : public QMainWindow {
   Q_OBJECT
 
  private:
-  double x, xmax, xmin, ymax, ymin;
+  double x;
+  double xmin, xmax, ymin, ymax;
 
  public:
   MainWindow(QWidget *parent = nullptr);
