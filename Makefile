@@ -1,7 +1,12 @@
 BUILD_DIR := build
 
 
-all: build
+all:
+	cmake -B $(BUILD_DIR)/release -Wno-dev -DCMAKE_BUILD_TYPE=Release \
+                                         -DLIBSMARTCALC_TESTING \
+                                         -DLIBSMARTCALC_COVERAGE \
+                                         -DLIBSMARTCALC_DOCS
+	cmake --build $(BUILD_DIR)/release
 .PHONY: all
 
 release:
@@ -13,9 +18,6 @@ debug:
 	cmake -B $(BUILD_DIR)/debug -Wno-dev -DCMAKE_BUILD_TYPE=Debug
 	cmake --build $(BUILD_DIR)/debug
 .PHONY: debug
-
-re: clean debug
-.PHONY: re
 
 # verbose build
 buildv:
@@ -39,18 +41,20 @@ uninstall:
 .PHONY: uninstall
 
 clean:
-	$(RM) -r build bin
+	$(RM) -r build
 .PHONY: clean
 
 dvi:
+	cmake --build $(BUILD_DIR)/debug --target docs
 .PHONY: dvi
 
 dist:
 .PHONY: dist
 
 test:
-	@cd build/release && ctest
+	cmake --build $(BUILD_DIR)/debug --target test
 .PHONY: test
 
 gcov_report:
+	cmake --build $(BUILD_DIR)/debug --target coverage
 .PHONY: gcov_report
