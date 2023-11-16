@@ -17,12 +17,6 @@ static const char* const ErrorLUT[] = {
         "There is an argument separator located not inside a function.",
 };
 
-void smartcalc_error_terminate(SmartCalcError error) {
-  const char* desc = ErrorLUT[error];
-  fprintf(stderr, "%s\n", desc);
-  exit(error);
-}
-
 const char* smartcalc_error_get_description(SmartCalcError error) {
   return ErrorLUT[error];
 }
