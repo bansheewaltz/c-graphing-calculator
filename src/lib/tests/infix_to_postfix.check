@@ -2,10 +2,92 @@
 
 
 #suite infix_to_postfix
-#test sample1
+#test sample
   const char* expr = "2 / (3 + 2) * 5";
 
-  const char* res = smartcalc_expr_infix_to_postfix(expr);
+  char *res = NULL;
+  SmartCalcError rc = smartcalc_expr_infix_to_postfix(expr, &res);
 
-  const char* exp = "2 3 2 + / 5 *";
-  ck_assert_str_eq(res, exp);
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS) {
+    const char* exp = "2 3 2 + / 5 *";
+    ck_assert_str_eq(res, exp);
+  }
+
+
+#test minus_binary
+  const char* expr = "2-2";
+
+  char *res = NULL;
+  SmartCalcError rc = smartcalc_expr_infix_to_postfix(expr, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS) {
+    const char* exp = "2 2 -";
+    ck_assert_str_eq(res, exp);
+  }
+
+
+#test minus_unary_first_with_single_number
+  const char* expr = "-2";
+
+  char *res = NULL;
+  SmartCalcError rc = smartcalc_expr_infix_to_postfix(expr, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS) {
+    const char* exp = "2 -";
+    ck_assert_str_eq(res, exp);
+  }
+
+
+#test minus_unary_first_with_sum
+  const char* expr = "-2+2";
+
+  char *res = NULL;
+  SmartCalcError rc = smartcalc_expr_infix_to_postfix(expr, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS) {
+    const char* exp = "2 - 2 +";
+    ck_assert_str_eq(res, exp);
+  }
+
+
+#test minus_unary_first_with_parenthesis_sum
+  const char* expr = "-(2+2)";
+
+  char *res = NULL;
+  SmartCalcError rc = smartcalc_expr_infix_to_postfix(expr, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS) {
+    const char* exp = "2 2 + -";
+    ck_assert_str_eq(res, exp);
+  }
+
+
+#test minus_unary_after_lparenthesis_with_single_number
+  const char* expr = "4-(-2)";
+
+  char *res = NULL;
+  SmartCalcError rc = smartcalc_expr_infix_to_postfix(expr, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS) {
+    const char* exp = "4 2 - -";
+    ck_assert_str_eq(res, exp);
+  }
+
+
+#test minus_unary_after_lparenthesis_with_sum
+  const char* expr = "4-(-2+8)";
+
+  char *res = NULL;
+  SmartCalcError rc = smartcalc_expr_infix_to_postfix(expr, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS) {
+    const char* exp = "4 2 - 8 + -";
+    ck_assert_str_eq(res, exp);
+  }

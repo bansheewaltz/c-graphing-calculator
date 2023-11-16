@@ -5,16 +5,290 @@
 #test sample
   const char* expr = "2 / (3 + 2) * 5 + 2";
 
-  const double res = smartcalc_expr_infix_evaluate(expr);
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 4.0;
-  ck_assert_double_eq_tol(exp, res, 10e-7);
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
 #test sample2
   const char* expr = "2 / (3 + 2) * 5";
 
-  const double res = smartcalc_expr_infix_evaluate(expr);
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 2.0;
-  ck_assert_double_eq_tol(exp, res, 10e-7);
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test fn_sin
+  const char* expr = "sin(5)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 0.08715574; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test fn_asin
+  const char* expr = "asin(0.37)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 0.37900902; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test fn_cos
+  const char* expr = "cos(5)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 0.99619469; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test fn_acos
+  const char* expr = "acos(0.37)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 1.19178730; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test fn_tan
+  const char* expr = "tan(5)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 0.08748866; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test fn_atan
+  const char* expr = "atan(5)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 1.37340076; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test fn_cot
+  const char* expr = "cot(5)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 11.43005230; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test fn_acot
+  const char* expr = "acot(5)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 0.19739555; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test fn_ln
+  const char* expr = "ln(5)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 1.6094379124341; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test fn_log
+  const char* expr = "log(5)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 0.6989700043360189; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test fn_sqrt
+  const char* expr = "sqrt(5)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 2.23606797749979; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test op_mult
+  const char* expr = "3*13";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 39.0; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test op_div
+  const char* expr = "37/3";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 12.333333333333333; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test op_sum
+  const char* expr = "7+5";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 12.0; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test op_sub
+  const char* expr = "7-5";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 2.0; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test op_mod
+  const char* expr = "7mod5";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 2.0; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test op_pow
+  const char* expr = "3^3";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 27.0; // taken from wolframalpha.com
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test err_empty_string
+  const char* expr = "";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_EMPTY_SOURCE_STRING);
+
+
+#test err_empty_expression
+  const char* expr = "*";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_EMPTY_EXPRESSION);
+
+
+#test err_bad_token
+  const char* expr = "2&3";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_BAD_TOKEN);
+
+/*
+ test minus_first
+  const char* expr = "-2-2";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = -4.0;
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+ test minus_minus
+  const char* expr = "2--2";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 4.0;
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+ test minus_x3
+  const char* expr = "2---2";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  const double exp = 0.0;
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+*/

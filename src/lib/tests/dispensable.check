@@ -1,0 +1,24 @@
+#include "smartcalc.h"
+
+
+#suite dispensable
+#test err_get_description
+  SmartCalcError err = 0;
+  
+  const char* desc = smartcalc_error_get_description(err);
+
+
+#test analyze_expression
+  const char *expr = "4*2 + 3^2, cos(3.14)";
+  
+  smartcalc_expr_analyze(expr);
+
+/*
+ test infix_to_postfix_invalid_fn
+  const char *expr = "4*2 + 3^2, cos(3,14)";
+  
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+*/
