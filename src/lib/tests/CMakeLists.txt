@@ -49,6 +49,7 @@ if(LIBSMARTCALC_COVERAGE AND GCOVR_EXECUTABLE)
             --filter=${PROJECT_SOURCE_DIR}/include
             --filter=${PROJECT_SOURCE_DIR}/src
             --object-directory=${PROJECT_BINARY_DIR}
+        COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green "You can find html coverage report at ${LIBSMARTCALC_COVERAGE_DIR}/report.html"
         DEPENDS run_tests create_coverage_dir
     )
     add_custom_target(create_coverage_dir
