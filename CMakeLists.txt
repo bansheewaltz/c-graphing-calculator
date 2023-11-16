@@ -27,14 +27,14 @@ endif()
 add_subdirectory(src/lib)
 
 # testing
-add_executable(main main.c)
-target_link_libraries(main libsmartcalc)
+add_executable(testf test.c)
+target_link_libraries(testf libsmartcalc)
 
-# qt_standard_project_setup()
-# add_subdirectory(src/app)
+qt_standard_project_setup()
+add_subdirectory(src/app)
 
-# target_link_libraries(${APP_NAME} PRIVATE
-# ${LIB_NAME}
-# Qt6::Widgets
-# Qt6::PrintSupport
-# )
+target_link_libraries(${APP_NAME} PRIVATE
+  ${LIB_NAME}
+  Qt6::Widgets
+  Qt6::PrintSupport
+)
