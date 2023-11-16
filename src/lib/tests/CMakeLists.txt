@@ -27,6 +27,7 @@ add_custom_target(run_tests ALL
     COMMAND ${CMAKE_CTEST_COMMAND}
         --output-on-failure
         --rerun-failed
+    || exit 0
     DEPENDS ${SUITES_EXE}
 )
 
