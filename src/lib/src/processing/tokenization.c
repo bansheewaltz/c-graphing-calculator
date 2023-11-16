@@ -154,15 +154,15 @@ SmartCalcError validate_tokens(const TokenNode* const list_head) {
       term_presence = true;
     if (token.type == TT_PARENTHESIS_LEFT) parentheses_balance++;
     if (token.type == TT_PARENTHESIS_RIGHT) parentheses_balance--;
-    if (parentheses_balance < 0) return SMARTCALC_PARENTHESES_INVALID_SEQUENCE;
+    if (parentheses_balance < 0) return SMARTCALC_INVALID_PARENTHESES_SEQUENCE;
     node = node->next;
   }
-  if (parentheses_balance != 0) return SMARTCALC_PARENTHESES_NOT_BALANCED;
+  if (parentheses_balance != 0) return SMARTCALC_INVALID_PARENTHESES_SEQUENCE;
   if (term_presence == false) return SMARTCALC_EMPTY_EXPRESSION;
   return SMARTCALC_SUCCESS;
 }
 
 SmartCalcError format_token_sequence(const TokenNode* const list_head) {
   ;
-  ;
+  return SMARTCALC_SUCCESS;
 }

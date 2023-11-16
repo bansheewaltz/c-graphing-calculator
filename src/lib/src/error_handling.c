@@ -8,12 +8,8 @@ static const char* const ErrorLUT[] = {
     [SMARTCALC_BAD_TOKEN] =
         "There is a symbol in the expression string that the calculator does "
         "not work with.",
-    [SMARTCALC_PARENTHESES_INVALID_SEQUENCE] =
-        "There is a point in the expression string, where the closing "
-        "parenthesis does not match any of the opening ones.",
-    [SMARTCALC_PARENTHESES_NOT_BALANCED] =
-        "The count of opening parentheses does not match with the count of "
-        "closing ones.",
+    [SMARTCALC_INVALID_PARENTHESES_SEQUENCE] =
+        "Not every opening bracket has a corresponding close one.",
     [SMARTCALC_EMPTY_EXPRESSION] =
         "There are no any literals or variables, so there is nothing to "
         "calculate.",
