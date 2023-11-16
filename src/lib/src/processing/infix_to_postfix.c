@@ -113,7 +113,7 @@ TokenQueue* infix_to_postfix(const TokenNode* const list_head) {
         }
         break;
       default:
-        assert(token.type && false);
+        assert(false && token.type);
     }
     node = node->next;
   }
