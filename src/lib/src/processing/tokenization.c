@@ -7,6 +7,7 @@
 
 #include "grammar.h"
 #include "smartcalc.h"
+#include "stdbool.h"
 #include "stringutils.h"
 #include "tkn_linkedl.h"
 #include "token.h"
@@ -144,22 +145,34 @@ SmartCalcError validate_tokens(const TokenNode* const list_head) {
   if (list_head == NULL) {
     return SMARTCALC_EMPTY_SOURCE_STRING;
   }
-  int parentheses_balance = 0;
+
+  char parenthesis_stack[SMARTCALC_INPUT_MAX_LEN] = "";
+  const int STACK_EMPTY = -1;
+  unsigned int parenthesis_stack_top = STACK_EMPTY;
+
   bool term_presence = false;
+
   const TokenNode* node = list_head;
-  while (node) {
+  SmartCalcError err = SMARTCALC_SUCCESS;
+  while (node && err == SMARTCALC_SUCCESS) {
     Token token = node->token;
-    if (token.type == TT_BAD_TOKEN) return SMARTCALC_BAD_TOKEN;
     if (token.type == TT_LITERAL || token.type == TT_VARIABLE)
       term_presence = true;
-    if (token.type == TT_PARENTHESIS_LEFT) parentheses_balance++;
-    if (token.type == TT_PARENTHESIS_RIGHT) parentheses_balance--;
-    if (parentheses_balance < 0) return SMARTCALC_INVALID_PARENTHESES_SEQUENCE;
+    if (token.type == TT_PARENTHESIS_LEFT)
+      parenthesis_stack[++parenthesis_stack_top] = '(';
+    if (token.type == TT_PARENTHESIS_RIGHT) {
+      if (parenthesis_stack[parenthesis_stack_top] == '(')
+        parenthesis_stack[parenthesis_stack_top--] = ' ';
+      else
+        err = SMARTCALC_INVALID_PARENTHESES_SEQUENCE;
+    }
+    if (token.type == TT_BAD_TOKEN) err = SMARTCALC_BAD_TOKEN;
     node = node->next;
   }
-  if (parentheses_balance != 0) return SMARTCALC_INVALID_PARENTHESES_SEQUENCE;
-  if (term_presence == false) return SMARTCALC_EMPTY_EXPRESSION;
-  return SMARTCALC_SUCCESS;
+  if (!err && parenthesis_stack_top != STACK_EMPTY)
+    err = SMARTCALC_INVALID_PARENTHESES_SEQUENCE;
+  if (!err && term_presence == false) err = SMARTCALC_EMPTY_EXPRESSION;
+  return err;
 }
 
 SmartCalcError format_token_sequence(const TokenNode* const list_head) {
