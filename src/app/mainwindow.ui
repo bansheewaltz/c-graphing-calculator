@@ -80,7 +80,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>50</pointsize>
+         <pointsize>25</pointsize>
          <kerning>true</kerning>
         </font>
        </property>
@@ -89,6 +89,7 @@
   background-color: rgb(37, 41, 47);
   color: white; 
   border: 1px solid rgb(36, 40, 45);
+  padding-right: 7px;
 }</string>
        </property>
        <property name="text">
