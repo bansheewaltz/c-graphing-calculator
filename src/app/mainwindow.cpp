@@ -53,6 +53,32 @@ static QString qstr_internal_to_display(QString &internal) {
   }
   return display;
 }
+bool verifySequenceCorrectness(QString str, QChar sym) {
+  if (sym == '(') return true;
+  if (sym == ')' && str.length() != 0) return true;
+  if (str == "0") {
+    if (sym == QChar(0x2013)) return true;
+    if (sym == '.') return true;
+    if (sym.isDigit()) return true;
+  }
+  if (sym == '.') {
+    if (str.back() == 'x') {
+      return false;
+    }
+    int i = str.length() - 1;
+    while (str.at(i).isDigit()) {
+      i--;
+    }
+    if (str.at(i) == '.') return false;
+  }
+  if (!str.back().isDigit()) {  // is operator
+    if (sym.isDigit())
+      return true;
+    else
+      return false;
+  }
+  return true;
+}
 }  // namespace SmartCalc
 
 void MainWindow::calculate() {
@@ -75,6 +101,10 @@ void MainWindow::calculate() {
 }
 
 void MainWindow::setDisplayAddSymbol(QAbstractButton *button) {
+  QString display = ui->outputDisplay->text();
+  QChar symbol = button->text().front();
+  bool correct = SmartCalc::verifySequenceCorrectness(display, symbol);
+  if (!correct) return;
   setDisplayPrepare(button);
   ui->outputDisplay->setText(ui->outputDisplay->text() + button->text());
 }
