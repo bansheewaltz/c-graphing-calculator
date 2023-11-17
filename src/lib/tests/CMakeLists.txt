@@ -29,6 +29,7 @@ add_custom_target(run_tests ALL
         --output-on-failure
         --rerun-failed
     || exit 0
+    COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green "You can find test logs at ${CMAKE_CURRENT_BINARY_DIR}/Testing/Temporary/LastTest.log"
     DEPENDS ${SUITES_EXE}
 )
 
