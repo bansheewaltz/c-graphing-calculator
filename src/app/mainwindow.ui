@@ -54,7 +54,7 @@
      </size>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -552,6 +552,7 @@ QPushButton:pressed {
   background-color: rgb(58, 62, 66);
   color: white; 
   border: 1px solid rgb(36, 40, 45);
+  padding-left: 5px
 }
 </string>
              </property>
@@ -562,7 +563,7 @@ QPushButton:pressed {
               <string/>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
              <property name="placeholderText">
               <string>Xmin</string>
@@ -587,6 +588,7 @@ QPushButton:pressed {
   background-color: rgb(58, 62, 66);
   color: white; 
   border: 1px solid rgb(36, 40, 45);
+  padding-left: 5px
 }
 </string>
              </property>
@@ -597,7 +599,7 @@ QPushButton:pressed {
               <string/>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
              <property name="placeholderText">
               <string>Xmax</string>
@@ -622,6 +624,7 @@ QPushButton:pressed {
   background-color: rgb(58, 62, 66);
   color: white; 
   border: 1px solid rgb(36, 40, 45);
+  padding-left: 5px
 }
 </string>
              </property>
@@ -632,7 +635,7 @@ QPushButton:pressed {
               <string/>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
              <property name="placeholderText">
               <string>Ymin</string>
@@ -657,6 +660,7 @@ QPushButton:pressed {
   background-color: rgb(58, 62, 66);
   color: white; 
   border: 1px solid rgb(36, 40, 45);
+  padding-left: 5px
 }
 </string>
              </property>
@@ -667,7 +671,7 @@ QPushButton:pressed {
               <string/>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
              <property name="placeholderText">
               <string>Ymax</string>
