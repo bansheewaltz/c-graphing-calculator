@@ -213,8 +213,3 @@ SmartCalcError validate_tokens(const TokenNode* const list_head) {
   if (!err && term_presence == false) err = SMARTCALC_ERR_EMPTY_EXPRESSION;
   return err;
 }
-
-SmartCalcError format_token_sequence(const TokenNode* const list_head) {
-  ;
-  return SMARTCALC_ERR_SUCCESS;
-}
