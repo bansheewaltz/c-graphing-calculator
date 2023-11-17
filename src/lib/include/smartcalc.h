@@ -1,6 +1,8 @@
 #ifndef SMARTCALC_H_
 #define SMARTCALC_H_
 
+#define SMARTCALC_INPUT_MAX_LEN 256
+
 typedef enum ErrorCode {
   SMARTCALC_SUCCESS,
   SMARTCALC_EMPTY_SOURCE_STRING,
