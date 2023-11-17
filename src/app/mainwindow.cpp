@@ -31,22 +31,26 @@ void MainWindow::setDisplayPrepare(QAbstractButton *button) {
 void MainWindow::setxVal(const QString &val) { x = val.toDouble(); }
 
 void MainWindow::calculate() {
-  std::string inputStringStr = ui->outputDisplay->text().toStdString();
-  const char *inputStr = inputStringStr.c_str();
+  QString input_qstr = ui->outputDisplay->text();
+  for (int i = 0; i < input_qstr.length(); i++) {
+    if (input_qstr[i] == QChar(0x00D7)) input_qstr[i] = QChar('*');  // ×
+    if (input_qstr[i] == QChar(0x2013)) input_qstr[i] = QChar('-');  // –
+  }
+  std::string input_str = input_qstr.toStdString();
+  const char *input_cstr = input_str.c_str();
 
-  char postfixStr[255] = {0};
-  double outputStr = 0;
-
-  //  if (parser(inputStr, postfixStr)) {
-  //    ui->label->setText("Error: Invalid input expression.");
-  //  } else {
-  //    if (calculation(postfixStr, &outputStr, x)) {
-  //      ui->label->setText("Error: Error in calculation.");
-  //    } else {
-  //      ui->label->setText(QString::number(outputStr, 'g', 16));  // x - error
-  //      1
-  //    }
-  //  }
+  double res;
+  SmartCalcError rc;
+  rc = smartcalc_expr_infix_evaluate(input_cstr, this->x, &res);
+  if (rc == SMARTCALC_SUCCESS) {
+    QString output_qstr = QString::number(res, 'g', 7);
+    for (int i = 0; i < output_qstr.length(); i++) {
+      if (output_qstr[i] == QChar('*')) output_qstr[i] = QChar(0x00D7);  // ×
+      if (output_qstr[i] == QChar('-')) output_qstr[i] = QChar(0x2013);  // –
+    }
+    ui->outputDisplay->setText(output_qstr);
+  } else
+    ui->outputDisplay->setText("Error: Invalid input expression.");
 
   ui->xVal->setText("");
 }
