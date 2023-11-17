@@ -36,7 +36,6 @@ add_custom_target(run_tests ALL
 find_program(GCOVR_EXECUTABLE gcovr)
 
 if(ENABLE_COVERAGE AND GCOVR_EXECUTABLE)
-    message(STATUS "Code coverage is enabled")
     set(LIBSMARTCALC_COVERAGE_DIR ${PROJECT_BINARY_DIR}/coverage)
     target_compile_options(libsmartcalc PRIVATE --coverage)
     target_link_options(libsmartcalc PRIVATE --coverage)
