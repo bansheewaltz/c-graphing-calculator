@@ -53,22 +53,71 @@ const FunctionInfo FunctionLUT[] = {
 };
 const int FunctionLUT_size = sizeof(FunctionLUT) / sizeof(FunctionLUT[0]);
 
-double calc_add(double a, double b) { return a + b; }
-double calc_sub(double a, double b) { return a - b; }
-double calc_mult(double a, double b) { return a * b; }
-double calc_div(double a, double b) { return a / b; }
-double calc_pow(double a, double b) { return pow(a, b); }
-double calc_mod(double a, double b) { return fmod(a, b); }
+double add(double a, double b) { return a + b; }
+double sub(double a, double b) { return a - b; }
+double mult(double a, double b) { return a * b; }
+double div(double a, double b) { return a / b; }
+double neg(double a) { return -a; }
 
 double fn_binary_apply(FnBinaryPtr fn, double a, double b) { return fn(a, b); }
 
 const OperatorInfo OperatorLUT[] = {
-    [OP_ADDITION] = {"+", &calc_add, .precedence = 1, ASSOC_LEFT},
-    [OP_SUBTRACTION] = {"-", &calc_sub, .precedence = 1, ASSOC_LEFT},
-    [OP_MULTIPLICATION] = {"*", &calc_mult, .precedence = 2, ASSOC_LEFT},
-    [OP_DIVISION] = {"/", &calc_div, .precedence = 2, ASSOC_LEFT},
-    [OP_POWER] = {"^", &calc_pow, .precedence = 3, ASSOC_LEFT},
-    [OP_MODULUS] = {"mod", &calc_mod, .precedence = 2, ASSOC_LEFT},
+    [OP_ADDITION] =
+        {
+            .lexeme = "+",
+            .arg_count = 2,
+            .fn_ptr.binary = &add,
+            .precedence = 1,
+            .assoc = ASSOC_LEFT,
+        },
+    [OP_SUBTRACTION] =
+        {
+            .lexeme = "-",
+            .arg_count = 2,
+            .fn_ptr.binary = &sub,
+            .precedence = 1,
+            .assoc = ASSOC_LEFT,
+        },
+    [OP_NEGATIVE] =
+        {
+            .lexeme = "-",
+            .arg_count = 1,
+            .fn_ptr.unary = &neg,
+            .precedence = 3,
+            .assoc = ASSOC_LEFT,
+        },
+    [OP_MULTIPLICATION] =
+        {
+            .lexeme = "*",
+            .arg_count = 2,
+            .fn_ptr.binary = &mult,
+            .precedence = 2,
+            .assoc = ASSOC_LEFT,
+        },
+    [OP_DIVISION] =
+        {
+            .lexeme = "/",
+            .arg_count = 2,
+            .fn_ptr.binary = &div,
+            .precedence = 2,
+            .assoc = ASSOC_LEFT,
+        },
+    [OP_POWER] =
+        {
+            .lexeme = "^",
+            .arg_count = 2,
+            .fn_ptr.binary = &pow,
+            .precedence = 3,
+            .assoc = ASSOC_LEFT,
+        },
+    [OP_MODULUS] =
+        {
+            .lexeme = "mod",
+            .arg_count = 2,
+            .fn_ptr.binary = &fmod,
+            .precedence = 2,
+            .assoc = ASSOC_LEFT,
+        },
 };
 const int OperatorLUT_size = sizeof(OperatorLUT) / sizeof(OperatorLUT[0]);
 
@@ -76,8 +125,13 @@ FnUnaryPtr fn_unary_getptr(FunctionKey key) {
   assert(FunctionLUT[key].arg_count == 1);
   return FunctionLUT[key].fn_unary_ptr;
 }
+FnUnaryPtr op_unary_getptr(OperatorKey key) {
+  assert(OperatorLUT[key].arg_count == 1);
+  return OperatorLUT[key].fn_ptr.unary;
+}
 FnBinaryPtr op_binary_getptr(OperatorKey key) {
-  return OperatorLUT[key].fn_binary_ptr;
+  assert(OperatorLUT[key].arg_count == 2);
+  return OperatorLUT[key].fn_ptr.binary;
 }
 
 int fn_get_keyfromstr(const char* const str) {
@@ -127,25 +181,19 @@ int tkn_get_assoc(Token token) {
   return op_get_assoc(token.lexeme.opkey);
 }
 int tkn_get_argcount(Token token) {
-  assert(token.type == TT_OPERATOR || token.type == TT_FUNCTION);
-  if (token.type == TT_OPERATOR) return 2;
+  if (token.type == TT_OPERATOR)
+    return OperatorLUT[token.lexeme.opkey].arg_count;
   if (token.type == TT_FUNCTION)
     return FunctionLUT[token.lexeme.fnkey].arg_count;
-  return 0;
+  assert(false && "wrong token type: " && token.type);
 }
 FnUnaryPtr tkn_get_fn_unary(Token token) {
-  switch (token.type) {
-    case TT_FUNCTION:
-      return fn_unary_getptr(token.lexeme.fnkey);
-    default:
-      assert(token.type && false);
-  }
+  if (token.type == TT_FUNCTION) return fn_unary_getptr(token.lexeme.fnkey);
+  if (token.type == TT_OPERATOR) return op_unary_getptr(token.lexeme.opkey);
+  assert(false && "wrong token type: " && token.type);
 }
+
 FnBinaryPtr tkn_get_fn_binary(Token token) {
-  switch (token.type) {
-    case TT_OPERATOR:
-      return op_binary_getptr(token.lexeme.opkey);
-    default:
-      assert(token.type && false);
-  }
+  if (token.type == TT_OPERATOR) return op_binary_getptr(token.lexeme.opkey);
+  assert(false && "wrong token type: " && token.type);
 }

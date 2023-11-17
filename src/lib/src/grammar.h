@@ -42,6 +42,7 @@ typedef double (*FnUnaryPtr)(double);
 typedef enum {
   OP_ADDITION,
   OP_SUBTRACTION,
+  OP_NEGATIVE,
   OP_MULTIPLICATION,
   OP_DIVISION,
   OP_POWER,
@@ -55,7 +56,11 @@ typedef enum {
 typedef double (*FnBinaryPtr)(double, double);
 typedef struct OperatorInfo {
   const char *const lexeme;
-  FnBinaryPtr fn_binary_ptr;
+  int arg_count;
+  union {
+    FnUnaryPtr unary;
+    FnBinaryPtr binary;
+  } fn_ptr;
   int precedence;
   Associativity assoc;
 } OperatorInfo;
