@@ -30,18 +30,35 @@ void MainWindow::setDisplayPrepare(QAbstractButton *button) {
 
 void MainWindow::setxVal(const QString &val) { x = val.toDouble(); }
 
-void MainWindow::calculate() {
-  QString input_qstr = ui->outputDisplay->text();
-  for (int i = 0; i < input_qstr.length(); i++) {
-    if (input_qstr[i] == QChar(0x00D7)) input_qstr[i] = QChar('*');  // ×
-    if (input_qstr[i] == QChar(0x2013)) input_qstr[i] = QChar('-');  // –
-    if (input_qstr[i] == QChar(0x00F7)) input_qstr[i] = QChar('/');  // ÷
-    if (input_qstr[i] == QChar('%')) {
-      input_qstr.removeAt(i);
-      input_qstr.insert(i, "mod"), i += 2;
+namespace SmartCalc {
+static QString qstr_display_to_internal(QString &display) {
+  QString internal = display;
+  for (int i = 0; i < internal.length(); i++) {
+    if (internal[i] == QChar(0x00D7)) internal[i] = QChar('*');  // ×
+    if (internal[i] == QChar(0x2013)) internal[i] = QChar('-');  // –
+    if (internal[i] == QChar(0x00F7)) internal[i] = QChar('/');  // ÷
+    if (internal[i] == QChar('%')) {
+      internal.removeAt(i);
+      internal.insert(i, "mod"), i += 2;
     }
   }
-  std::string input_str = input_qstr.toStdString();
+  return internal;
+}
+static QString qstr_internal_to_display(QString &internal) {
+  QString display = internal;
+  for (int i = 0; i < display.length(); i++) {
+    if (display[i] == QChar('*')) display[i] = QChar(0x00D7);  // ×
+    if (display[i] == QChar('-')) display[i] = QChar(0x2013);  // –
+    if (display[i] == QChar('/')) display[i] = QChar(0x00F7);  // ÷
+  }
+  return display;
+}
+}  // namespace SmartCalc
+
+void MainWindow::calculate() {
+  QString input_qstr = ui->outputDisplay->text();
+  QString input_qstr_fmt = SmartCalc::qstr_display_to_internal(input_qstr);
+  std::string input_str = input_qstr_fmt.toStdString();
   const char *input_cstr = input_str.c_str();
 
   double res;
@@ -49,12 +66,8 @@ void MainWindow::calculate() {
   rc = smartcalc_expr_infix_evaluate(input_cstr, this->x, &res);
   if (rc == SMARTCALC_SUCCESS) {
     QString output_qstr = QString::number(res, 'g', 7);
-    for (int i = 0; i < output_qstr.length(); i++) {
-      if (output_qstr[i] == QChar('*')) output_qstr[i] = QChar(0x00D7);  // ×
-      if (output_qstr[i] == QChar('-')) output_qstr[i] = QChar(0x2013);  // –
-      if (output_qstr[i] == QChar('/')) output_qstr[i] = QChar(0x00F7);  // ÷
-    }
-    ui->outputDisplay->setText(output_qstr);
+    QString output_qstr_fmt = SmartCalc::qstr_internal_to_display(output_qstr);
+    ui->outputDisplay->setText(output_qstr_fmt);
   } else
     ui->outputDisplay->setText("Error: Invalid input expression.");
 
