@@ -26,7 +26,7 @@ SmartCalcError smartcalc_expr_infix_to_postfix(const char* expr,
   }
   TokenQueue* queue = infix_to_postfix(token_list);
   *result = tkn_queue_tostr(queue);
-  return SMARTCALC_SUCCESS;
+  return SMARTCALC_ERR_SUCCESS;
 }
 
 SmartCalcError smartcalc_expr_infix_evaluate(const char* expr, double x,
@@ -38,5 +38,5 @@ SmartCalcError smartcalc_expr_infix_evaluate(const char* expr, double x,
   }
   TokenQueue* queue = infix_to_postfix(token_list);
   *result = tkn_queue_postfix_evaluate(queue, x);
-  return SMARTCALC_SUCCESS;
+  return SMARTCALC_ERR_SUCCESS;
 }

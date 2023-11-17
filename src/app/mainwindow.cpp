@@ -64,7 +64,7 @@ void MainWindow::calculate() {
   double res;
   SmartCalcError rc;
   rc = smartcalc_expr_infix_evaluate(input_cstr, this->x, &res);
-  if (rc == SMARTCALC_SUCCESS) {
+  if (rc == SMARTCALC_ERR_SUCCESS) {
     QString output_qstr = QString::number(res, 'g', 7);
     QString output_qstr_fmt = SmartCalc::qstr_internal_to_display(output_qstr);
     ui->outputDisplay->setText(output_qstr_fmt);

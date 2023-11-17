@@ -159,7 +159,7 @@ TokenNode* tokenize(const char* src) {
 
 SmartCalcError validate_tokens(const TokenNode* const list_head) {
   if (list_head == NULL) {
-    return SMARTCALC_EMPTY_SOURCE_STRING;
+    return SMARTCALC_ERR_EMPTY_SOURCE_STRING;
   }
 
   char parenthesis_stack[SMARTCALC_INPUT_MAX_LEN] = "";
@@ -169,8 +169,8 @@ SmartCalcError validate_tokens(const TokenNode* const list_head) {
   bool term_presence = false;
 
   const TokenNode* node = list_head;
-  SmartCalcError err = SMARTCALC_SUCCESS;
-  while (node && err == SMARTCALC_SUCCESS) {
+  SmartCalcError err = SMARTCALC_ERR_SUCCESS;
+  while (node && err == SMARTCALC_ERR_SUCCESS) {
     Token token = node->token;
     if (token.type == TT_LITERAL || token.type == TT_VARIABLE)
       term_presence = true;
@@ -180,18 +180,18 @@ SmartCalcError validate_tokens(const TokenNode* const list_head) {
       if (parenthesis_stack[parenthesis_stack_top] == '(')
         parenthesis_stack[parenthesis_stack_top--] = ' ';
       else
-        err = SMARTCALC_INVALID_PARENTHESES_SEQUENCE;
+        err = SMARTCALC_ERR_INVALID_PARENTHESES_SEQUENCE;
     }
-    if (token.type == TT_BAD_TOKEN) err = SMARTCALC_BAD_TOKEN;
+    if (token.type == TT_BAD_TOKEN) err = SMARTCALC_ERR_BAD_TOKEN;
     node = node->next;
   }
   if (!err && parenthesis_stack_top != STACK_EMPTY)
-    err = SMARTCALC_INVALID_PARENTHESES_SEQUENCE;
-  if (!err && term_presence == false) err = SMARTCALC_EMPTY_EXPRESSION;
+    err = SMARTCALC_ERR_INVALID_PARENTHESES_SEQUENCE;
+  if (!err && term_presence == false) err = SMARTCALC_ERR_EMPTY_EXPRESSION;
   return err;
 }
 
 SmartCalcError format_token_sequence(const TokenNode* const list_head) {
   ;
-  return SMARTCALC_SUCCESS;
+  return SMARTCALC_ERR_SUCCESS;
 }

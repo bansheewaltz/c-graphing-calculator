@@ -20,5 +20,5 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
 */

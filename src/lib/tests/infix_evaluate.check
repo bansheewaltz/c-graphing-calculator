@@ -9,8 +9,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 4.0;
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -21,8 +21,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 2.0;
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -33,8 +33,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 0.08715574; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -45,8 +45,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 0.37900902; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -57,8 +57,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 0.99619469; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -69,8 +69,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 1.19178730; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -81,8 +81,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 0.08748866; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -93,8 +93,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 1.37340076; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -105,8 +105,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 11.43005230; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -117,8 +117,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 0.19739555; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -129,8 +129,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 1.6094379124341; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -141,8 +141,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 0.6989700043360189; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -153,8 +153,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 2.23606797749979; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -165,8 +165,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 39.0; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -177,8 +177,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 12.333333333333333; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -189,8 +189,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 12.0; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -201,8 +201,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 2.0; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -213,8 +213,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 2.0; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -225,8 +225,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = 27.0; // taken from wolframalpha.com
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -236,7 +236,7 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_EMPTY_SOURCE_STRING);
+  ck_assert_int_eq(rc, SMARTCALC_ERR_EMPTY_SOURCE_STRING);
 
 
 #test err_empty_expression
@@ -245,7 +245,7 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_EMPTY_EXPRESSION);
+  ck_assert_int_eq(rc, SMARTCALC_ERR_EMPTY_EXPRESSION);
 
 
 #test err_bad_token
@@ -254,7 +254,7 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_BAD_TOKEN);
+  ck_assert_int_eq(rc, SMARTCALC_ERR_BAD_TOKEN);
 
 
 #test err_parenthesis_seq_close
@@ -263,7 +263,7 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_INVALID_PARENTHESES_SEQUENCE);
+  ck_assert_int_eq(rc, SMARTCALC_ERR_INVALID_PARENTHESES_SEQUENCE);
 
 
 #test err_parenthesis_seq_open
@@ -272,7 +272,7 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_INVALID_PARENTHESES_SEQUENCE);
+  ck_assert_int_eq(rc, SMARTCALC_ERR_INVALID_PARENTHESES_SEQUENCE);
 
 
 #test minus_first
@@ -282,8 +282,8 @@
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
   const double exp = -4.0;
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -294,8 +294,8 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -306,8 +306,8 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -318,8 +318,8 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -330,8 +330,8 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -342,8 +342,8 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -354,8 +354,8 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
@@ -366,6 +366,6 @@
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
