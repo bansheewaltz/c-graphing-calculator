@@ -34,7 +34,7 @@ add_custom_target(run_tests ALL
 
 find_program(GCOVR_EXECUTABLE gcovr)
 
-if(LIBSMARTCALC_COVERAGE AND GCOVR_EXECUTABLE)
+if(ENABLE_COVERAGE AND GCOVR_EXECUTABLE)
     message(STATUS "Code coverage is enabled")
     set(LIBSMARTCALC_COVERAGE_DIR ${PROJECT_BINARY_DIR}/coverage)
     target_compile_options(libsmartcalc PRIVATE --coverage)
@@ -56,7 +56,7 @@ if(LIBSMARTCALC_COVERAGE AND GCOVR_EXECUTABLE)
     )
     add_custom_target(create_coverage_dir
         COMMAND ${CMAKE_COMMAND} -E make_directory ${LIBSMARTCALC_COVERAGE_DIR})
-elseif(LIBSMARTCALC_COVERAGE AND NOT GCOVR_EXECUTABLE)
-    set(LIBSMARTCALC_COVERAGE OFF)
+elseif(ENABLE_COVERAGE AND NOT GCOVR_EXECUTABLE)
+    set(ENABLE_COVERAGE OFF)
     message(WARNING "gcovr program required for code coverage analysis was not found.")
 endif()

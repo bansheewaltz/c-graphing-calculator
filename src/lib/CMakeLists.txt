@@ -45,15 +45,16 @@ target_include_directories(${LIB_NAME} PRIVATE
   src/utils
 )
 
-option(LIBSMARTCALC_DOCS "Create documenation" ON)
-option(LIBSMARTCALC_TESTING "Turn on unit-testing" ON)
-option(LIBSMARTCALC_COVERAGE "Turn on code coverage" ON)
+option(ENABLE_DOCS "Build documenation" ON)
 
-if(LIBSMARTCALC_DOCS)
+if(ENABLE_DOCS)
   add_subdirectory(docs)
 endif()
 
-if(LIBSMARTCALC_TESTING)
+option(ENABLE_TESTING "Enable testing" ON)
+option(ENABLE_COVERAGE "Enable code coverage" ON)
+
+if(ENABLE_TESTING)
   enable_testing()
   add_subdirectory(tests)
 endif()
