@@ -24,32 +24,26 @@ static inline double to_degrees(double radians) {
 static inline double to_radians(double degrees) {
   return degrees * (M_PI / 180);
 }
-double calc_sin(double x) { return sin(to_radians(x)); }
-double calc_cos(double x) { return cos(to_radians(x)); }
-double calc_tan(double x) { return tan(to_radians(x)); }
-double calc_cot(double x) { return 1.0 / tan(to_radians(x)); }
-double calc_asin(double x) { return asin(x); }
-double calc_acos(double x) { return acos(x); }
-double calc_atan(double x) { return atan(x); }
-double calc_acot(double x) { return atan(1.0 / x); }
-double calc_sqrt(double x) { return sqrt(x); }
-double calc_log(double x) { return log10(x); }
-double calc_ln(double x) { return log(x); }
+double sin_deg(double x) { return sin(to_radians(x)); }
+double cos_deg(double x) { return cos(to_radians(x)); }
+double tan_deg(double x) { return tan(to_radians(x)); }
+double cot_deg(double x) { return 1.0 / tan(to_radians(x)); }
+double acot(double x) { return atan(1.0 / x); }
 
 double fn_unary_apply(FnUnaryPtr fn, double a) { return fn(a); }
 
 const FunctionInfo FunctionLUT[] = {
-    [FN_ARC_COSINE] = {"acos", &calc_acos, .arg_count = 1},
-    [FN_ARC_COTANGENT] = {"acot", &calc_acot, .arg_count = 1},
-    [FN_ARC_SINE] = {"asin", &calc_asin, .arg_count = 1},
-    [FN_ARC_TANENGT] = {"atan", &calc_atan, .arg_count = 1},
-    [FN_COSINE] = {"cos", &calc_cos, .arg_count = 1},
-    [FN_COTANGENT] = {"cot", &calc_cot, .arg_count = 1},
-    [FN_LOGARITHM_COMMON] = {"log", &calc_log, .arg_count = 1},
-    [FN_LOGARITHM_NATURAL] = {"ln", &calc_ln, .arg_count = 1},
-    [FN_SINE] = {"sin", &calc_sin, .arg_count = 1},
-    [FN_SQUARE_ROOT] = {"sqrt", &calc_sqrt, .arg_count = 1},
-    [FN_TANGENT] = {"tan", &calc_tan, .arg_count = 1},
+    [FN_ARC_COSINE] = {"acos", &acos, .arg_count = 1},
+    [FN_ARC_COTANGENT] = {"acot", &acot, .arg_count = 1},
+    [FN_ARC_SINE] = {"asin", &asin, .arg_count = 1},
+    [FN_ARC_TANENGT] = {"atan", &atan, .arg_count = 1},
+    [FN_COSINE] = {"cos", &cos_deg, .arg_count = 1},
+    [FN_COTANGENT] = {"cot", &cot_deg, .arg_count = 1},
+    [FN_LOGARITHM_COMMON] = {"log", &log10, .arg_count = 1},
+    [FN_LOGARITHM_NATURAL] = {"ln", &log, .arg_count = 1},
+    [FN_SINE] = {"sin", &sin_deg, .arg_count = 1},
+    [FN_SQUARE_ROOT] = {"sqrt", &sqrt, .arg_count = 1},
+    [FN_TANGENT] = {"tan", &tan_deg, .arg_count = 1},
 };
 const int FunctionLUT_size = sizeof(FunctionLUT) / sizeof(FunctionLUT[0]);
 
