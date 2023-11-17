@@ -15,6 +15,7 @@ extern "C" {
 #endif
 
 void smartcalc_expr_analyze(const char* expr);
+// void smartcalc_expr_to_internal_syntax(const char* expr, const char* result);
 SmartCalcError smartcalc_expr_infix_to_postfix(const char* expr, char** result);
 SmartCalcError smartcalc_expr_infix_evaluate(const char* expr, double x,
                                              double* result);
