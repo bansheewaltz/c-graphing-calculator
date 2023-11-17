@@ -54,12 +54,22 @@ static QString qstr_internal_to_display(QString &internal) {
   return display;
 }
 bool verifySequenceCorrectness(QString str, QChar sym) {
+  if (sym == 'x') {
+    if (str.back() == 'x') return false;
+    return true;
+  }
   if (sym == '(') return true;
-  if (sym == ')' && str.length() != 0) return true;
+  if (sym == ')') {
+    if (str == "0") return false;
+    return true;
+  }
   if (str == "0") {
     if (sym == QChar(0x2013)) return true;
     if (sym == '.') return true;
     if (sym.isDigit()) return true;
+  }
+  if (sym == QChar(0x2013)) {
+    if (str.back() == 'x') return true;
   }
   if (sym == '.') {
     if (str.back() == 'x') {

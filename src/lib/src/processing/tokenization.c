@@ -157,6 +157,29 @@ TokenNode* tokenize(const char* src) {
   return list_head;
 }
 
+void tkn_linkedl_insert_var_value(TokenNode* list_head, double x) {
+  TokenNode* prev = NULL;
+  TokenNode* node = list_head;
+  while (node != NULL) {
+    Token* token = &node->token;
+    if (token->type == TT_VARIABLE) {
+      token->type = TT_LITERAL;
+      token->lexeme.number = x;
+      if (prev && prev->token.type == TT_LITERAL) {
+        Token token_mult;
+        token_mult.type = TT_OPERATOR;
+        token_mult.lexeme.opkey = OP_MULTIPLICATION;
+        token_mult.str = "*";
+        TokenNode* node_bridge = tkn_linkedl_createnode(token_mult);
+        prev->next = node_bridge;
+        node_bridge->next = node;
+      }
+    }
+    prev = node;
+    node = node->next;
+  }
+}
+
 SmartCalcError validate_tokens(const TokenNode* const list_head) {
   if (list_head == NULL) {
     return SMARTCALC_ERR_EMPTY_SOURCE_STRING;

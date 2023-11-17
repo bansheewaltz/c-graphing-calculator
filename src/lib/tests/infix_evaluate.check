@@ -369,3 +369,42 @@
   ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
   if (rc == SMARTCALC_ERR_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test var_with_scalar
+  const char* expr = "3x";
+  const double x = 7.0;
+  const double exp = 21.0;
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, x, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test var_literal_minus_x
+  const char* expr = "3-x";
+  const double x = 7.0;
+  const double exp = -4.0;
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, x, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test var_x_minus_litearl
+  const char* expr = "x-3";
+  const double x = 7.0;
+  const double exp = 4.0;
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, x, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_ERR_SUCCESS);
+  if (rc == SMARTCALC_ERR_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);

@@ -32,11 +32,12 @@ SmartCalcError smartcalc_expr_infix_to_postfix(const char* expr,
 SmartCalcError smartcalc_expr_infix_evaluate(const char* expr, double x,
                                              double* result) {
   TokenNode* token_list = tokenize(expr);
+  tkn_linkedl_insert_var_value(token_list, x);
   SmartCalcError rc = validate_tokens(token_list);
   if (rc) {
     return rc;
   }
   TokenQueue* queue = infix_to_postfix(token_list);
-  *result = tkn_queue_postfix_evaluate(queue, x);
+  *result = tkn_queue_postfix_evaluate(queue);
   return SMARTCALC_ERR_SUCCESS;
 }

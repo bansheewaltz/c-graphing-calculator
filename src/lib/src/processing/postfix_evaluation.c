@@ -43,7 +43,7 @@ static double num_stack_pop(NumberStack *stack) {
   return stack->array[stack->top--];
 }
 
-double tkn_queue_postfix_evaluate(TokenQueue *queue, double x) {
+double tkn_queue_postfix_evaluate(TokenQueue *queue) {
   size_t queue_size = tkn_queue_getsize(queue);
   NumberStack *num_stack = num_stack_create(queue_size);
   while (!tkn_queue_isempty(queue)) {
