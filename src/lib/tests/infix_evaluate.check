@@ -256,8 +256,26 @@
 
   ck_assert_int_eq(rc, SMARTCALC_BAD_TOKEN);
 
-/*
- test minus_first
+
+#test err_parenthesis_seq_close
+  const char* expr = "(2+3))";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_INVALID_PARENTHESES_SEQUENCE);
+
+
+#test err_parenthesis_seq_open
+  const char* expr = "((2+3)";
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_INVALID_PARENTHESES_SEQUENCE);
+
+
+#test minus_first
   const char* expr = "-2-2";
 
   double res;
@@ -269,26 +287,85 @@
     ck_assert_double_eq_tol(exp, res, 10e-7);
 
 
- test minus_minus
+#test minus_minus
   const char* expr = "2--2";
-
-  double res;
-  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
-
   const double exp = 4.0;
-  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
-  if (rc == SMARTCALC_SUCCESS)
-    ck_assert_double_eq_tol(exp, res, 10e-7);
-
-
- test minus_x3
-  const char* expr = "2---2";
 
   double res;
   SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
 
-  const double exp = 0.0;
   ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
   if (rc == SMARTCALC_SUCCESS)
     ck_assert_double_eq_tol(exp, res, 10e-7);
-*/
+
+
+#test minus_binary
+  const char* expr = "2-2";
+  const double exp = 0.0;
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test minus_unary_first_with_single_number
+  const char* expr = "-2";
+  const double exp = -2.0;
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test minus_unary_first_with_sum
+  const char* expr = "-2+2";
+  const double exp = 0.0;
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test minus_unary_first_with_parenthesis_sum
+  const char* expr = "-(2+2)";
+  const double exp = -4.0;
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test minus_unary_after_lparenthesis_with_single_number
+  const char* expr = "4-(-2)";
+  const double exp = 6.0;
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
+
+
+#test minus_unary_after_lparenthesis_with_sum
+  const char* expr = "4-(-2+8)";
+  const double exp = -2.0;
+
+  double res;
+  SmartCalcError rc = smartcalc_expr_infix_evaluate(expr, 0, &res);
+
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+  if (rc == SMARTCALC_SUCCESS)
+    ck_assert_double_eq_tol(exp, res, 10e-7);
