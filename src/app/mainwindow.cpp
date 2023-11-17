@@ -92,6 +92,7 @@ bool verifySequenceCorrectness(QString str, QChar sym) {
 }  // namespace SmartCalc
 
 void MainWindow::calculate() {
+  ui->outputDisplay->setFocus();
   QString input_qstr = ui->outputDisplay->text();
   QString input_qstr_fmt = SmartCalc::qstr_display_to_internal(input_qstr);
   std::string input_str = input_qstr_fmt.toStdString();
