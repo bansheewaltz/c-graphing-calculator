@@ -137,15 +137,6 @@ int fn_get_keyfromstr(const char* const str) {
   return BAD_KEY;
 }
 
-const char* fn_get_strfromkey(FunctionKey key) {
-  if ((int)key < 0 || (int)key >= FunctionLUT_size) {
-    return NULL;
-  }
-  return FunctionLUT[key].lexeme;
-}
-
-int fn_get_argcount(FunctionKey key) { return FunctionLUT[key].arg_count; }
-
 int op_get_keyfromstr(const char* const str) {
   for (int i = 0; i < OperatorLUT_size; i++) {
     if (strcmp(OperatorLUT[i].lexeme, str) == 0) {
@@ -153,13 +144,6 @@ int op_get_keyfromstr(const char* const str) {
     }
   }
   return BAD_KEY;
-}
-
-const char* op_get_strfromkey(OperatorKey key) {
-  if ((int)key < 0 || (int)key >= OperatorLUT_size) {
-    return NULL;
-  }
-  return OperatorLUT[key].lexeme;
 }
 
 int op_get_precedence(OperatorKey key) { return OperatorLUT[key].precedence; }
