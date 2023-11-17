@@ -32,6 +32,7 @@ class MainWindow : public QMainWindow {
   void setxVal(const QString &val);
   void calculate();
 
+  void on_del_clicked();
   void on_plot_clicked();
   void animateWindowSize();
 

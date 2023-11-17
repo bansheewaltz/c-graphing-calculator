@@ -80,6 +80,23 @@ void MainWindow::setDisplayReset() {
   ui->yMax->setText("");
 }
 
+void MainWindow::on_del_clicked() {
+  QString str = ui->outputDisplay->displayText();
+  if (str.length() == 0) return;
+
+  str.removeLast();
+  if (str.length() != 0) {
+    while (str.back().isLetter()) {
+      str.removeLast();
+    }
+  }
+
+  if (str.length() == 0)
+    ui->outputDisplay->setText("0");
+  else
+    ui->outputDisplay->setText(str);
+}
+
 void MainWindow::animateWindowSize() {
   window_animation = new QPropertyAnimation(this, "size");
   window_animation->setDuration(350);
