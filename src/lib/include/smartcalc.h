@@ -20,7 +20,6 @@ SmartCalcError smartcalc_expr_infix_evaluate(const char* expr, double x,
                                              double* result);
 
 const char* smartcalc_error_get_description(SmartCalcError error);
-void smartcalc_error_terminate(SmartCalcError error);
 
 #ifdef __cplusplus
 }
