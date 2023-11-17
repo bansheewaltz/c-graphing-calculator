@@ -69,7 +69,7 @@ double tkn_queue_postfix_evaluate(TokenQueue *queue) {
         num_stack_push(num_stack, res);
       } break;
       default:
-        assert(token.type && false);
+        assert(false && token.type);
     }
   }
   double res = num_stack_pop(num_stack);

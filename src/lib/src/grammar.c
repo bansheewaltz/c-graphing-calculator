@@ -163,15 +163,15 @@ int tkn_get_argcount(Token token) {
     return OperatorLUT[token.lexeme.opkey].arg_count;
   if (token.type == TT_FUNCTION)
     return FunctionLUT[token.lexeme.fnkey].arg_count;
-  assert(false && "wrong token type: " && token.type);
+  assert(false);
 }
 FnUnaryPtr tkn_get_fn_unary(Token token) {
-  if (token.type == TT_FUNCTION) return fn_unary_getptr(token.lexeme.fnkey);
   if (token.type == TT_OPERATOR) return op_unary_getptr(token.lexeme.opkey);
-  assert(false && "wrong token type: " && token.type);
+  if (token.type == TT_FUNCTION) return fn_unary_getptr(token.lexeme.fnkey);
+  assert(false);
 }
 
 FnBinaryPtr tkn_get_fn_binary(Token token) {
   if (token.type == TT_OPERATOR) return op_binary_getptr(token.lexeme.opkey);
-  assert(false && "wrong token type: " && token.type);
+  assert(false);
 }
