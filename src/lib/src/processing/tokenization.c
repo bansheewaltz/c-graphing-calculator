@@ -123,6 +123,21 @@ Token read_token(const char* const src, size_t* pos) {
   return token;
 }
 
+void tkn_linkedl_identify_unary_operators(TokenNode* list_head) {
+  TokenNode* node = list_head;
+  Token* prev;
+  for (unsigned int i = 0; node; node = node->next, i++) {
+    Token* token = &node->token;
+    if (token->type == TT_OPERATOR && token->str[0] == '-') {
+      if (i == 0)
+        token->lexeme.opkey = OP_NEGATIVE;
+      else if (prev->type == TT_PARENTHESIS_LEFT || prev->type == TT_OPERATOR)
+        token->lexeme.opkey = OP_NEGATIVE;
+    }
+    prev = token;
+  }
+}
+
 TokenNode* tokenize(const char* src) {
   assert(src != NULL);
   src = string_remove(src, ' ');
@@ -138,6 +153,7 @@ TokenNode* tokenize(const char* src) {
     token_node->next = tkn_linkedl_createnode(token);
     token_node = token_node->next;
   }
+  tkn_linkedl_identify_unary_operators(list_head);
   return list_head;
 }
 
