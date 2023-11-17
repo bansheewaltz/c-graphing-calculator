@@ -35,6 +35,7 @@ void MainWindow::calculate() {
   for (int i = 0; i < input_qstr.length(); i++) {
     if (input_qstr[i] == QChar(0x00D7)) input_qstr[i] = QChar('*');  // ×
     if (input_qstr[i] == QChar(0x2013)) input_qstr[i] = QChar('-');  // –
+    if (input_qstr[i] == QChar(0x00F7)) input_qstr[i] = QChar('/');  // ÷
   }
   std::string input_str = input_qstr.toStdString();
   const char *input_cstr = input_str.c_str();
@@ -47,6 +48,7 @@ void MainWindow::calculate() {
     for (int i = 0; i < output_qstr.length(); i++) {
       if (output_qstr[i] == QChar('*')) output_qstr[i] = QChar(0x00D7);  // ×
       if (output_qstr[i] == QChar('-')) output_qstr[i] = QChar(0x2013);  // –
+      if (output_qstr[i] == QChar('/')) output_qstr[i] = QChar(0x00F7);  // ÷
     }
     ui->outputDisplay->setText(output_qstr);
   } else
@@ -57,10 +59,7 @@ void MainWindow::calculate() {
 
 void MainWindow::setDisplayAddSymbol(QAbstractButton *button) {
   setDisplayPrepare(button);
-  if (button->text() != "÷")
-    ui->outputDisplay->setText(ui->outputDisplay->text() + button->text());
-  else
-    ui->outputDisplay->setText(ui->outputDisplay->text() + '/');
+  ui->outputDisplay->setText(ui->outputDisplay->text() + button->text());
 }
 
 void MainWindow::setDisplayAddFunction(QAbstractButton *button) {
