@@ -36,6 +36,10 @@ void MainWindow::calculate() {
     if (input_qstr[i] == QChar(0x00D7)) input_qstr[i] = QChar('*');  // ×
     if (input_qstr[i] == QChar(0x2013)) input_qstr[i] = QChar('-');  // –
     if (input_qstr[i] == QChar(0x00F7)) input_qstr[i] = QChar('/');  // ÷
+    if (input_qstr[i] == QChar('%')) {
+      input_qstr.removeAt(i);
+      input_qstr.insert(i, "mod"), i += 2;
+    }
   }
   std::string input_str = input_qstr.toStdString();
   const char *input_cstr = input_str.c_str();
