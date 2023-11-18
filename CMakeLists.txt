@@ -51,3 +51,9 @@ if(NOT TARGET uninstall)
   add_custom_target(uninstall
     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 endif()
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME}-v1.0-Source")
+set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-v1.0-${CMAKE_SYSTEM_NAME}")
+set(CPACK_SOURCE_GENERATOR "TGZ")
+include(CPack)

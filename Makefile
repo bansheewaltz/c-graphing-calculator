@@ -1,5 +1,5 @@
 BUILD_DIR := build
-
+INSTALL_DIR := installation
 
 all: debug
 .PHONY: all
@@ -30,7 +30,7 @@ lint lint_fix:
 .PHONY: lint lint_fix
 
 install:
-	cmake --install build/debug --prefix "./installation"
+	cmake --install build/debug --prefix $(INSTALL_DIR)
 .PHONY: install
 
 uninstall:
@@ -39,7 +39,8 @@ uninstall:
 .PHONY: uninstall
 
 clean:
-	$(RM) -r $(BUILD_DIR)
+	$(RM) -r $(BUILD_DIR) $(INSTALL_DIR)
+	$(RM) *.tar*
 .PHONY: clean
 
 dvi:
@@ -47,7 +48,14 @@ dvi:
 .PHONY: dvi
 
 dist:
+	cpack --config $(BUILD_DIR)/debug/CPackSourceConfig.cmake
+	rm -r _CPack_Packages
 .PHONY: dist
+
+bdist:
+	cd $(BUILD_DIR)/debug && cpack -B ../..
+	rm -r _CPack_Packages
+.PHONY: bdist
 
 test:
 	cmake --build $(BUILD_DIR)/debug --target run_tests
