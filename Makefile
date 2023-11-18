@@ -15,8 +15,7 @@ build release debug: configure
 .PHONY: build release debug
 
 # verbose build
-buildv:
-	cmake -B $(BUILD_DIR) -Wno-dev -DCMAKE_BUILD_TYPE=$(BUILD_TYPE)
+buildv: configure
 	VERBOSE=1 cmake --build $(BUILD_DIR)
 .PHONY: buildv
 
@@ -29,37 +28,37 @@ lint lint_fix:
                                              -name '*.hpp' -or -name '*.cpp')
 .PHONY: lint lint_fix
 
-install:
+install: configure
 	cmake --install $(BUILD_DIR) --prefix $(INSTALL_DIR)
 .PHONY: install
 
-uninstall:
+uninstall: build
 	cmake --build $(BUILD_DIR) --target uninstall
 .PHONY: uninstall
 
 clean:
-	$(RM) -r $(BUILD_DIR) $(INSTALL_DIR)
+	$(RM) -r build $(INSTALL_DIR)
 	$(RM) *.tar* *.sh
 .PHONY: clean
 
-dvi:
+dvi: configure
 	cmake --build $(BUILD_DIR) --target docs
 .PHONY: dvi
 
-dist:
+dist: build
 	cpack --config $(BUILD_DIR)/CPackSourceConfig.cmake
 	rm -r _CPack_Packages
 .PHONY: dist
 
-bdist:
+bdist: build
 	cpack --config $(BUILD_DIR)/CPackConfig.cmake
 	rm -r _CPack_Packages
 .PHONY: bdist
 
-test:
+test: configure
 	cmake --build $(BUILD_DIR) --target run_tests
 .PHONY: test
 
-gcov_report:
+gcov_report: configure
 	cmake --build $(BUILD_DIR) --target coverage
 .PHONY: gcov_report
