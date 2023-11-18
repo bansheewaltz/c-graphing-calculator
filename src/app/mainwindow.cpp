@@ -23,8 +23,7 @@ MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::setDisplayPrepare(QAbstractButton *button) {
   if (ui->outputDisplay->text() == "0" && button->text() != "." ||
-      ui->outputDisplay->text() == "Error: Invalid input expression." ||
-      ui->outputDisplay->text() == "Error: Error in calculation.")
+      ui->outputDisplay->text() == error_message)
     ui->outputDisplay->setText("");
 }
 
@@ -112,7 +111,7 @@ void MainWindow::calculate() {
         SmartCalc::qstr_internal_to_display(display_qstr);
     ui->outputDisplay->setText(display_qstr_fmt);
   } else
-    ui->outputDisplay->setText("Error: Invalid input expression.");
+    ui->outputDisplay->setText(error_message);
 
   ui->xVal->setText("");
 }

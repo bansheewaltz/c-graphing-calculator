@@ -18,6 +18,7 @@ class MainWindow : public QMainWindow {
  private:
   double x;
   double xmin, xmax, ymin, ymax;
+  QString error_message = "Error: Invalid input expression";
 
  public:
   MainWindow(QWidget *parent = nullptr);
