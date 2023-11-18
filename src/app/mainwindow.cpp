@@ -107,9 +107,10 @@ void MainWindow::calculate() {
   SmartCalcError rc;
   rc = smartcalc_expr_infix_evaluate(input_cstr, this->x, &res);
   if (rc == SMARTCALC_ERR_SUCCESS) {
-    QString output_qstr = QString::number(res, 'g', 16);
-    QString output_qstr_fmt = SmartCalc::qstr_internal_to_display(output_qstr);
-    ui->outputDisplay->setText(output_qstr_fmt);
+    QString display_qstr = QString::number(res, 'g', 16);
+    QString display_qstr_fmt =
+        SmartCalc::qstr_internal_to_display(display_qstr);
+    ui->outputDisplay->setText(display_qstr_fmt);
   } else
     ui->outputDisplay->setText("Error: Invalid input expression.");
 
