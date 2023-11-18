@@ -154,7 +154,7 @@ void MainWindow::on_del_clicked() {
 
   str.removeLast();
   if (str.length() != 0) {
-    while (str.back().isLetter()) {
+    while (str.length() && str.back().isLetter()) {
       if (str.back() == ui_symbols_lut[UiSymbols::XVAR]) break;
       str.removeLast();
     }
