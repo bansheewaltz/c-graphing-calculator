@@ -8,13 +8,14 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
 
   this->setProperty("windowOpacity", 0.98);
-  op_symbols_lut.resize(Operators::ENUM_SIZE);
-  op_symbols_lut[Operators::SUM] = ui->plus->text().front();
-  op_symbols_lut[Operators::SUB] = ui->minus->text().front();
-  op_symbols_lut[Operators::MUL] = ui->mult->text().front();
-  op_symbols_lut[Operators::DIV] = ui->div->text().front();
-  op_symbols_lut[Operators::MOD] = ui->mod->text().front();
-  op_symbols_lut[Operators::POW] = ui->pow->text().front();
+  ui_symbols_lut.resize(UiSymbols::ENUM_SIZE);
+  ui_symbols_lut[UiSymbols::PLUS] = ui->plus->text().front();
+  ui_symbols_lut[UiSymbols::MINUS] = ui->minus->text().front();
+  ui_symbols_lut[UiSymbols::MUL] = ui->mult->text().front();
+  ui_symbols_lut[UiSymbols::DIV] = ui->div->text().front();
+  ui_symbols_lut[UiSymbols::MOD] = ui->mod->text().front();
+  ui_symbols_lut[UiSymbols::POW] = ui->pow->text().front();
+  ui_symbols_lut[UiSymbols::XVAR] = ui->push_x->text().front();
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -55,8 +56,8 @@ static QString qstr_internal_to_display(QString &internal) {
 }  // namespace SmartCalc
 
 bool MainWindow::isOperator(QChar sym) {
-  for (int i = 0; i < op_symbols_lut.size(); i++)
-    if (op_symbols_lut[i] == sym) return true;
+  for (int i = 0; i < operators_count; i++)
+    if (ui_symbols_lut[i] == sym) return true;
   return false;
 }
 
@@ -66,13 +67,17 @@ bool MainWindow::verifySequenceCorrectness(QString str, QChar sym) {
     return true;
   }
   if (isOperator(sym)) {
+    if (str == "0") {
+      if (sym == ui_symbols_lut[UiSymbols::MINUS]) return true;
+      return false;
+    }
     if (isOperator(str.back())) {
       if (str.length() >= 2) {
         QChar last = str.at(str.size() - 1);
         QChar prelast = str.at(str.size() - 2);
         if (isOperator(last) && isOperator(prelast)) return false;
       }
-      if (sym == op_symbols_lut[Operators::SUB]) return true;
+      if (sym == ui_symbols_lut[UiSymbols::MINUS]) return true;
       return false;
     }
   }
@@ -154,6 +159,7 @@ void MainWindow::on_del_clicked() {
   str.removeLast();
   if (str.length() != 0) {
     while (str.back().isLetter()) {
+      if (str.back() == ui_symbols_lut[UiSymbols::XVAR]) break;
       str.removeLast();
     }
   }
