@@ -102,7 +102,7 @@ const OperatorInfo OperatorLUT[] = {
             .arg_count = 2,
             .fn_ptr.binary = &pow,
             .precedence = 3,
-            .assoc = ASSOC_LEFT,
+            .assoc = ASSOC_RIGHT,
         },
     [OP_MODULUS] =
         {
