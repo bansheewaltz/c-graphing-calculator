@@ -53,7 +53,7 @@ dist:
 .PHONY: dist
 
 bdist:
-	cd $(BUILD_DIR)/debug && cpack -B ../..
+	cpack --config $(BUILD_DIR)/debug/CPackConfig.cmake
 	rm -r _CPack_Packages
 .PHONY: bdist
 
