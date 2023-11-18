@@ -1,22 +1,20 @@
-BUILD_DIR := build
+BUILD_TYPE ?= debug
+BUILD_DIR := build/$(BUILD_TYPE)
 INSTALL_DIR := installation
 
-all: debug
+all: build
 .PHONY: all
 
-release:
-	cmake -B $(BUILD_DIR)/release -Wno-dev -DCMAKE_BUILD_TYPE=Release
-	cmake --build $(BUILD_DIR)/release
-.PHONY: release
-
-debug:
-	cmake -B $(BUILD_DIR)/debug -Wno-dev -DCMAKE_BUILD_TYPE=Debug
-	cmake --build $(BUILD_DIR)/debug
-.PHONY: debug
+debug:   BUILD_TYPE = debug
+release: BUILD_TYPE = release
+build release debug:
+	cmake -B $(BUILD_DIR) -Wno-dev -DCMAKE_BUILD_TYPE=$(BUILD_TYPE)
+	cmake --build $(BUILD_DIR)
+.PHONY: build release debug
 
 # verbose build
 buildv:
-	cmake -B $(BUILD_DIR)
+	cmake -B $(BUILD_DIR) -Wno-dev -DCMAKE_BUILD_TYPE=$(BUILD_TYPE)
 	VERBOSE=1 cmake --build $(BUILD_DIR)
 .PHONY: buildv
 
@@ -30,12 +28,11 @@ lint lint_fix:
 .PHONY: lint lint_fix
 
 install:
-	cmake --install build/debug --prefix $(INSTALL_DIR)
+	cmake --install $(BUILD_DIR) --prefix $(INSTALL_DIR)
 .PHONY: install
 
 uninstall:
-	cmake --build $(BUILD_DIR)/debug --target uninstall
-#	xargs rm < build/debug/install_manifest.txt
+	cmake --build $(BUILD_DIR) --target uninstall
 .PHONY: uninstall
 
 clean:
@@ -44,23 +41,23 @@ clean:
 .PHONY: clean
 
 dvi:
-	cmake --build $(BUILD_DIR)/debug --target docs
+	cmake --build $(BUILD_DIR) --target docs
 .PHONY: dvi
 
 dist:
-	cpack --config $(BUILD_DIR)/debug/CPackSourceConfig.cmake
+	cpack --config $(BUILD_DIR)/CPackSourceConfig.cmake
 	rm -r _CPack_Packages
 .PHONY: dist
 
 bdist:
-	cpack --config $(BUILD_DIR)/debug/CPackConfig.cmake
+	cpack --config $(BUILD_DIR)/CPackConfig.cmake
 	rm -r _CPack_Packages
 .PHONY: bdist
 
 test:
-	cmake --build $(BUILD_DIR)/debug --target run_tests
+	cmake --build $(BUILD_DIR) --target run_tests
 .PHONY: test
 
 gcov_report:
-	cmake --build $(BUILD_DIR)/debug --target coverage
+	cmake --build $(BUILD_DIR) --target coverage
 .PHONY: gcov_report
