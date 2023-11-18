@@ -8,6 +8,11 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
 
   this->setProperty("windowOpacity", 0.98);
+
+  height_graph_hidden = height();
+  height_graph_visible = height_graph_hidden * 2;
+  setMaximumHeight(height_graph_hidden);
+
   ui_symbols_lut.resize(UiSymbols::ENUM_SIZE);
   ui_symbols_lut[UiSymbols::PLUS] = ui->plus->text().front();
   ui_symbols_lut[UiSymbols::MINUS] = ui->minus->text().front();
@@ -171,18 +176,22 @@ void MainWindow::on_del_clicked() {
 void MainWindow::animateWindowSize() {
   window_animation = new QPropertyAnimation(this, "size");
   window_animation->setDuration(350);
-  connect(window_animation, &QPropertyAnimation::finished, this, [this]() {
-    delete window_animation;
-    window_animation = nullptr;
-  });
+  bool shrink_height = (height() != height_graph_hidden);
+  connect(window_animation, &QPropertyAnimation::finished, this,
+          [this, shrink_height]() {
+            delete window_animation;
+            window_animation = nullptr;
+            if (shrink_height) setMaximumHeight(height_graph_hidden);
+          });
 
   if (window_animation->state() != QAbstractAnimation::Running) {
-    if (height() == minimumHeight()) {
-      window_animation->setStartValue(QSize(width(), minimumHeight()));
-      window_animation->setEndValue(QSize(width(), maximumHeight()));
+    if (height() == height_graph_hidden) {
+      setMaximumHeight(height_graph_visible);
+      window_animation->setStartValue(QSize(width(), height()));
+      window_animation->setEndValue(QSize(width(), height_graph_visible));
     } else {
       window_animation->setStartValue(QSize(width(), height()));
-      window_animation->setEndValue(QSize(width(), minimumHeight()));
+      window_animation->setEndValue(QSize(width(), height_graph_hidden));
     }
     window_animation->start();
   }

@@ -47,6 +47,8 @@ class MainWindow : public QMainWindow {
 
  private:
   Ui::MainWindow *ui;
+  int height_graph_hidden;
+  int height_graph_visible;
   QPropertyAnimation *window_animation = nullptr;
   void animateWindowSize();
 };
