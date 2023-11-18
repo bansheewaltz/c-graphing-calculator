@@ -29,11 +29,6 @@ void MainWindow::on_xVal_textChanged(const QString &arg1) {
   x = arg1.toDouble();
 }
 
-bool MainWindow::isOperator(QChar sym) {
-  for (int i = 0; i < op_symbols_lut.size(); i++)
-    if (op_symbols_lut[i] == sym) return true;
-  return false;
-}
 namespace SmartCalc {
 static QString qstr_display_to_internal(QString &display) {
   QString internal = display;
@@ -57,12 +52,30 @@ static QString qstr_internal_to_display(QString &internal) {
   }
   return display;
 }
-bool verifySequenceCorrectness(QString str, QChar sym) {
+}  // namespace SmartCalc
+
+bool MainWindow::isOperator(QChar sym) {
+  for (int i = 0; i < op_symbols_lut.size(); i++)
+    if (op_symbols_lut[i] == sym) return true;
+  return false;
+}
+
+bool MainWindow::verifySequenceCorrectness(QString str, QChar sym) {
   if (sym.isDigit()) {
     if (str.back() == ')') return false;
     return true;
   }
-  if (str.back() == ')') return true;
+  if (isOperator(sym)) {
+    if (isOperator(str.back())) {
+      if (str.length() >= 2) {
+        QChar last = str.at(str.size() - 1);
+        QChar prelast = str.at(str.size() - 2);
+        if (isOperator(last) && isOperator(prelast)) return false;
+      }
+      if (sym == op_symbols_lut[Operators::SUB]) return true;
+      return false;
+    }
+  }
   if (sym == 'x') {
     if (str.back() == 'x') return false;
     return true;
@@ -71,14 +84,6 @@ bool verifySequenceCorrectness(QString str, QChar sym) {
   if (sym == ')') {
     if (str == "0") return false;
     return true;
-  }
-  if (str == "0") {
-    if (sym == QChar(0x2013)) return true;
-    if (sym == '.') return true;
-    if (sym.isDigit()) return true;
-  }
-  if (sym == QChar(0x2013)) {
-    if (str.back() == 'x') return true;
   }
   if (sym == '.') {
     if (str.back() == 'x') {
@@ -90,15 +95,8 @@ bool verifySequenceCorrectness(QString str, QChar sym) {
     }
     if (str.at(i) == '.') return false;
   }
-  if (!str.back().isDigit()) {  // is operator
-    if (sym.isDigit())
-      return true;
-    else
-      return false;
-  }
   return true;
 }
-}  // namespace SmartCalc
 
 void MainWindow::on_eq_clicked() {
   ui->outputDisplay->setFocus();
@@ -124,7 +122,7 @@ void MainWindow::on_eq_clicked() {
 void MainWindow::on_symbolButtonGroup_buttonClicked(QAbstractButton *button) {
   QString display = ui->outputDisplay->text();
   QChar symbol = button->text().front();
-  bool correct = SmartCalc::verifySequenceCorrectness(display, symbol);
+  bool correct = verifySequenceCorrectness(display, symbol);
   if (!correct) return;
   prepareDisplay(button);
   ui->outputDisplay->setText(ui->outputDisplay->text() + button->text());

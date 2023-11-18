@@ -28,10 +28,11 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
 
  private:
+  bool verifySequenceCorrectness(QString str, QChar sym);
+  bool isOperator(QChar sym);
   bool isGraphOpen();
   void updateGraph();
   void prepareDisplay(QAbstractButton *button);
-  bool isOperator(QChar sym);
 
  private slots:
   void on_eq_clicked();
