@@ -54,6 +54,11 @@ static QString qstr_internal_to_display(QString &internal) {
   return display;
 }
 bool verifySequenceCorrectness(QString str, QChar sym) {
+  if (sym.isDigit()) {
+    if (str.back() == ')') return false;
+    return true;
+  }
+  if (str.back() == ')') return true;
   if (sym == 'x') {
     if (str.back() == 'x') return false;
     return true;
@@ -172,54 +177,56 @@ void MainWindow::animateWindowSize() {
 }
 
 void MainWindow::on_plot_clicked() {
+  if (width() != maximumWidth()) {
+    return;
+  }
+
+  xmin = ui->xMin->text().toDouble();
+  xmax = ui->xMax->text().toDouble();
+  ymin = ui->yMin->text().toDouble();
+  ymax = ui->yMax->text().toDouble();
+
+  if (xmin > xmax || ymin > ymax) {
+    ui->outputDisplay->setText("Error: invalid function ranges");
+    return;
+  }
+
   animateWindowSize();
 
-  if (width() == maximumWidth()) {
-    xmin = ui->xMin->text().toDouble();
-    xmax = ui->xMax->text().toDouble();
-    ymin = ui->yMin->text().toDouble();
-    ymax = ui->yMax->text().toDouble();
+  if (ui->xMin->text().isEmpty()) xmin = -100;
+  if (ui->xMax->text().isEmpty()) xmax = +100;
+  if (ui->yMin->text().isEmpty()) ymin = -100;
+  if (ui->yMax->text().isEmpty()) ymax = +100;
 
-    if (ui->xMin->text().isEmpty()) xmin = -100;
-    if (ui->xMax->text().isEmpty()) xmax = +100;
-    if (ui->yMin->text().isEmpty()) ymin = -100;
-    if (ui->yMax->text().isEmpty()) ymax = +100;
+  ui->graphWidget->xAxis->setRange(xmin, xmax);
+  ui->graphWidget->yAxis->setRange(ymin, ymax);
+  ui->graphWidget->setInteraction(QCP::iRangeDrag);
+  ui->graphWidget->setInteraction(QCP::iRangeZoom);
 
-    ui->graphWidget->xAxis->setRange(xmin, xmax);
-    ui->graphWidget->yAxis->setRange(ymin, ymax);
-    ui->graphWidget->setInteraction(QCP::iRangeDrag);
-    ui->graphWidget->setInteraction(QCP::iRangeZoom);
+  QString expr_qstr = ui->outputDisplay->text();
+  QString expr_qstr_fmt = SmartCalc::qstr_display_to_internal(expr_qstr);
+  std::string expr_str = expr_qstr_fmt.toStdString();
+  const char *expr_cstr = expr_str.c_str();
 
-    std::string inputStringStr = ui->outputDisplay->text().toStdString();
-    const char *inputStr = inputStringStr.c_str();
+  double res;
+  SmartCalcError rc;
 
-    char postfixStr[255] = {0};
+  rc = smartcalc_expr_infix_evaluate(expr_cstr, this->x, &res);
+  if (rc == SMARTCALC_ERR_SUCCESS) {
+    for (double x = xmin; x <= xmax; x += 0.1) {
+      x_graph.push_back(x);
+      smartcalc_expr_infix_evaluate(expr_cstr, x, &res);
+      if (ymin <= res && res <= ymax) {
+        y_graph.push_back(res);
+      } else {
+        y_graph.push_back(qQNaN());
+      }
+    }
 
-    //    if (parser(inputStr, postfixStr)) {
-    //      ui->label->setText("Error: Invalid input expression.");
-    //    } else {
-    //      if ((xMin <= xmax) && (ymin <= ymax)) {
-    //        double output = 0;
-
-    //        for (double X = xMin; X <= xmax; X += 0.1) {
-    //          x_graph.push_back(X);
-    //          calculation(postfixStr, &output, X);
-    //          if (ymin <= output && output <= ymax) {
-    //            y_graph.push_back(output);
-    //          } else {
-    //            y_graph.push_back(qQNaN());
-    //          }
-    //        }
-
-    //        ui->graphWidget->addGraph();
-    //        ui->graphWidget->graph(0)->setData(x_graph, y_graph);
-    //        ui->graphWidget->replot();
-    //        x_graph.clear();
-    //        y_graph.clear();
-
-    //      } else {
-    //        ui->label->setText("Error: Invalid input expression.");
-    //      }
-    //    }
+    ui->graphWidget->addGraph();
+    ui->graphWidget->graph(0)->setData(x_graph, y_graph);
+    ui->graphWidget->replot();
+    x_graph.clear();
+    y_graph.clear();
   }
 }
