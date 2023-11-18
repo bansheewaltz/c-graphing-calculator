@@ -5,10 +5,12 @@ INSTALL_DIR := installation
 all: build
 .PHONY: all
 
+configure:
+	cmake -B $(BUILD_DIR) -Wno-dev -DCMAKE_BUILD_TYPE=$(BUILD_TYPE)
+
 debug:   BUILD_TYPE = debug
 release: BUILD_TYPE = release
-build release debug:
-	cmake -B $(BUILD_DIR) -Wno-dev -DCMAKE_BUILD_TYPE=$(BUILD_TYPE)
+build release debug: configure	
 	cmake --build $(BUILD_DIR)
 .PHONY: build release debug
 
