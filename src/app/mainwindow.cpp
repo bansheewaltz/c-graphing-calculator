@@ -131,11 +131,11 @@ void MainWindow::on_symbolButtonGroup_buttonClicked(QAbstractButton *button) {
   if (!correct) return;
   prepareDisplay(button);
   ui->outputDisplay->setText(ui->outputDisplay->text() + button->text());
-  //  if (isGraphOpen()) {
-  if (!isOperator(ui->outputDisplay->text().back())) {
-    updateGraph();
+  if (isGraphOpen()) {
+    if (!isOperator(ui->outputDisplay->text().back())) {
+      updateGraph();
+    }
   }
-  //  }
 }
 
 void MainWindow::on_functionButtonGroup_buttonClicked(QAbstractButton *button) {
@@ -192,17 +192,16 @@ void MainWindow::animateWindowSize() {
   }
 }
 
-void MainWindow::on_plot_clicked() { animateWindowSize(); }
+void MainWindow::on_plot_clicked() {
+  animateWindowSize();
+  updateGraph();
+}
 
 bool MainWindow::isGraphOpen() {
   return this->height() != this->minimumHeight();
 }
 
 void MainWindow::updateGraph() {
-  //  if (!isGraphOpen()) {
-  //    return;
-  //  }
-
   xmin = ui->xMin->text().toDouble();
   xmax = ui->xMax->text().toDouble();
   ymin = ui->yMin->text().toDouble();
