@@ -132,9 +132,7 @@ void MainWindow::on_symbolButtonGroup_buttonClicked(QAbstractButton *button) {
   prepareDisplay(button);
   ui->outputDisplay->setText(ui->outputDisplay->text() + button->text());
   if (isGraphOpen()) {
-    if (!isOperator(ui->outputDisplay->text().back())) {
-      updateGraph();
-    }
+    updateGraph();
   }
 }
 
@@ -202,6 +200,10 @@ bool MainWindow::isGraphOpen() {
 }
 
 void MainWindow::updateGraph() {
+  if (isOperator(ui->outputDisplay->text().back())) {
+    return;
+  }
+
   xmin = ui->xMin->text().toDouble();
   xmax = ui->xMax->text().toDouble();
   ymin = ui->yMin->text().toDouble();
