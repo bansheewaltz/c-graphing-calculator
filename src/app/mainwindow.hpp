@@ -18,11 +18,16 @@ class MainWindow : public QMainWindow {
  private:
   double x;
   double xmin, xmax, ymin, ymax;
+  QVector<double> x_graph, y_graph;
   QString error_message = "Error: Invalid input expression";
 
  public:
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
+
+ private:
+  bool isGraphOpen();
+  void updateGraph();
 
  private slots:
   void setDisplayPrepare(QAbstractButton *button);
@@ -35,12 +40,11 @@ class MainWindow : public QMainWindow {
 
   void on_del_clicked();
   void on_plot_clicked();
-  void animateWindowSize();
 
  private:
   Ui::MainWindow *ui;
-  QVector<double> x_graph, y_graph;
   QPropertyAnimation *window_animation = nullptr;
+  void animateWindowSize();
 };
 
 #endif  // MainWindow_HPP_

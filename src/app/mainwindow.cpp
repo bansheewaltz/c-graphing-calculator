@@ -121,6 +121,9 @@ void MainWindow::setDisplayAddSymbol(QAbstractButton *button) {
   QChar symbol = button->text().front();
   bool correct = SmartCalc::verifySequenceCorrectness(display, symbol);
   if (!correct) return;
+  //  if (isGraphOpen()) {
+  updateGraph();
+  //  }
   setDisplayPrepare(button);
   ui->outputDisplay->setText(ui->outputDisplay->text() + button->text());
 }
@@ -176,10 +179,16 @@ void MainWindow::animateWindowSize() {
   }
 }
 
-void MainWindow::on_plot_clicked() {
-  if (width() != maximumWidth()) {
-    return;
-  }
+void MainWindow::on_plot_clicked() { animateWindowSize(); }
+
+bool MainWindow::isGraphOpen() {
+  return this->height() != this->minimumHeight();
+}
+
+void MainWindow::updateGraph() {
+  //  if (!isGraphOpen()) {
+  //    return;
+  //  }
 
   xmin = ui->xMin->text().toDouble();
   xmax = ui->xMax->text().toDouble();
@@ -190,8 +199,6 @@ void MainWindow::on_plot_clicked() {
     ui->outputDisplay->setText("Error: invalid function ranges");
     return;
   }
-
-  animateWindowSize();
 
   if (ui->xMin->text().isEmpty()) xmin = -100;
   if (ui->xMax->text().isEmpty()) xmax = +100;
