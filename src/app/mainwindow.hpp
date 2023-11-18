@@ -20,6 +20,8 @@ class MainWindow : public QMainWindow {
   double xmin, xmax, ymin, ymax;
   QVector<double> x_graph, y_graph;
   QString error_message = "Error: Invalid input expression";
+  enum Operators { SUM, SUB, MUL, DIV, MOD, POW, ENUM_SIZE };
+  std::vector<QChar> op_symbols_lut;
 
  public:
   MainWindow(QWidget *parent = nullptr);
@@ -29,6 +31,7 @@ class MainWindow : public QMainWindow {
   bool isGraphOpen();
   void updateGraph();
   void prepareDisplay(QAbstractButton *button);
+  bool isOperator(QChar sym);
 
  private slots:
   void on_eq_clicked();

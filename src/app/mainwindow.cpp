@@ -8,6 +8,13 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
 
   this->setProperty("windowOpacity", 0.98);
+  op_symbols_lut.resize(Operators::ENUM_SIZE);
+  op_symbols_lut[Operators::SUM] = ui->plus->text().front();
+  op_symbols_lut[Operators::SUB] = ui->minus->text().front();
+  op_symbols_lut[Operators::MUL] = ui->mult->text().front();
+  op_symbols_lut[Operators::DIV] = ui->div->text().front();
+  op_symbols_lut[Operators::MOD] = ui->mod->text().front();
+  op_symbols_lut[Operators::POW] = ui->pow->text().front();
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -22,6 +29,11 @@ void MainWindow::on_xVal_textChanged(const QString &arg1) {
   x = arg1.toDouble();
 }
 
+bool MainWindow::isOperator(QChar sym) {
+  for (int i = 0; i < op_symbols_lut.size(); i++)
+    if (op_symbols_lut[i] == sym) return true;
+  return false;
+}
 namespace SmartCalc {
 static QString qstr_display_to_internal(QString &display) {
   QString internal = display;
@@ -114,11 +126,13 @@ void MainWindow::on_symbolButtonGroup_buttonClicked(QAbstractButton *button) {
   QChar symbol = button->text().front();
   bool correct = SmartCalc::verifySequenceCorrectness(display, symbol);
   if (!correct) return;
-  //  if (isGraphOpen()) {
-  updateGraph();
-  //  }
   prepareDisplay(button);
   ui->outputDisplay->setText(ui->outputDisplay->text() + button->text());
+  //  if (isGraphOpen()) {
+  if (!isOperator(ui->outputDisplay->text().back())) {
+    updateGraph();
+  }
+  //  }
 }
 
 void MainWindow::on_functionButtonGroup_buttonClicked(QAbstractButton *button) {
