@@ -156,17 +156,16 @@ void MainWindow::on_ac_clicked() {
 
 void MainWindow::on_del_clicked() {
   QString str = ui->outputDisplay->displayText();
-  if (str.length() == 0) return;
+  if (str.isEmpty()) return;
 
   str.removeLast();
-  if (str.length() != 0) {
-    while (str.length() && str.back().isLetter()) {
-      if (str.back() == sym_var) break;
-      str.removeLast();
-    }
+
+  while (!str.isEmpty() && str.back().isLetter()) {
+    if (str.back() == sym_var) break;
+    str.removeLast();
   }
 
-  if (str.length() == 0)
+  if (str.isEmpty())
     ui->outputDisplay->setText("0");
   else
     ui->outputDisplay->setText(str);
