@@ -168,6 +168,8 @@ void MainWindow::on_del_clicked() {
     ui->outputDisplay->setText("0");
   else
     ui->outputDisplay->setText(str);
+
+  updateGraph();
 }
 
 void MainWindow::animateWindowSize() {
