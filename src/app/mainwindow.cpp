@@ -8,26 +8,19 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
 
   this->setProperty("windowOpacity", 0.98);
-
-  connect(ui->buttonGroup, &QButtonGroup::buttonClicked, this,
-          &MainWindow::setDisplayAddSymbol);
-  connect(ui->buttonGroup_function, &QButtonGroup::buttonClicked, this,
-          &MainWindow::setDisplayAddFunction);
-  connect(ui->ac, &QPushButton::clicked, this, &MainWindow::setDisplayReset);
-
-  connect(ui->eq, &QPushButton::clicked, this, &MainWindow::calculate);
-  connect(ui->xVal, &QLineEdit::textChanged, this, &MainWindow::setxVal);
 }
 
 MainWindow::~MainWindow() { delete ui; }
 
-void MainWindow::setDisplayPrepare(QAbstractButton *button) {
+void MainWindow::prepareDisplay(QAbstractButton *button) {
   if (ui->outputDisplay->text() == "0" && button->text() != "." ||
       ui->outputDisplay->text() == error_message)
     ui->outputDisplay->setText("");
 }
 
-void MainWindow::setxVal(const QString &val) { x = val.toDouble(); }
+void MainWindow::on_xVal_textChanged(const QString &arg1) {
+  x = arg1.toDouble();
+}
 
 namespace SmartCalc {
 static QString qstr_display_to_internal(QString &display) {
@@ -95,7 +88,7 @@ bool verifySequenceCorrectness(QString str, QChar sym) {
 }
 }  // namespace SmartCalc
 
-void MainWindow::calculate() {
+void MainWindow::on_eq_clicked() {
   ui->outputDisplay->setFocus();
   QString input_qstr = ui->outputDisplay->text();
   QString input_qstr_fmt = SmartCalc::qstr_display_to_internal(input_qstr);
@@ -116,7 +109,7 @@ void MainWindow::calculate() {
   ui->xVal->setText("");
 }
 
-void MainWindow::setDisplayAddSymbol(QAbstractButton *button) {
+void MainWindow::on_symbolButtonGroup_buttonClicked(QAbstractButton *button) {
   QString display = ui->outputDisplay->text();
   QChar symbol = button->text().front();
   bool correct = SmartCalc::verifySequenceCorrectness(display, symbol);
@@ -124,16 +117,16 @@ void MainWindow::setDisplayAddSymbol(QAbstractButton *button) {
   //  if (isGraphOpen()) {
   updateGraph();
   //  }
-  setDisplayPrepare(button);
+  prepareDisplay(button);
   ui->outputDisplay->setText(ui->outputDisplay->text() + button->text());
 }
 
-void MainWindow::setDisplayAddFunction(QAbstractButton *button) {
-  setDisplayPrepare(button);
+void MainWindow::on_functionButtonGroup_buttonClicked(QAbstractButton *button) {
+  prepareDisplay(button);
   ui->outputDisplay->setText(ui->outputDisplay->text() + button->text() + "(");
 }
 
-void MainWindow::setDisplayReset() {
+void MainWindow::on_ac_clicked() {
   ui->outputDisplay->setText("0");
   ui->xVal->setText("");
   ui->xMin->setText("");

@@ -28,17 +28,15 @@ class MainWindow : public QMainWindow {
  private:
   bool isGraphOpen();
   void updateGraph();
+  void prepareDisplay(QAbstractButton *button);
 
  private slots:
-  void setDisplayPrepare(QAbstractButton *button);
-  void setDisplayReset();
-  void setDisplayAddSymbol(QAbstractButton *button);
-  void setDisplayAddFunction(QAbstractButton *button);
-
-  void setxVal(const QString &val);
-  void calculate();
-
+  void on_eq_clicked();
+  void on_ac_clicked();
   void on_del_clicked();
+  void on_xVal_textChanged(const QString &arg1);
+  void on_symbolButtonGroup_buttonClicked(QAbstractButton *button);
+  void on_functionButtonGroup_buttonClicked(QAbstractButton *button);
   void on_plot_clicked();
 
  private:

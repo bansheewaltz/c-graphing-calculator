@@ -144,7 +144,7 @@ QPushButton:pressed {
             <string>Q</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup_function</string>
+            <string notr="true">functionButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -179,7 +179,7 @@ QPushButton:pressed {
             <string>Shift+T</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup_function</string>
+            <string notr="true">functionButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -214,7 +214,7 @@ QPushButton:pressed {
             <string>)</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup</string>
+            <string notr="true">symbolButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -249,7 +249,7 @@ QPushButton:pressed {
             <string>Shift+C</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup_function</string>
+            <string notr="true">functionButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -284,7 +284,7 @@ QPushButton:pressed {
             <string>L</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup_function</string>
+            <string notr="true">functionButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -319,7 +319,7 @@ QPushButton:pressed {
             <string>C</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup_function</string>
+            <string notr="true">functionButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -354,7 +354,7 @@ QPushButton:pressed {
             <string>^</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup</string>
+            <string notr="true">symbolButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -418,7 +418,7 @@ QPushButton:pressed {
             <string>(</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup</string>
+            <string notr="true">symbolButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -453,7 +453,7 @@ QPushButton:pressed {
             <string>S</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup_function</string>
+            <string notr="true">functionButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -488,7 +488,7 @@ QPushButton:pressed {
             <string>T</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup_function</string>
+            <string notr="true">functionButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -712,7 +712,7 @@ QPushButton:pressed {
             <string>Shift+L</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup_function</string>
+            <string notr="true">functionButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -747,7 +747,7 @@ QPushButton:pressed {
             <string>Shift+S</string>
            </property>
            <attribute name="buttonGroup">
-            <string notr="true">buttonGroup_function</string>
+            <string notr="true">functionButtonGroup</string>
            </attribute>
           </widget>
          </item>
@@ -1066,7 +1066,7 @@ QPushButton:pressed {
               <string>%</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1101,7 +1101,7 @@ QPushButton:pressed {
               <string>/</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1143,7 +1143,7 @@ QPushButton:pressed {
               <string>6</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1178,7 +1178,7 @@ QPushButton:pressed {
               <string>.</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1213,7 +1213,7 @@ QPushButton:pressed {
               <string>X</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1248,7 +1248,7 @@ QPushButton:pressed {
               <string>0</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1315,7 +1315,7 @@ QPushButton:pressed {
               <string>3</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1350,7 +1350,7 @@ QPushButton:pressed {
               <string>8</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1385,7 +1385,7 @@ QPushButton:pressed {
               <string>9</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1420,7 +1420,7 @@ QPushButton:pressed {
               <string>*</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1455,7 +1455,7 @@ QPushButton:pressed {
               <string>2</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1490,7 +1490,7 @@ QPushButton:pressed {
               <string>4</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1525,7 +1525,7 @@ QPushButton:pressed {
               <string>+</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1560,7 +1560,7 @@ QPushButton:pressed {
               <string>-</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1595,7 +1595,7 @@ QPushButton:pressed {
               <string>7</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1630,7 +1630,7 @@ QPushButton:pressed {
               <string>1</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1665,7 +1665,7 @@ QPushButton:pressed {
               <string>5</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">symbolButtonGroup</string>
              </attribute>
             </widget>
            </item>
@@ -1690,7 +1690,7 @@ QPushButton:pressed {
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_function"/>
+  <buttongroup name="functionButtonGroup"/>
+  <buttongroup name="symbolButtonGroup"/>
  </buttongroups>
 </ui>
