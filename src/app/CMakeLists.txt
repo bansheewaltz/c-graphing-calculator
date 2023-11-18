@@ -7,6 +7,7 @@ qt_add_executable(${APP_NAME}
 target_include_directories(${APP_NAME} PRIVATE .)
 
 set_target_properties(${APP_NAME} PROPERTIES
-    WIN32_EXECUTABLE ON
+    MACOSX_BUNDLE_GUI_IDENTIFIER smartcalc.bansheewaltz
     MACOSX_BUNDLE ON
+    WIN32_EXECUTABLE ON
 )
