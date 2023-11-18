@@ -13,14 +13,13 @@ MainWindow::MainWindow(QWidget *parent)
   height_graph_visible = height_graph_hidden * 2;
   setMaximumHeight(height_graph_hidden);
 
-  ui_symbols_lut.resize(UiSymbols::ENUM_SIZE);
-  ui_symbols_lut[UiSymbols::PLUS] = ui->plus->text().front();
-  ui_symbols_lut[UiSymbols::MINUS] = ui->minus->text().front();
-  ui_symbols_lut[UiSymbols::MUL] = ui->mult->text().front();
-  ui_symbols_lut[UiSymbols::DIV] = ui->div->text().front();
-  ui_symbols_lut[UiSymbols::MOD] = ui->mod->text().front();
-  ui_symbols_lut[UiSymbols::POW] = ui->pow->text().front();
-  ui_symbols_lut[UiSymbols::XVAR] = ui->push_x->text().front();
+  sym_plus = ui->plus->text().front();
+  sym_minus = ui->minus->text().front();
+  sym_mult = ui->mult->text().front();
+  sym_div = ui->div->text().front();
+  sym_mod = ui->mod->text().front();
+  sym_pow = ui->pow->text().front();
+  sym_var = ui->push_x->text().front();
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -33,34 +32,37 @@ void MainWindow::prepareDisplay(QAbstractButton *button) {
 
 void MainWindow::on_xVal_textChanged(const QString &val) { x = val.toDouble(); }
 
-namespace SmartCalc {
-static QString qstr_display_to_internal(QString &display) {
+QString MainWindow::qstr_display_to_internal(QString &display) {
   QString internal = display;
   for (int i = 0; i < internal.length(); i++) {
-    if (internal[i] == QChar(0x00D7)) internal[i] = QChar('*');  // ×
-    if (internal[i] == QChar(0x2013)) internal[i] = QChar('-');  // –
-    if (internal[i] == QChar(0x00F7)) internal[i] = QChar('/');  // ÷
-    if (internal[i] == QChar('%')) {
+    if (internal[i] == sym_mult) internal[i] = QChar('*');   // ×
+    if (internal[i] == sym_minus) internal[i] = QChar('-');  // –
+    if (internal[i] == sym_div) internal[i] = QChar('/');    // ÷
+    if (internal[i] == sym_mod) {
       internal.removeAt(i);
       internal.insert(i, "mod"), i += 2;
     }
   }
   return internal;
 }
-static QString qstr_internal_to_display(QString &internal) {
+
+QString MainWindow::qstr_internal_to_display(QString &internal) {
   QString display = internal;
   for (int i = 0; i < display.length(); i++) {
-    if (display[i] == QChar('*')) display[i] = QChar(0x00D7);  // ×
-    if (display[i] == QChar('-')) display[i] = QChar(0x2013);  // –
-    if (display[i] == QChar('/')) display[i] = QChar(0x00F7);  // ÷
+    if (display[i] == QChar('*')) display[i] = sym_mult;   // ×
+    if (display[i] == QChar('-')) display[i] = sym_minus;  // –
+    if (display[i] == QChar('/')) display[i] = sym_div;    // ÷
   }
   return display;
 }
-}  // namespace SmartCalc
 
 bool MainWindow::isOperator(QChar sym) {
-  for (int i = 0; i < operators_count; i++)
-    if (ui_symbols_lut[i] == sym) return true;
+  if (sym == sym_plus) return true;
+  if (sym == sym_minus) return true;
+  if (sym == sym_mult) return true;
+  if (sym == sym_div) return true;
+  if (sym == sym_mod) return true;
+  if (sym == sym_pow) return true;
   return false;
 }
 
@@ -71,7 +73,7 @@ bool MainWindow::verifySequenceCorrectness(QString str, QChar sym) {
   }
   if (isOperator(sym)) {
     if (str == "0") {
-      if (sym == ui_symbols_lut[UiSymbols::MINUS]) return true;
+      if (sym == sym_minus) return true;
       return false;
     }
     if (isOperator(str.back())) {
@@ -80,12 +82,12 @@ bool MainWindow::verifySequenceCorrectness(QString str, QChar sym) {
         QChar prelast = str.at(str.size() - 2);
         if (isOperator(last) && isOperator(prelast)) return false;
       }
-      if (sym == ui_symbols_lut[UiSymbols::MINUS]) return true;
+      if (sym == sym_minus) return true;
       return false;
     }
   }
-  if (sym == 'x') {
-    if (str.back() == 'x') return false;
+  if (sym == sym_var) {
+    if (str.back() == sym_var) return false;
     return true;
   }
   if (sym == '(') return true;
@@ -94,7 +96,7 @@ bool MainWindow::verifySequenceCorrectness(QString str, QChar sym) {
     return true;
   }
   if (sym == '.') {
-    if (str.back() == 'x') {
+    if (str.back() == sym_var) {
       return false;
     }
     int i = str.length() - 1;
@@ -109,7 +111,7 @@ bool MainWindow::verifySequenceCorrectness(QString str, QChar sym) {
 void MainWindow::on_eq_clicked() {
   ui->outputDisplay->setFocus();
   QString input_qstr = ui->outputDisplay->text();
-  QString input_qstr_fmt = SmartCalc::qstr_display_to_internal(input_qstr);
+  QString input_qstr_fmt = qstr_display_to_internal(input_qstr);
   std::string input_str = input_qstr_fmt.toStdString();
   const char *input_cstr = input_str.c_str();
 
@@ -118,8 +120,7 @@ void MainWindow::on_eq_clicked() {
   rc = smartcalc_expr_infix_evaluate(input_cstr, this->x, &res);
   if (rc == SMARTCALC_ERR_SUCCESS) {
     QString display_qstr = QString::number(res, 'g', 16);
-    QString display_qstr_fmt =
-        SmartCalc::qstr_internal_to_display(display_qstr);
+    QString display_qstr_fmt = qstr_internal_to_display(display_qstr);
     ui->outputDisplay->setText(display_qstr_fmt);
   } else
     ui->outputDisplay->setText(error_message);
@@ -160,7 +161,7 @@ void MainWindow::on_del_clicked() {
   str.removeLast();
   if (str.length() != 0) {
     while (str.length() && str.back().isLetter()) {
-      if (str.back() == ui_symbols_lut[UiSymbols::XVAR]) break;
+      if (str.back() == sym_var) break;
       str.removeLast();
     }
   }
@@ -235,7 +236,7 @@ void MainWindow::updateGraph() {
   ui->graphWidget->setInteraction(QCP::iRangeZoom);
 
   QString expr_qstr = ui->outputDisplay->text();
-  QString expr_qstr_fmt = SmartCalc::qstr_display_to_internal(expr_qstr);
+  QString expr_qstr_fmt = qstr_display_to_internal(expr_qstr);
   std::string expr_str = expr_qstr_fmt.toStdString();
   const char *expr_cstr = expr_str.c_str();
 

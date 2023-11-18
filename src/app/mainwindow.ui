@@ -523,7 +523,7 @@ QPushButton:pressed {
             <set>Qt::AlignCenter</set>
            </property>
            <property name="placeholderText">
-            <string>x</string>
+            <string>X</string>
            </property>
           </widget>
          </item>
@@ -1242,7 +1242,7 @@ QPushButton:pressed {
 }</string>
              </property>
              <property name="text">
-              <string>x</string>
+              <string>X</string>
              </property>
              <property name="shortcut">
               <string>X</string>

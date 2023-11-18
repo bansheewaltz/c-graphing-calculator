@@ -20,9 +20,12 @@ class MainWindow : public QMainWindow {
   double xmin, xmax, ymin, ymax, xstep;
   QVector<double> x_graph, y_graph;
   QString error_message = "Error: Invalid input expression";
-  enum UiSymbols { PLUS, MINUS, MUL, DIV, MOD, POW, XVAR, ENUM_SIZE };
-  const int operators_count = 6;
-  std::vector<QChar> ui_symbols_lut;
+  QChar sym_plus, sym_minus, sym_mult, sym_div, sym_mod, sym_pow, sym_var;
+
+  Ui::MainWindow *ui;
+  int height_graph_hidden;
+  int height_graph_visible;
+  QPropertyAnimation *window_animation = nullptr;
 
  public:
   MainWindow(QWidget *parent = nullptr);
@@ -30,10 +33,13 @@ class MainWindow : public QMainWindow {
 
  private:
   bool verifySequenceCorrectness(QString str, QChar sym);
+  QString qstr_display_to_internal(QString &display);
+  QString qstr_internal_to_display(QString &display);
   bool isOperator(QChar sym);
   bool isGraphOpen();
   void updateGraph();
   void prepareDisplay(QAbstractButton *button);
+  void animateWindowSize();
 
  private slots:
   void on_eq_clicked();
@@ -44,13 +50,6 @@ class MainWindow : public QMainWindow {
   void on_functionButtonGroup_buttonClicked(QAbstractButton *button);
   void on_plot_clicked();
   void on_xStep_textChanged(const QString &val);
-
- private:
-  Ui::MainWindow *ui;
-  int height_graph_hidden;
-  int height_graph_visible;
-  QPropertyAnimation *window_animation = nullptr;
-  void animateWindowSize();
 };
 
 #endif  // MainWindow_HPP_
