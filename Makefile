@@ -30,9 +30,12 @@ lint lint_fix:
 .PHONY: lint lint_fix
 
 install:
+	cmake --install build/debug --prefix "./installation"
 .PHONY: install
 
 uninstall:
+	cmake --build $(BUILD_DIR)/debug --target uninstall
+#	xargs rm < build/debug/install_manifest.txt
 .PHONY: uninstall
 
 clean:
