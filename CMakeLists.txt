@@ -52,6 +52,7 @@ if(NOT TARGET uninstall)
     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 endif()
 
+# dist target
 include(InstallRequiredSystemLibraries)
 set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME}-v1.0-Source")
 set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-v1.0-${CMAKE_SYSTEM_NAME}")
