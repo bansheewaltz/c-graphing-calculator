@@ -26,9 +26,7 @@ void MainWindow::prepareDisplay(QAbstractButton *button) {
     ui->outputDisplay->setText("");
 }
 
-void MainWindow::on_xVal_textChanged(const QString &arg1) {
-  x = arg1.toDouble();
-}
+void MainWindow::on_xVal_textChanged(const QString &val) { x = val.toDouble(); }
 
 namespace SmartCalc {
 static QString qstr_display_to_internal(QString &display) {
@@ -208,6 +206,8 @@ void MainWindow::updateGraph() {
   xmax = ui->xMax->text().toDouble();
   ymin = ui->yMin->text().toDouble();
   ymax = ui->yMax->text().toDouble();
+  xstep = ui->xStep->text().toDouble();
+  if (xstep < 0.001) xstep = 0.001;
 
   if (xmin > xmax || ymin > ymax) {
     ui->outputDisplay->setText("Error: invalid function ranges");
@@ -218,6 +218,7 @@ void MainWindow::updateGraph() {
   if (ui->xMax->text().isEmpty()) xmax = +100;
   if (ui->yMin->text().isEmpty()) ymin = -100;
   if (ui->yMax->text().isEmpty()) ymax = +100;
+  if (ui->xStep->text().isEmpty()) xstep = +0.1;
 
   ui->graphWidget->xAxis->setRange(xmin, xmax);
   ui->graphWidget->yAxis->setRange(ymin, ymax);
@@ -234,7 +235,7 @@ void MainWindow::updateGraph() {
 
   rc = smartcalc_expr_infix_evaluate(expr_cstr, this->x, &res);
   if (rc == SMARTCALC_ERR_SUCCESS) {
-    for (double x = xmin; x <= xmax; x += 0.1) {
+    for (double x = xmin; x <= xmax; x += xstep) {
       x_graph.push_back(x);
       smartcalc_expr_infix_evaluate(expr_cstr, x, &res);
       if (ymin <= res && res <= ymax) {
@@ -250,4 +251,9 @@ void MainWindow::updateGraph() {
     x_graph.clear();
     y_graph.clear();
   }
+}
+
+void MainWindow::on_xStep_textChanged(const QString &val) {
+  xstep = val.toDouble();
+  updateGraph();
 }

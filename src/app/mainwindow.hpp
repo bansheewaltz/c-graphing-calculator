@@ -17,7 +17,7 @@ class MainWindow : public QMainWindow {
 
  private:
   double x;
-  double xmin, xmax, ymin, ymax;
+  double xmin, xmax, ymin, ymax, xstep;
   QVector<double> x_graph, y_graph;
   QString error_message = "Error: Invalid input expression";
   enum UiSymbols { PLUS, MINUS, MUL, DIV, MOD, POW, XVAR, ENUM_SIZE };
@@ -39,10 +39,11 @@ class MainWindow : public QMainWindow {
   void on_eq_clicked();
   void on_ac_clicked();
   void on_del_clicked();
-  void on_xVal_textChanged(const QString &arg1);
+  void on_xVal_textChanged(const QString &val);
   void on_symbolButtonGroup_buttonClicked(QAbstractButton *button);
   void on_functionButtonGroup_buttonClicked(QAbstractButton *button);
   void on_plot_clicked();
+  void on_xStep_textChanged(const QString &val);
 
  private:
   Ui::MainWindow *ui;
