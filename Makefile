@@ -40,7 +40,7 @@ uninstall:
 
 clean:
 	$(RM) -r $(BUILD_DIR) $(INSTALL_DIR)
-	$(RM) *.tar*
+	$(RM) *.tar* *.sh
 .PHONY: clean
 
 dvi:
