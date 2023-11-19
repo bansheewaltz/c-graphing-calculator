@@ -17,16 +17,6 @@ static const char* const ErrorLUT[] = {
         "There is an argument separator located not inside a function.",
 };
 
-/**
- * The function returns the description of a given error code.
- *
- * @param error The parameter "error" is of type SmartCalcError, which is an
- * enumeration representing different error codes in the smart calculator
- * program.
- *
- * @return a pointer to a character array (const char*) which represents the
- * description of the given SmartCalcError.
- */
 const char* smartcalc_error_get_description(SmartCalcError error) {
   return ErrorLUT[error];
 }
