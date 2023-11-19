@@ -2,13 +2,6 @@ cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_C_COMPILER "gcc")
 project(smartcalc)
-find_package(Qt6 REQUIRED COMPONENTS Widgets PrintSupport)
-
-# specify the ouput directory
-# set(OUTPUT_BINARY_DIR ${CMAKE_CURRENT_LIST_DIR}/bin)
-# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_BINARY_DIR}) # exe
-# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUTPUT_BINARY_DIR}/lib) # static libraries
-# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_BINARY_DIR}/lib) # shared libraries
 
 # specify the output binaries' names
 set(APP_NAME ${PROJECT_NAME})
@@ -25,21 +18,7 @@ if(ENABLE_TESTING)
 endif()
 
 add_subdirectory(src/lib)
-
-# testing
-add_executable(testf test.c)
-target_link_libraries(testf libsmartcalc)
-
-qt_standard_project_setup()
 add_subdirectory(src/app)
-
-target_link_libraries(${APP_NAME} PRIVATE
-  ${LIB_NAME}
-  Qt6::Widgets
-  Qt6::PrintSupport
-)
-
-install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 
 # uninstall target
 if(NOT TARGET uninstall)
