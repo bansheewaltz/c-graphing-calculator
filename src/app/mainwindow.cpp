@@ -26,7 +26,8 @@ MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::prepareDisplay(QAbstractButton *button) {
   if (ui->outputDisplay->text() == "0" && button->text() != "." ||
-      ui->outputDisplay->text() == error_message)
+      ui->outputDisplay->text() == error_invalid ||
+      ui->outputDisplay->text() == error_nan)
     ui->outputDisplay->setText("");
 }
 
@@ -119,11 +120,14 @@ void MainWindow::on_eq_clicked() {
   SmartCalcError rc;
   rc = smartcalc_expr_infix_evaluate(input_cstr, this->x, &res);
   if (rc == SMARTCALC_ERR_SUCCESS) {
-    QString display_qstr = QString::number(res, 'g', 16);
-    QString display_qstr_fmt = qstr_internal_to_display(display_qstr);
-    ui->outputDisplay->setText(display_qstr_fmt);
+    if (isfinite(res)) {
+      QString display_qstr = QString::number(res, 'g', 16);
+      QString display_qstr_fmt = qstr_internal_to_display(display_qstr);
+      ui->outputDisplay->setText(display_qstr_fmt);
+    } else
+      ui->outputDisplay->setText(error_nan);
   } else
-    ui->outputDisplay->setText(error_message);
+    ui->outputDisplay->setText(error_invalid);
 
   ui->xVal->setText("");
 }

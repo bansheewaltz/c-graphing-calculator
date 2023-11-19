@@ -19,7 +19,8 @@ class MainWindow : public QMainWindow {
   double x;
   double xmin, xmax, ymin, ymax, xstep;
   QVector<double> x_graph, y_graph;
-  QString error_message = "Error: Invalid input expression";
+  QString error_invalid = "Error: Invalid input expression";
+  QString error_nan = "Not a number";
   QChar sym_plus, sym_minus, sym_mult, sym_div, sym_mod, sym_pow, sym_var;
 
   Ui::MainWindow *ui;
