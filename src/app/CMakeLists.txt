@@ -31,12 +31,23 @@ set_target_properties(${APP_NAME} PROPERTIES
 )
 
 target_link_libraries(${APP_NAME} PRIVATE
-  ${LIB_NAME}
-  Qt6::Widgets
-  Qt6::PrintSupport
+    ${LIB_NAME}
+    Qt6::Widgets
+    Qt6::PrintSupport
 )
 
-install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+install(TARGETS ${PROJECT_NAME}
+    BUNDLE DESTINATION .
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+# Target install
+qt_generate_deploy_app_script(
+    TARGET ${PROJECT_NAME}
+    OUTPUT_SCRIPT deploy_script
+    NO_UNSUPPORTED_PLATFORM_ERROR
+)
+install(SCRIPT ${deploy_script})
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(${PROJECT_NAME})
