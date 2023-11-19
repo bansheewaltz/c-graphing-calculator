@@ -6,7 +6,11 @@ set(CMAKE_AUTORCC ON)
 
 set(PROJECT_SOURCES
     src/main.cpp
-    src/mainwindow.cpp src/mainwindow.hpp forms/mainwindow.ui
+
+    src/mainwindow.cpp  src/mainwindow.hpp  forms/mainwindow.ui
+    src/depositcalc.cpp src/depositcalc.hpp forms/depositcalc.ui
+    src/creditcalc.cpp  src/creditcalc.hpp  forms/creditcalc.ui
+
     third-party/qcustomplot.cpp third-party/qcustomplot.h
 )
 
@@ -23,6 +27,8 @@ endif()
 
 qt6_wrap_ui(UI_HEADERS
     forms/mainwindow.ui
+    forms/creditcalc.ui
+    forms/depositcalc.ui
 )
 
 target_include_directories(${APP_NAME}
