@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
   this->setProperty("windowOpacity", 0.98);
 
   height_graph_hidden = height();
-  height_graph_visible = height_graph_hidden * 2;
+  height_graph_visible = height_graph_hidden + width();
   setMaximumHeight(height_graph_hidden);
 
   sym_plus = ui->plus->text().front();
