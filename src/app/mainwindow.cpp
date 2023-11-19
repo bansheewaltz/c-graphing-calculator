@@ -100,10 +100,10 @@ bool MainWindow::verifySequenceCorrectness(QString str, QChar sym) {
       return false;
     }
     int i = str.length() - 1;
-    while (str.at(i).isDigit()) {
+    while (i >= 0 && str.at(i).isDigit()) {
       i--;
     }
-    if (str.at(i) == '.') return false;
+    if (i >= 0 && str.at(i) == '.') return false;
   }
   return true;
 }
