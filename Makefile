@@ -28,7 +28,7 @@ lint lint_fix:
                                              -name '*.hpp' -or -name '*.cpp')
 .PHONY: lint lint_fix
 
-install: configure
+install: build
 	cmake --install $(BUILD_DIR) --prefix $(INSTALL_DIR)
 .PHONY: install
 
