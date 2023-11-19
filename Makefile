@@ -41,7 +41,11 @@ clean:
 	$(RM) *.tar* *.sh
 .PHONY: clean
 
-dvi: configure
+dvi:
+	texi2dvi readmi.texi --clean
+.PHONY: dvi
+
+docs: configure
 	cmake --build $(BUILD_DIR) --target docs
 .PHONY: dvi
 

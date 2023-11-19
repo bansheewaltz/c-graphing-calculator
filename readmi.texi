@@ -1,0 +1,71 @@
+\input texinfo
+@setfilename readme.info
+@settitle Example Documentation
+
+@node Top, Introduction, (dir), (dir)
+@top Example Documentation
+
+This is an example document for demonstration purposes.
+
+@node Title, Usage, Top, Top
+@chapter SmartCalc_v1.0
+
+@section Purpose:
+In this project you will implement an extended version of the usual calculator, which can be found in the standard applications of each operating system in the C programming language using structured programming. In addition to basic arithmetic operations such as add/subtract and multiply/divide, you need to supplement the calculator with the ability to calculate arithmetic expressions by following the order, as well as some mathematical functions (sine, cosine, logarithm, etc.).
+Besides calculating expressions, it should also support the use of the x variable and the graphing of the corresponding function.
+As for other improvements you can consider a credit and deposit calculator.
+
+@node Usage, Conclusion, Introduction, Top
+@chapter Usage
+
+@section Makefile targets
+
+
+1. all - build the project, run tests with reporting coverage, generate docs.
+@example
+$ make all
+@end example
+
+2. install - build the .app file and puts it in an /installation folder
+@example
+$ make install
+@end example
+
+3. uninstall - delete the .app file from the installation folder
+@example
+$ make uninstall
+@end example
+
+4. clean - clean up everyting 
+@example
+$ make clean
+@end example
+
+5. dvi - generate this .dvi file
+@example
+$ make dvi
+@end example
+
+6. dist - prepare .tgz archive with the source distribution package
+@example
+$ make dist
+@end example
+
+7. bdist - prepare .tgz archive with the binary distribution package
+@example
+$ make bdist
+@end example
+
+8. test - perform unit-tests over the lib functions
+@example
+$ make test
+@end example
+
+9. gcov_report - prepare unit-tests coverage report in a .txt and an .html formats
+@example
+$ make gcov_report
+@end example
+
+@node Conclusion, , Usage, Top
+
+@bye
