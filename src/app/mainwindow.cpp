@@ -235,8 +235,8 @@ void MainWindow::updateGraph() {
 
   ui->graphWidget->xAxis->setRange(xmin, xmax);
   ui->graphWidget->yAxis->setRange(ymin, ymax);
-  ui->graphWidget->setInteraction(QCP::iRangeDrag);
-  ui->graphWidget->setInteraction(QCP::iRangeZoom);
+  ui->graphWidget->xAxis->setLabel("x");
+  ui->graphWidget->yAxis->setLabel("y");
 
   QString expr_qstr = ui->outputDisplay->text();
   QString expr_qstr_fmt = qstr_display_to_internal(expr_qstr);
