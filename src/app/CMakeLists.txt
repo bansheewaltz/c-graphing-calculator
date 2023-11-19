@@ -1,14 +1,13 @@
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets PrintSupport)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets PrintSupport)
 
-set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 set(PROJECT_SOURCES
-    main.cpp
-    mainwindow.cpp mainwindow.hpp mainwindow.ui
-    qcustomplot.cpp qcustomplot.h
+    src/main.cpp
+    src/mainwindow.cpp src/mainwindow.hpp forms/mainwindow.ui
+    third-party/qcustomplot.cpp third-party/qcustomplot.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -22,7 +21,15 @@ else()
     )
 endif()
 
-target_include_directories(${APP_NAME} PRIVATE .)
+qt6_wrap_ui(UI_HEADERS
+    forms/mainwindow.ui
+)
+
+target_include_directories(${APP_NAME}
+    PRIVATE
+        third-party
+        ${CMAKE_CURRENT_BINARY_DIR}
+)
 
 set_target_properties(${APP_NAME} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER smartcalc.bansheewaltz
