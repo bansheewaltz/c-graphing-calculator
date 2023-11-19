@@ -203,7 +203,9 @@ void MainWindow::animateWindowSize() {
 
 void MainWindow::on_plot_clicked() {
   animateWindowSize();
-  updateGraph();
+  if (!isGraphOpen()) {
+    updateGraph();
+  }
 }
 
 bool MainWindow::isGraphOpen() {
