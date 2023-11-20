@@ -18,6 +18,23 @@ public:
     ~CreditCalc();
 
 private:
-    Ui::CreditCalc *ui;
+ Ui::CreditCalc *ui;
+private slots:
+ void on_calculate_payments_clicked();
+
+ // multiwindow functionality
+private:
+ void moveEvent(QMoveEvent *event) { emit newPosSet(this->pos()); }
+signals:
+ void switchToExpr();
+ void switchToDeposit();
+ void newPosSet(QPoint);
+public slots:
+ void setActive() {
+   show();
+   activateWindow();
+   raise();
+ }
+ void setNewPos(QPoint newpos) { this->move(newpos.x(), newpos.y()); }
 };
 #endif // CREDITCALC_HPP

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CreditCalc</class>
- <widget class="QMainWindow" name="CreditCalc">
+ <class>DepositCalc</class>
+ <widget class="QMainWindow" name="DepositCalc">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>CreditCalc</string>
+   <string/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="Label_operMonth">
@@ -59,10 +59,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {
-background-color:rgb(28, 113, 216)
-}
-</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Add withdrawal</string>
@@ -145,13 +142,6 @@ background-color:rgb(28, 113, 216)
       <height>21</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Inter</family>
-      <pointsize>9</pointsize>
-      <bold>false</bold>
-     </font>
-    </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
     </property>
@@ -226,10 +216,7 @@ background-color:rgb(28, 113, 216)
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {
-background-color:rgb(38, 162, 105)
-}
-</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Calculate</string>
@@ -371,6 +358,21 @@ background-color:rgb(38, 162, 105)
       <height>23</height>
      </rect>
     </property>
+    <item>
+     <property name="text">
+      <string>monthly</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>quaterly</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>annualy</string>
+     </property>
+    </item>
    </widget>
    <widget class="QLabel" name="Label_interestAccrued">
     <property name="geometry">
@@ -430,10 +432,7 @@ background-color:rgb(38, 162, 105)
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {
-background-color:rgb(230, 97, 0)
-}
-</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Revert last operation</string>
@@ -468,10 +467,7 @@ background-color:rgb(230, 97, 0)
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {
-background-color:rgb(46, 194, 126)
-}
-</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Add replenishment</string>

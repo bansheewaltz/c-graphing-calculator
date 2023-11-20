@@ -18,6 +18,8 @@ add_library(${LIB_NAME} STATIC
   include/smartcalc.h
 
   src/grammar.c src/grammar.h
+  src/credit_mode.c
+  src/deposit_mode.c
   src/error_handling.c
 
   src/data_structures/token.h

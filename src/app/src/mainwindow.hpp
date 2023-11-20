@@ -51,6 +51,21 @@ class MainWindow : public QMainWindow {
   void on_functionButtonGroup_buttonClicked(QAbstractButton *button);
   void on_plot_clicked();
   void on_xStep_textChanged(const QString &val);
+
+  // multiwindow functionality
+ private:
+  void moveEvent(QMoveEvent *event) { emit newPosSet(this->pos()); }
+ signals:
+  void switchToCredit();
+  void switchToDeposit();
+  void newPosSet(QPoint);
+ public slots:
+  void setActive() {
+    show();
+    activateWindow();
+    raise();
+  }
+  void setNewPos(QPoint newpos) { this->move(newpos.x(), newpos.y()); }
 };
 
 #endif  // MainWindow_HPP_

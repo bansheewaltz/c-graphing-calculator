@@ -20,6 +20,23 @@ MainWindow::MainWindow(QWidget *parent)
   sym_mod = ui->mod->text().front();
   sym_pow = ui->pow->text().front();
   sym_var = ui->push_x->text().front();
+
+  QAction *exprAct = new QAction("Expression", this);
+
+  QAction *depositAct = new QAction("Deposit", this);
+  connect(depositAct, &QAction::triggered,
+          [this] { emit switchToDeposit(), hide(); });
+  depositAct->setShortcut(Qt::CTRL | Qt::Key_2);
+
+  QAction *creditAct = new QAction("Credit", this);
+  connect(creditAct, &QAction::triggered,
+          [this] { emit switchToCredit(), hide(); });
+  creditAct->setShortcut(Qt::CTRL | Qt::Key_3);
+
+  QMenu *modeMenu = menuBar()->addMenu("Mode");
+  modeMenu->addAction(exprAct);
+  modeMenu->addAction(depositAct);
+  modeMenu->addAction(creditAct);
 }
 
 MainWindow::~MainWindow() { delete ui; }
