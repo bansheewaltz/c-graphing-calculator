@@ -6,20 +6,20 @@
 #include "smartcalc.h"
 
 void smartcalc_deposit_stackinit(DepositStack *stack) { stack->top = -1; }
-void smartcalc_deposit_stackpush(DepositStack *stack,
-                                 DepositOperation operation) {
-  assert(stack->top != STACK_SIZE - 1);
-  stack->operations[++stack->top] = operation;
-}
-DepositOperation smartcalc_deposit_stackpop(DepositStack *stack) {
-  assert(stack->top != -1);
-  return stack->operations[stack->top--];
-}
 bool smartcalc_deposit_stackisempty(DepositStack *stack) {
   return stack->top == -1;
 }
 bool smartcalc_deposit_stackisfull(DepositStack *stack) {
   return stack->top == STACK_SIZE - 1;
+}
+void smartcalc_deposit_stackpush(DepositStack *stack,
+                                 DepositOperation operation) {
+  assert(!smartcalc_deposit_stackisfull(stack));
+  stack->operations[++stack->top] = operation;
+}
+DepositOperation smartcalc_deposit_stackpop(DepositStack *stack) {
+  assert(!smartcalc_deposit_stackisempty(stack));
+  return stack->operations[stack->top--];
 }
 
 SmartCalcError smartcalc_deposit_calculate(
@@ -30,6 +30,7 @@ SmartCalcError smartcalc_deposit_calculate(
     return !SMARTCALC_ERR_SUCCESS;
   }
 
+  *total_tax = 0;
   *end_amount = depo_amount;
   for (int i = 1; i <= period; i++) {
     double current_int = 0;
@@ -65,5 +66,5 @@ SmartCalcError smartcalc_deposit_calculate(
   *total_tax = round(*total_tax * 100) / 100;
   //    }
 
-  return SMARTCALC_ERR_SUCCESS;
+  return SMARTCALC_SUCCESS;
 }
