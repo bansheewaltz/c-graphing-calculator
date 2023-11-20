@@ -1,0 +1,71 @@
+#include "smartcalc.h"
+
+
+#suite deposit
+#test montly_payments
+  DepositStack stack;
+  smartcalc_deposit_stackinit(&stack);
+  double depo_amount = 1000, period = 12, i_rate = 5, t_rate = 2, terms = 0,
+         cap = 0, total_interest, total_tax, end_amount;
+  SmartCalcError rc =
+      smartcalc_deposit_calculate(stack, depo_amount, period, i_rate, t_rate, terms, cap,
+                                  &total_interest, &total_tax, &end_amount);
+  ck_assert_double_eq_tol(total_interest, 50, 2);
+  ck_assert_double_eq_tol(total_tax, 1, 2);
+  ck_assert_double_eq_tol(end_amount, 1049, 2);
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+
+
+#test quaterly_payments
+  DepositStack stack;
+  smartcalc_deposit_stackinit(&stack);
+  DepositOperation operation1 = {1000, 1};
+  DepositOperation operation2 = {-1000, 2};
+  smartcalc_deposit_stackpush(&stack, operation1);
+  smartcalc_deposit_stackpush(&stack, operation2);
+  double depo_amount = 1000, period = 12, i_rate = 5, t_rate = 2, terms = 1,
+         cap = 0, total_interest, total_tax, end_amount;
+  SmartCalcError rc =
+      smartcalc_deposit_calculate(stack, depo_amount, period, i_rate, t_rate, terms, cap,
+                                  &total_interest, &total_tax, &end_amount);
+  ck_assert_double_eq_tol(total_interest, 50, 2);
+  ck_assert_double_eq_tol(total_tax, 1, 2);
+  ck_assert_double_eq_tol(end_amount, 1049, 2);
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+
+
+#test annualy_payments
+  DepositStack stack;
+  smartcalc_deposit_stackinit(&stack);
+  DepositOperation operation1 = {1000, 1};
+  DepositOperation operation2 = {-1000, 2};
+  smartcalc_deposit_stackpush(&stack, operation1);
+  smartcalc_deposit_stackpush(&stack, operation2);
+  double depo_amount = 1000, period = 12, i_rate = 5, t_rate = 2, terms = 2,
+         cap = 0, total_interest, total_tax, end_amount;
+  SmartCalcError rc =
+      smartcalc_deposit_calculate(stack, depo_amount, period, i_rate, t_rate, terms, cap,
+                                  &total_interest, &total_tax, &end_amount);
+  ck_assert_double_eq_tol(total_interest, 50, 2);
+  ck_assert_double_eq_tol(total_tax, 1, 2);
+  ck_assert_double_eq_tol(end_amount, 1049, 2);
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+
+
+#test stack_pop
+  DepositStack stack;
+  smartcalc_deposit_stackinit(&stack);
+  DepositOperation operation1 = {1000, 1};
+  smartcalc_deposit_stackpush(&stack, operation1);
+  smartcalc_deposit_stackpush(&stack, operation1);
+  smartcalc_deposit_stackpop(&stack);
+
+  double depo_amount = 1000, period = 12, i_rate = 5, t_rate = 2, terms = 0,
+         cap = 0, total_interest, total_tax, end_amount;
+  SmartCalcError rc =
+      smartcalc_deposit_calculate(stack, depo_amount, period, i_rate, t_rate, terms, cap,
+                                  &total_interest, &total_tax, &end_amount);
+  ck_assert_double_eq_tol(total_interest, 100, 2);
+  ck_assert_double_eq_tol(total_tax, 2, 2);
+  ck_assert_double_eq_tol(end_amount, 2098, 2);
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);

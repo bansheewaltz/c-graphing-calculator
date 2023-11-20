@@ -1,0 +1,22 @@
+#include "smartcalc.h"
+
+
+#suite credit
+#test diff
+  double loan_amount = 1000, period = 12, interest_rate = 5, fixed_payment, interest_payment;
+  SmartCalcError rc = smartcalc_credit_diff_payment(loan_amount, period, 1, interest_rate,
+                                                 &fixed_payment, &interest_payment);
+  ck_assert_double_eq_tol(fixed_payment, 83.33, 2);
+  ck_assert_double_eq_tol(interest_payment, 4.17, 2);
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
+
+
+#test annual
+  double loan_amount = 1000, period = 12, interest_rate = 5, pay_mnth, int_exp,
+         pay_tot;
+  SmartCalcError rc = smartcalc_credit_fixed_payment(loan_amount, period, interest_rate,
+                                                     &pay_mnth, &int_exp, &pay_tot);
+  ck_assert_double_eq_tol(pay_mnth, 85.61, 2);
+  ck_assert_double_eq_tol(int_exp, 27.29, 2);
+  ck_assert_double_eq_tol(pay_tot, 1027.29, 2);
+  ck_assert_int_eq(rc, SMARTCALC_SUCCESS);
