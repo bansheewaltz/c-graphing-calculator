@@ -34,6 +34,7 @@ install: build
 
 uninstall: build
 	cmake --build $(BUILD_DIR) --target uninstall
+	rm -rf $(INSTALL_DIR)
 .PHONY: uninstall
 
 clean:
