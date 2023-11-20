@@ -25,10 +25,7 @@ CreditCalc::CreditCalc(QWidget *parent)
   modeMenu->addAction(creditAct);
 }
 
-CreditCalc::~CreditCalc()
-{
-    delete ui;
-}
+CreditCalc::~CreditCalc() { delete ui; }
 
 void CreditCalc::on_calculate_payments_clicked() {
   double pay_mnth = 0, total_int_exp = 0, pay_tot = 0;

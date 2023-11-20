@@ -30,11 +30,11 @@ SmartCalcError smartcalc_credit_diff_payment(double loan_amount, double period,
     return !SMARTCALC_SUCCESS;
   }
 
-    *fixed_payment = loan_amount / period;
-    double current_debt = loan_amount - ((*fixed_payment) * (i - 1));
-    *interest_payment = current_debt * (interest_rate / 100) / 12;
-    *fixed_payment = round(*fixed_payment * 100) / 100;
-    *interest_payment = round(*interest_payment * 100) / 100;
+  *fixed_payment = loan_amount / period;
+  double current_debt = loan_amount - ((*fixed_payment) * (i - 1));
+  *interest_payment = current_debt * (interest_rate / 100) / 12;
+  *fixed_payment = round(*fixed_payment * 100) / 100;
+  *interest_payment = round(*interest_payment * 100) / 100;
 
-    return SMARTCALC_SUCCESS;
+  return SMARTCALC_SUCCESS;
 }
