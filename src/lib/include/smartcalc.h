@@ -3,7 +3,14 @@
 
 /** @file smartcalc.h */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdbool.h>
+
 #define SMARTCALC_INPUT_MAX_LEN 256
+#define SMARTCALC_SUCCESS 0
 
 typedef enum ErrorCode {
   SMARTCALC_ERR_SUCCESS,
@@ -13,10 +20,6 @@ typedef enum ErrorCode {
   SMARTCALC_ERR_EMPTY_EXPRESSION,
   SMARTCALC_ERR_SEPARATOR_OUT_OF_CONTEXT,
 } SmartCalcError;
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * The function smartcalc_expr_analyze analyzes an expression by tokenizing it
@@ -69,6 +72,39 @@ SmartCalcError smartcalc_expr_infix_evaluate(const char* expr, double x,
  */
 const char* smartcalc_error_get_description(SmartCalcError error);
 
+typedef struct {
+  double amount;
+  double month;
+} DepositOperation;
+
+#define STACK_SIZE 256
+
+typedef struct {
+  DepositOperation operations[STACK_SIZE];
+  int top;
+} DepositStack;
+
+void smartcalc_deposit_stackinit(DepositStack* stack);
+void smartcalc_deposit_stackpush(DepositStack* stack,
+                                 DepositOperation operation);
+DepositOperation smartcalc_deposit_stackpop(DepositStack* stack);
+bool smartcalc_deposit_stackisfull(DepositStack* stack);
+bool smartcalc_deposit_stackisempty(DepositStack* stack);
+
+SmartCalcError smartcalc_deposit_calculate(
+    DepositStack dstack, double depo_amount, double period, double i_rate,
+    double t_rate, int terms, int cap, double* total_interest,
+    double* total_tax, double* end_amount);
+
+SmartCalcError smartcalc_credit_fixed_payment(double loan_amount, double period,
+                                              double interest_rate,
+                                              double* pay_mnth, double* int_exp,
+                                              double* pay_tot);
+
+SmartCalcError smartcalc_credit_diff_payment(double loan_amount, double period,
+                                             double i, double interest_rate,
+                                             double* fixed_payment,
+                                             double* interest_payment);
 #ifdef __cplusplus
 }
 #endif
