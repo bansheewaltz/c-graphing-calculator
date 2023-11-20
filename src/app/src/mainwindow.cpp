@@ -246,10 +246,10 @@ void MainWindow::updateGraph() {
     return;
   }
 
-  if (ui->xMin->text().isEmpty()) xmin = -100;
-  if (ui->xMax->text().isEmpty()) xmax = +100;
-  if (ui->yMin->text().isEmpty()) ymin = -100;
-  if (ui->yMax->text().isEmpty()) ymax = +100;
+  if (ui->xMin->text().isEmpty()) xmin = -10;
+  if (ui->xMax->text().isEmpty()) xmax = +10;
+  if (ui->yMin->text().isEmpty()) ymin = -10;
+  if (ui->yMax->text().isEmpty()) ymax = +10;
   if (ui->xStep->text().isEmpty()) xstep = +0.1;
 
   ui->graphWidget->xAxis->setRange(xmin, xmax);
